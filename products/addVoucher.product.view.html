@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add Voucher product</title>
+  
+        <!-- CSS -->
+        <style type="text/css">
+            body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+            }
+            form p label {
+                display:block;
+                float:left;
+                width:200px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'profiles/profile.view.html'"></div><br>
+        <div>{{ message }}</div>
+        <div>
+            <form name="VoucherP" ng-submit="addVoucherProduct()" ng-hide="hideform" role="addVoucher" novalidate>
+                <div ng-class="{ 'has-error': VoucherP.pi.$touched && VoucherP.pi.$invalid }">
+                    <p>
+                        <label>Product Identifier : </label>
+                        <input type="text" name="pi" ng-model="voucher.pi" required>
+                    </p>
+                    <div ng-messages="VoucherP.pi.$error" ng-if="VoucherP.pi.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+                <div ng-class="{ 'has-error': VoucherP.pname.$touched && VoucherP.pname.$invalid }">
+                    <p>
+                        <label>Product Name : </label>
+                        <input type="text" name="pname" ng-model="voucher.pname" required>
+                    </p>
+                    <div ng-messages="VoucherP.pname.$error" ng-if="VoucherP.pname.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': VoucherP.description.$touched && VoucherP.description.$invalid }">
+                    <p>
+                        <label>Description : </label>
+                        <input type="text" name="description" ng-model="voucher.description" required>
+                    </p>
+                    <div ng-messages="VoucherP.description.$error" ng-if="VoucherP.description.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': VoucherP.credits.$touched && VoucherP.credits.$invalid }">
+                    <p>
+                        <label>Credits : </label>
+                        <input type="text" name="credits" ng-model="voucher.credits" required>
+                    </p>
+                    <div ng-messages="VoucherP.credits.$error" ng-if="VoucherP.credits.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': VoucherP.cvfd.$touched && VoucherP.cvfd.$invalid }">
+                    <p>
+                        <label>Credits valid for days : </label>
+                        <input type="text" name="cvfd" ng-model="voucher.cvfd" required>
+                    </p>
+                    <div ng-messages="VoucherP.cvfd.$error" ng-if="VoucherP.cvfd.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': VoucherP.availablefor.$touched && VoucherP.availablefor.$invalid }">
+                    <p>
+                        <label>Available For : </label>
+                        <input type="text" name="availablefor" ng-model="voucher.availablefor" required>
+                    </p>
+                    <div ng-messages="VoucherP.availablefor.$error" ng-if="VoucherP.availablefor.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': VoucherP.code.$touched && VoucherP.code.$invalid }">
+                    <p>
+                        <label>Code : </label>
+                        <input type="text" name="code" ng-model="voucher.code" required>
+                    </p>
+                    <div ng-messages="VoucherP.code.$error" ng-if="VoucherP.code.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': VoucherP.codemajor.$touched && VoucherP.codemajor.$invalid }">
+                    <p>
+                        <label>Code Major : </label>
+                        <input type="text" name="codemajor" ng-model="voucher.codemajor" required>
+                    </p>
+                    <div ng-messages="VoucherP.codemajor.$error" ng-if="VoucherP.codemajor.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': VoucherP.codeminor.$touched && VoucherP.codeminor.$invalid }">
+                    <p>
+                        <label>Code Minor : </label>
+                        <input type="text" name="codeminor" ng-model="voucher.codeminor" required>
+                    </p>
+                    <div ng-messages="VoucherP.codeminor.$error" ng-if="VoucherP.codeminor.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': VoucherP.usagecount.$touched && VoucherP.usagecount.$invalid }">
+                    <p>
+                        <label>Usage Count : </label>
+                        <input type="text" name="usagecount" ng-model="voucher.usagecount" required>
+                    </p>
+                    <div ng-messages="VoucherP.usagecount.$error" ng-if="VoucherP.usagecount.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div>
+                    <p style="align-content: center">
+                        <button type="submit" ng-disabled="VoucherP.$invalid && VoucherP.$dirty">Submit</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

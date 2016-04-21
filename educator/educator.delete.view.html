@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Add Educator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <style type="text/css">
+            body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+            }
+            form p label {
+                display:block;
+                float:left;
+                width:200px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'profiles/profile.view.html'"></div><br>
+        <div>{{ message }}</div>
+        
+        <div>
+            <div>{{ ctrl }}</div>
+            <form name="update" ng-submit="deleteEducator()" ng-hide="hideform" role="update" novalidate>
+                <div ng-class="{ 'has-error': update.email.$touched && update.email.$invalid }">
+                    <p>
+                        <label>Email : </label>
+                        <input type="email" name="email" ng-model="email" required>
+                    </p>
+                    <div ng-messages="update.email.$error" ng-if="update.email.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <p>
+                        <label>AppID : </label>
+                        <input type="text" name="appid" ng-model="appid" required>
+                    </p>
+                    <div ng-messages="update.appid.$error" ng-if="update.appid.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                
+                <div>
+                    <p>
+                        <button type="submit" ng-disabled="update.$invalid && update.$dirty">Submit</button>
+                    </p>
+                </div>
+            </form>    
+        </div>
+    </body>
+</html>

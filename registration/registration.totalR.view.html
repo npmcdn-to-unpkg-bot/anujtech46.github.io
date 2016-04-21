@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+            }
+            table {
+                width:100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color:#fff;
+            }
+            table#t01 th	{
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'profiles/profile.view.html'"></div><br>
+        <div>
+            <table id="t01">
+                <tr>
+                    <th>user ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>App Id</th>
+                    <th>Role</th>
+                    <th>On Board</th>
+                    <th>created</th>
+                </tr>
+                <tr ng-repeat=" user in users ">
+                    <td ><a ng-href="#/profile/{{user._id}}">{{ user._id }} </a></td>
+                    <td>{{ user.fullname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.appid }}</td>
+                    <td>{{ user.roles }}</td>
+                    <td>{{ user.onboard }}</td>
+                    <td>{{ user.created }}</td>
+<!--                    <td>
+                        <button type="button" ng-click="showProfile()">showProfile</button>
+                        <button type="button" ng-click="hideProfile()">hideProfile</button>
+                    </td>-->
+                </tr>
+            </table>
+            <div>
+                
+            </div>
+                
+        </div><br>
+        <div>Total Registration {{ count }}</div>
+        
+    </body>
+</html>

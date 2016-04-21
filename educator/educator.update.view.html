@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Add Educator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <style type="text/css">
+            body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+            }
+            form p label {
+                display:block;
+                float:left;
+                width:200px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'profiles/profile.view.html'"></div><br>
+        <div>{{ message }}</div>
+        
+        <div>
+            <div>{{ ctrl }}</div>
+            <form name="update" ng-submit="updateEducator()" ng-hide="hideform" role="update" novalidate>
+                <div ng-class="{ 'has-error': update.email.$touched && update.email.$invalid }">
+                    <p>
+                        <label>Email : </label>
+                        <input type="text" name="email" ng-model="updateE.email" required>
+                    </p>
+                    <div ng-messages="update.email.$error" ng-if="update.email.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+                <div>
+                    <p>
+                        <label>AppID : </label>
+                        <input type="text" name="appid" ng-model="updateE.appid" required>
+                    </p>
+                    <div ng-messages="update.appid.$error" ng-if="update.appid.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+                
+                <div>
+                    <p>
+                        <label>Internal : </label>
+                        <input type="radio" ng-model="updateE.internal" value="true"> true &nbsp;&nbsp;&nbsp;
+                        <input type="radio" ng-model="updateE.internal"  value="false" checked> false                        
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <label>Roles : </label>
+                        <input type="checkbox" ng-model="updateE.educator" value="educator"> Educator  
+                        <input type="checkbox" ng-model="updateE.channelpartner" value="ChannelPartner"> ChannelPartner  
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <label>Skills : </label>
+                        <input type="checkbox" ng-model="updateE.c6" value="c6"> c6
+                        <input type="checkbox" ng-model="updateE.c7" value="c7"> c7
+                        <input type="checkbox" ng-model="updateE.c8" value="c8"> c8
+                        <input type="checkbox" ng-model="updateE.c9" value="c9"> c9
+                        <input type="checkbox" ng-model="updateE.c10" value="c10"> c10
+                        <input type="checkbox" ng-model="updateE.c11" value="c11"> c11
+                        <input type="checkbox" ng-model="updateE.c12" value="c12"> c12
+                        <input type="checkbox" ng-model="updateE.maths" value="maths"> Maths
+                        <input type="checkbox" ng-model="updateE.science" value="science"> Science
+                        <input type="checkbox" ng-model="updateE.english" value="english"> English
+                            
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <button type="submit" ng-disabled="update.$invalid && update.$dirty">Submit</button>
+                    </p>
+                </div>
+            </form>    
+        </div>
+    </body>
+</html>

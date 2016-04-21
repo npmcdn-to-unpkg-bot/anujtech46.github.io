@@ -1,0 +1,16 @@
+<form name="update" ng-submit="updateStudent()" role="update" novalidate>
+                <div ng-class="{ 'has-error': update.email.$touched && update.email.$invalid }">
+                    <p>
+                        <label>Email : </label>
+                        <input type="text" name="email" ng-model="update.email" required>
+                    </p>
+                    <div ng-messages="update.email.$error" ng-if="update.email.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+                <div>
+                    <p>
+                        <button type="submit" ng-disabled="PromoP.$invalid && PromoP.$dirty">Submit</button>
+                    </p>
+                </div>
+            </form>

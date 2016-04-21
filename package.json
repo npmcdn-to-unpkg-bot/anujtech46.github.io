@@ -1,0 +1,16 @@
+{
+  "name": "myAngular",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "comp",
+  "contributors": [],
+  "dependencies": {
+    "bower": "^1.7.7"
+  }
+}

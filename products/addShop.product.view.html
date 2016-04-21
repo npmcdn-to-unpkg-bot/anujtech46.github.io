@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add Shop product</title>
+  
+        <!-- CSS -->
+        <style type="text/css">
+            body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+            }
+            form p label {
+                display:block;
+                float:left;
+                width:200px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'profiles/profile.view.html'"></div><br>
+        <div>{{ message }}</div>
+        <div>
+            <form name="ShopP" ng-submit="addShopProduct()" ng-hide="hideform" role="addPromo" novalidate>
+                <div ng-class="{ 'has-error': ShopP.pi.$touched && ShopP.pi.$invalid }">
+                    <p>
+                        <label>Product Identifier : </label>
+                        <input type="text" name="pi" ng-model="shop.pi" required>
+                    </p>
+                    <div ng-messages="ShopP.pi.$error" ng-if="ShopP.pi.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+                <div ng-class="{ 'has-error': ShopP.pname.$touched && ShopP.pname.$invalid }">
+                    <p>
+                        <label>Product Name : </label>
+                        <input type="text" name="pname" ng-model="shop.pname" required>
+                    </p>
+                    <div ng-messages="ShopP.pname.$error" ng-if="ShopP.pname.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': ShopP.description.$touched && ShopP.description.$invalid }">
+                    <p>
+                        <label>Description : </label>
+                        <input type="text" name="description" ng-model="shop.description" required>
+                    </p>
+                    <div ng-messages="ShopP.description.$error" ng-if="ShopP.description.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': ShopP.credits.$touched && ShopP.credits.$invalid }">
+                    <p>
+                        <label>Credits : </label>
+                        <input type="text" name="credits" ng-model="shop.credits" required>
+                    </p>
+                    <div ng-messages="ShopP.credits.$error" ng-if="ShopP.credits.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': ShopP.cvfd.$touched && ShopP.cvfd.$invalid }">
+                    <p>
+                        <label>Credits valid for days : </label>
+                        <input type="text" name="cvfd" ng-model="shop.cvfd" required>
+                    </p>
+                    <div ng-messages="ShopP.cvfd.$error" ng-if="ShopP.cvfd.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': ShopP.availablefor.$touched && ShopP.availablefor.$invalid }">
+                    <p>
+                        <label>Available For : </label>
+                        <input type="text" name="availablefor" ng-model="shop.availablefor" required>
+                    </p>
+                    <div ng-messages="ShopP.availablefor.$error" ng-if="ShopP.availablefor.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div>
+                    <p style="align-content: center">
+                        <button type="submit" ng-disabled="PromoP.$invalid && PromoP.$dirty">Submit</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

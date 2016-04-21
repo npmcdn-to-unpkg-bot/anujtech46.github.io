@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div ng-controller="loginCtrl">
+            <div>
+                <p>{{ message }}</p>
+            </div>
+            <div>
+                <h2>Login</h2>
+                <form name="loginForm" ng-submit="loginFunction()" role="login">
+                    <div ng-class="{ 'has-error': loginForm.username.$dirty && loginForm.username.$error.required }">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" class="form-control" ng-model="username" required />
+                        <span ng-show="loginForm.username.$dirty && loginForm.username.$error.required" class="help-block">Username is required</span>
+                    </div>
+                    <div ng-class="{ 'has-error': loginForm.password.$dirty && loginForm.password.$error.required }">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
+                        <span ng-show="loginForm.password.$dirty && loginForm.password.$error.required" class="help-block">Password is required</span>
+                    </div>
+                    <div>
+                        <button type="submit" ng-disabled="loginForm.$invalid && loginForm.$dirty" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

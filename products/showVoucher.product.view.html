@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            table {
+                width:100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color:#fff;
+            }
+            table#t01 th	{
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'profiles/profile.view.html'"></div><br>
+        
+        <div>
+            <table id="t01">
+                <tr>
+                    <th>Product Identifier</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Credits</th>
+                    <th>CVFD</th>
+                    <th>Available For</th>
+                    <th>Code</th>
+                    <th>Code Minor</th>
+                    <th>Code Major</th>
+                    <th>Usage Count</th>
+                    <th>Created</th>
+                    <th>Expired</th>
+                </tr>
+                <tr ng-repeat=" voucher in vouchers ">
+                    <td>{{ voucher.productidentifier}}</td>
+                    <td>{{ voucher.name}}</td>
+                    <td>{{ voucher.description}}</td>
+                    <td>{{ voucher.credits }}</td>
+                    <td>{{ voucher.creditsvalidfordays}}</td>
+                    <td>{{ voucher.availablefor}}</td>
+                    <td>{{ voucher.code }}</td>
+                    <td>{{ voucher.codeminor }}</td>
+                    <td>{{ voucher.codemajor }}</td>
+                    <td>{{ voucher.usagecount }}</td>
+                    <td>{{ voucher.created }}</td>
+                    <td>{{ voucher.expired }}</td>
+                </tr>
+            </table>
+        </div><br>
+        <div>Total Voucher {{ count }}</div>
+    </body>
+</html>

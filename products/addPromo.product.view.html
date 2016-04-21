@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add Promo product</title>
+  
+        <!-- CSS -->
+        <style type="text/css">
+            body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+            }
+            form p label {
+                display:block;
+                float:left;
+                width:200px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'profiles/profile.view.html'"></div><br>
+        <div>{{ message }}</div>
+        <div>
+            <form name="PromoP" ng-submit="addPromoProduct()" ng-hide="hideform" role="addPromo" novalidate>
+                <div ng-class="{ 'has-error': PromoP.pi.$touched && PromoP.pi.$invalid }">
+                    <p>
+                        <label>Product Identifier : </label>
+                        <input type="text" name="pi" ng-model="promo.pi" required>
+                    </p>
+                    <div ng-messages="PromoP.pi.$error" ng-if="PromoP.pi.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+
+                <div ng-class="{ 'has-error': PromoP.pname.$touched && PromoP.pname.$invalid }">
+                    <p>
+                        <label>Product Name : </label>
+                        <input type="text" name="pname" ng-model="promo.pname" required>
+                    </p>
+                    <div ng-messages="PromoP.pname.$error" ng-if="PromoP.pname.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': PromoP.description.$touched && PromoP.description.$invalid }">
+                    <p>
+                        <label>Description : </label>
+                        <input type="text" name="description" ng-model="promo.description" required>
+                    </p>
+                    <div ng-messages="PromoP.description.$error" ng-if="PromoP.description.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': PromoP.credits.$touched && PromoP.credits.$invalid }">
+                    <p>
+                        <label>Credits : </label>
+                        <input type="text" name="credits" ng-model="promo.credits" required>
+                    </p>
+                    <div ng-messages="PromoP.credits.$error" ng-if="PromoP.credits.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': PromoP.cvfd.$touched && PromoP.cvfd.$invalid }">
+                    <p>
+                        <label>Credits valid for days : </label>
+                        <input type="text" name="cvfd" ng-model="promo.cvfd" required>
+                    </p>
+                    <div ng-messages="PromoP.cvfd.$error" ng-if="PromoP.cvfd.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': PromoP.code.$touched && PromoP.code.$invalid }">
+                    <p>
+                        <label>Code : </label>
+                        <input type="text" name="code" ng-model="promo.code" required>
+                    </p>
+                    <div ng-messages="PromoP.code.$error" ng-if="PromoP.code.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': PromoP.usagecount.$touched && PromoP.usagecount.$invalid }">
+                    <p>
+                        <label>Usage Count : </label>
+                        <input type="text" name="usagecount" ng-model="promo.usagecount" required>
+                    </p>
+                    <div ng-messages="PromoP.usagecount.$error" ng-if="PromoP.usagecount.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': PromoP.availablefor.$touched && PromoP.availablefor.$invalid }">
+                    <p>
+                        <label>Available For : </label>
+                        <input type="text" name="availablefor" ng-model="promo.availablefor" required>
+                    </p>
+                    <div ng-messages="PromoP.availablefor.$error" ng-if="PromoP.availablefor.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div>
+                    <p style="align-content: center">
+                        <button type="submit" ng-disabled="PromoP.$invalid && PromoP.$dirty">Submit</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

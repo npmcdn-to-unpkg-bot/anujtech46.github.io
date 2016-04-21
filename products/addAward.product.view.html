@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add Award product</title>
+  
+        <!-- CSS -->
+        <style type="text/css">
+            body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+            }
+            form p label {
+                display:block;
+                float:left;
+                width:200px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'profiles/profile.view.html'"></div><br>
+        <div>{{ message }}</div>
+        <div>
+            <form name="AwardP" ng-submit="addAwardProduct()" ng-hide="hideform" role="addAward" novalidate>
+                <div ng-class="{ 'has-error': AwardP.pi.$touched && AwardP.pi.$invalid }">
+                    <p>
+                        <label>Product Identifier : </label>
+                        <input type="text" name="pi" ng-model="award.pi" required>
+                    </p>
+                    <div ng-messages="AwardP.pi.$error" ng-if="AwardP.pi.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+
+                <div ng-class="{ 'has-error': AwardP.pname.$touched && AwardP.pname.$invalid }">
+                    <p>
+                        <label>Product Name : </label>
+                        <input type="text" name="pname" ng-model="award.pname" required>
+                    </p>
+                    <div ng-messages="AwardP.pname.$error" ng-if="AwardP.pname.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': AwardP.description.$touched && AwardP.description.$invalid }">
+                    <p>
+                        <label>Description : </label>
+                        <input type="text" name="description" ng-model="award.description" required>
+                    </p>
+                    <div ng-messages="AwardP.description.$error" ng-if="AwardP.description.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': AwardP.credits.$touched && AwardP.credits.$invalid }">
+                    <p>
+                        <label>Credits : </label>
+                        <input type="text" name="credits" ng-model="award.credits" required>
+                    </p>
+                    <div ng-messages="AwardP.credits.$error" ng-if="AwardP.credits.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': AwardP.cvfd.$touched && AwardP.cvfd.$invalid }">
+                    <p>
+                        <label>Credits valid for days : </label>
+                        <input type="text" name="cvfd" ng-model="award.cvfd" required>
+                    </p>
+                    <div ng-messages="AwardP.cvfd.$error" ng-if="AwardP.cvfd.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+               
+                
+                <div ng-class="{ 'has-error': AwardP.availablefor.$touched && AwardP.availablefor.$invalid }">
+                    <p>
+                        <label>Available For : </label>
+                        <input type="text" name="availablefor" ng-model="award.availablefor" required>
+                    </p>
+                    <div ng-messages="AwardP.availablefor.$error" ng-if="AwardP.availablefor.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div>
+                    <p style="align-content: center">
+                        <button type="submit" ng-disabled="AwardP.$invalid && AwardP.$dirty">Submit</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
