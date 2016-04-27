@@ -1,11 +1,13 @@
-
 var login = angular.module('login');
 
-login.controller('loginCtrl', function($scope, user, $http, $location) {
-        
-    $scope.loginFunction =  function() {
+login.factory('loginFactory', function($log, user, $http, $location) {
+    
+    var factory = {};
+    
+    factory.doLogin = function($scope, callback) {
         
         var url = user.apiEndPoint + 'login/admin';
+        $log.log("calling api [%s]"+ url);
         var data = {
             'email'  : $scope.username,
             'password'  : $scope.password
@@ -17,18 +19,32 @@ login.controller('loginCtrl', function($scope, user, $http, $location) {
                 'content-type'      : 'application/json'
             }
         };
-        console.log(data);
-        
-        $http.post(url, data, config).then(function(res, err) {            
+        $http.post(url, data, config).then(function(res) {            
             if(res.data.token) {
-                $scope.message = "login success";
                 user.username  = $scope.username;
                 user.token     = res.data.token;
                 $location.path('/profile');
+                return callback(null, res.data);
             } else {
-                $scope.message = res.data.message;
+                return callback(true, null);
             }
+        },
+        function(res,status) {
+            return callback(true, null);
+        });
+    };
+    return factory ;
+});
+
+login.controller('loginCtrl',function($scope, $log, loginFactory) {
+        
+    $scope.loginFunction =  function() {
+        
+        loginFactory.doLogin($scope, function(err, res) {
+            if(err) {
+                $scope.message = "Invalid parameter";
+            }
+            $scope.message = "Login success";
         });
     };
 });
-

@@ -11,12 +11,10 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div ng-controller="ImageCtrl" >
-        <input type="file" id="file" name="avatar"/>
-        <button ng-click="add()">Add</button>
-        <p>{{data}}</p>
-        </div>
-        
+        <div ng-include = "'profiles/profile.view.html'"></div><br>
+        <div>
+            <input type="file" file-model="myFile" />
+            <button ng-click="uploadFile()">upload</button>
+        </div>  
     </body>
-    
 </html>

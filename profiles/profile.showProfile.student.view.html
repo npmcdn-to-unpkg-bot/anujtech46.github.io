@@ -1,57 +1,74 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color:#fff;
+            }
+            table#t01 th	{
+                background-color: black;
+                color: white;
+            }
+        </style>
     </head>
     <body>
         <div ng-include = "'profiles/profile.view.html'"></div><br>
         <div>
-            <p>{{ctrl}}</p>
-<!--            <table align="center">
+            <table align="center">
                 <tr>
                     <td>Fullname</td>
-                    <td>{{ profiles.fullname }}</td>
+                    <td>{{ fullname }}</td>
                 </tr>
                 <tr>
                     <td>School</td>
-                    <td>{{ profiles.school }}</td>
+                    <td>{{ school }}</td>
                 </tr>
                 <tr>
                     <td>Grade</td>
-                    <td>{{ profiles.grade }}</td>
+                    <td>{{ grade }}</td>
                 </tr>
                 <tr>
                     <td>Gender</td>
-                    <td>{{ profiles.gender }}</td>
+                    <td>{{ gender }}</td>
                 </tr>
                 <tr>
                     <td>Date Of Birth</td>
-                    <td>{{ profiles.dob }}</td>
+                    <td>{{ dob }}</td>
                 </tr>
                 <tr>
                     <td>v1username</td>
-                    <td>{{ profiles.v1username }}</td>
+                    <td>{{ v1username }}</td>
                 </tr>
                 <tr>
                     <td>Modified on</td>
-                    <td>{{ profiles.modifiedon }}</td>
+                    <td>{{ modifiedon }}</td>
                 </tr>
                 <tr>
                     <td>Created on</td>
-                    <td>{{ profiles.createdon }}</td>
+                    <td>{{ createdon }}</td>
                 </tr>
                 <tr>
                     <td>location</td>
-                    <td>{{ profiles.location }}</td>
+                    <td>{{ location }}</td>
                 </tr>
-            </table>-->
+            </table>
+        </div>
+        <div>
+            <a href="#totalR">Back</a>
         </div>
     </body>
 </html>

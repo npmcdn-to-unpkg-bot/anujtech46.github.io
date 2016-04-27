@@ -4,16 +4,16 @@ angular.module('profile').config(['$routeProvider', function($routeProvider) {
             templateUrl :'profiles/profile.view.html',
             controller : 'profileCtrl'
         }).
-        when('/profile/:userid', {
+        when('/profile/:userid/:roles', {
             controller : 'showProfileCtrl',
             templateUrl :'profiles/profile.showProfile.student.view.html'
         }).
         when('/profile/student', {
-//            controller : 'showProfileCtrl',
-            templateUrl :'profiles/profile.showProfile.student.view'
+            controller : 'showStudnetProfileCtrl',
+            templateUrl :'profiles/profile.showProfile.student.view.html'
         }).
         when('/profile/educator', {
-//            controller : 'showProfileCtrl',
+            controller : 'showEducatorProfileCtrl',
             templateUrl :'profiles/profile.showProfile.educator.view.html'
         }); 
     }]);
