@@ -16,5 +16,9 @@ angular.module('educator').config(['$routeProvider', function($routeProvider) {
             when('/showWeights', {
                 templateUrl :'educator/show.weights.view.html',
                 controller :'showWeightsCtrl'
+            }).
+            when('/setSleepTime', {
+                templateUrl :'educator/set.sleeptime.view.html',
+                controller :'setSleepTimeCtrl'
         });
 }]);

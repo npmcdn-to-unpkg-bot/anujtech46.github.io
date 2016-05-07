@@ -148,3 +148,38 @@ educatorCtrl.controller('showWeightsCtrl', function($scope, $http, user, $log) {
     });
     
 });
+
+educatorCtrl.controller('setSleepTimeCtrl', function($scope, $http, user, $log) {
+
+    $log.info('setSleepTimeCtrl');
+    
+    $scope.sleepEducator = function() {
+            
+        var url = user.apiEndPoint + "sleep";
+        var config = {
+            headers : {
+                token : user.token
+            }
+        };
+        $log.info("call url "+ url);
+        var date = new Date();
+        $scope.year = date.getFullYear();
+        $scope.month = date.getMonth();
+        $scope.day = date.getDate();
+        var data = {
+            "sleeptime" : $scope.sleeptime,
+            "sleepduration":$scope.sleepduration
+        };
+        $log.info("data", data);
+        $http.post(url, data, config).then(function(res, err) {
+            console.log(res);
+            if(res.data.code === 303000) {
+                $log.info("sleep time apply successfully");
+                $scope.message = "sleep time apply successfully";
+            } else {
+                $log.error("unable to apply");
+                $scope.message = "unable to apply";
+            }
+        });
+    };
+});

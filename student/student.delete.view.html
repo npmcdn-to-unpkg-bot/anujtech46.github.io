@@ -28,7 +28,6 @@ and open the template in the editor.
         <div>{{ message }}</div>
         
         <div>
-            <div>{{ ctrl }}</div>
             <form name="update" ng-submit="deleteStudent()" ng-hide="hideform" role="update" novalidate>
                 <div ng-class="{ 'has-error': update.email.$touched && update.email.$invalid }">
                     <p>
