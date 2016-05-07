@@ -38,7 +38,7 @@ and open the template in the editor.
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
                 </div>
-                <div>
+                <div ng-class="{ 'has-error': update.email.$touched && update.email.$invalid }">
                     <p>
                         <label>AppID : </label>
                         <input type="text" name="appid" ng-model="appid" required>

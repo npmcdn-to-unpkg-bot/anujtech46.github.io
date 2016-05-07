@@ -9,7 +9,6 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../bower_components/angularjs-datetime-picker/angularjs-datetime-picker.css" />
         <style>
             .angularjs-datetime-picker {
   color: #333;
@@ -89,32 +88,33 @@ and open the template in the editor.
         </style>
     </head>
     
-    <body>
+    <body align="center">
         <div ng-include = "'profiles/profile.view.html'"></div><br>
         <div>{{ message }}</div>
         
         <div>
-            <form name="update" ng-submit="sleepEducator()" ng-hide="hideform" role="update" novalidate>
-                <div ng-class="{ 'has-error': update.sleeptime.$touched && update.sleeptime.$invalid }">
+            <form name="sleep" ng-submit="sleepEducator()" ng-hide="hideform" role="update" novalidate>
+                <div ng-class="{ 'has-error': sleep.sleeptime.$touched && sleep.sleeptime.$invalid }">
                     <p>
                         <label>Sleep Time : </label>
                         <input name="sleeptime" ng-model="sleeptime" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000z" ng-model="year" ng-model="month"  ng-model="day" required />
                     </p>
-                    <div ng-messages="update.sleeptime.$error" ng-if="update.sleeptime.$touched">
+                    <div ng-messages="sleep.sleeptime.$error" ng-if="sleep.sleeptime.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+                <div ng-class="{ 'has-error': sleep.duration.$touched && sleep.duration.$invalid }">
+                    <p>
+                        <label>Sleep Duration : </label>
+                        <input type = "text" name="duration" ng-model="sleepduration" />
+                    </p>
+                    <div ng-messages="sleep.duration.$error" ng-if="sleep.duration.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <p>
-                    <label>Sleep Duration : </label>
-                    <input type = "text" name="duration" ng-model="sleepduration" />
-                </p>
-                    <div ng-messages="update.duration.$error" ng-if="update.duration.$touched">
-                        <div ng-messages-include="error/error.html"></div>
-                    </div>
-                
                 <div>
                     <p>
-                        <button type="submit" ng-disabled="update.$invalid && update.$dirty">Submit</button>
+                        <button type="submit" ng-disabled="sleepEducator.$invalid && sleepEducator.$dirty">Submit</button>
                     </p>
                 
                 </div>

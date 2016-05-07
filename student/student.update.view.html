@@ -35,7 +35,7 @@ and open the template in the editor.
                         <input type="text" name="email" ng-model="email" required>
                     </p>
                     <div ng-messages="update.email.$error" ng-if="update.email.$touched">
-                        <div ng-messages-include="error/error.html"></div>
+                        <span ng-show="update.email.$dirty && update.email.$error.required" class="help-block">Email is required</span>
                     </div>  
                 </div>
                 <div>
@@ -44,7 +44,7 @@ and open the template in the editor.
                         <input type="text" name="appid" ng-model="appid" required>
                     </p>
                     <div ng-messages="update.appid.$error" ng-if="update.appid.$touched">
-                        <div ng-messages-include="error/error.html"></div>
+                        <span ng-show="update.appid.$dirty && update.appid.$error.required" class="help-block">App Id is required</span>
                     </div> 
                 </div>
                 
