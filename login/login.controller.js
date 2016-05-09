@@ -36,12 +36,22 @@ login.factory('loginFactory', function($log, user, $http, $location) {
     return factory ;
 });
 
-login.controller('loginCtrl',function($scope, $log, loginFactory) {
+login.controller('loginCtrl',function($scope, $log, loginFactory, toaster) {
+    
+    $scope.loginpop = function(){
+        toaster.pop({
+                type: 'error',
+                title: 'Title text',
+                body: 'Body text',
+                showCloseButton: true
+            });
+        };
         
     $scope.loginFunction =  function() {
         
         loginFactory.doLogin($scope, function(err, res) {
             if(err) {
+                loginpop();
                 $scope.message = "Invalid parameter";
             }
             $scope.message = "Login success";

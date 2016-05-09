@@ -1,5 +1,5 @@
 var app = angular.module('TUTRAPP', ['ngRoute','ngMessages','ngFileUpload',
-                    'angularjs-datetime-picker','login','profile','question','registration','image','products','educator','student']);
+                    'toaster', 'ngAnimate','angularjs-datetime-picker','login','profile','question','registration','image','products','educator','student']);
  
 app.value('user', {
     token:'',
