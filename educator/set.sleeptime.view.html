@@ -117,7 +117,7 @@ body {
                 <div ng-class="{ 'has-error': sleep.wakeuptime.$touched && sleep.wakeuptime.$invalid }">
                     <p>
                         <label>WakeUp Time : </label>
-                        <input type = "text" name="wakeuptime" ng-model="wakeuptime" datetime-picker date-format="yyyy-MM-dd HH:mm:ss:SSS.z" ng-model="year" ng-model="month"  ng-model="day" required />
+                        <input type = "text" name="wakeuptime" ng-model="wakeuptime" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss:SSS.z" ng-model="year" ng-model="month"  ng-model="day" required />
                     </p>
                     <div ng-messages="sleep.wakeuptime.$error" ng-if="sleep.wakeuptime.$touched">
                         <div ng-messages-include="error/error.html"></div>
