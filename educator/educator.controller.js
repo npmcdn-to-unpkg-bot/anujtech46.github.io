@@ -175,6 +175,7 @@ educatorCtrl.controller('setSleepTimeCtrl', function($scope, $http, user, $log) 
             console.log(res);
             if(res.data.code === 303000) {
                 $log.info("sleep time apply successfully");
+                $scope.hideform = true;
                 $scope.message = "sleep time apply successfully";
             } else {
                 $log.error("unable to apply");
