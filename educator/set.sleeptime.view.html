@@ -114,12 +114,12 @@ body {
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
                 </div>
-                <div ng-class="{ 'has-error': sleep.duration.$touched && sleep.duration.$invalid }">
+                <div ng-class="{ 'has-error': sleep.wakeuptime.$touched && sleep.wakeuptime.$invalid }">
                     <p>
-                        <label>Sleep Duration : </label>
-                        <input type = "text" name="duration" ng-model="sleepduration" />
+                        <label>WakeUp Time : </label>
+                        <input type = "text" name="wakeuptime" ng-model="wakeuptime" datetime-picker date-format="yyyy-MM-dd HH:mm:ss" ng-model="year" ng-model="month"  ng-model="day" required />
                     </p>
-                    <div ng-messages="sleep.duration.$error" ng-if="sleep.duration.$touched">
+                    <div ng-messages="sleep.wakeuptime.$error" ng-if="sleep.wakeuptime.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>

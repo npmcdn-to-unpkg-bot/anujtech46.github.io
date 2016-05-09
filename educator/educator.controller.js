@@ -168,7 +168,7 @@ educatorCtrl.controller('setSleepTimeCtrl', function($scope, $http, user, $log) 
         $scope.day = date.getDate();
         var data = {
             "sleeptime" : $scope.sleeptime,
-            "sleepduration":$scope.sleepduration
+            "wakeuptime":$scope.wakeuptime
         };
         $log.info("data", data);
         $http.post(url, data, config).then(function(res, err) {
