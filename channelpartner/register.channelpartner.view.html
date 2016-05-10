@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add Award product</title>
+  
+        <!-- CSS -->
+        <style type="text/css">
+            body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+                
+            }
+            form p label {
+                display:block;
+                float:left;
+                width:200px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body style="width:100%" align="center">
+        <div ng-include = "'profiles/profile.view.html'"></div><br>
+        <div>{{ message }}</div>
+        <div>
+            <form name="register" ng-submit="register()" ng-hide="hideform" role="register" novalidate>
+                <div ng-class="{ 'has-error': register.email.$touched && register.email.$invalid }">
+                    <p>
+                        <label>Email : </label>
+                        <input type="text" name="email" ng-model="cp.email" required>
+                    </p>
+                    <div ng-messages="register.email.$error" ng-if="register.email.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+
+                <div ng-class="{ 'has-error': register.fullname.$touched && register.fullname.$invalid }">
+                    <p>
+                        <label>Full name : </label>
+                        <input type="text" name="fullname" ng-model="cp.fullname" required>
+                    </p>
+                    <div ng-messages="register.fullname.$error" ng-if="register.fullname.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': register.appid.$touched && register.appid.$invalid }">
+                    <p>
+                        <label>AppId : </label>
+                        <input type="text" name="appid" ng-model="cp.appid" required>
+                    </p>
+                    <div ng-messages="register.appid.$error" ng-if="register.appid.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': register.password.$touched && register.password.$invalid }">
+                    <p>
+                        <label>Password : </label>
+                        <input type="text" name="password" ng-model="cp.password" required>
+                    </p>
+                    <div ng-messages="register.password.$error" ng-if="register.password.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': register.institute.$touched && register.institute.$invalid }">
+                    <p>
+                        <label>Institute : </label>
+                        <input type="text" name="institute" ng-model="cp.institute" required>
+                    </p>
+                    <div ng-messages="register.institute.$error" ng-if="register.institute.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+               
+                <div>
+                    <p style="align-content: center">
+                        <button type="submit" ng-disabled="register.$invalid && register.$dirty">Submit</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
