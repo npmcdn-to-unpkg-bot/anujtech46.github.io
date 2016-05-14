@@ -26,21 +26,12 @@
         </style>
     </head>
     <body>
-        <div ng-controller="showProfileCtrl"></div>
         <div ng-include = "'profiles/profile.view.html'"></div><br>
-        <div ng-controller="showStudnetProfileCtrl">
+        <div>
             <table align="center">
                 <tr>
                     <td>Fullname</td>
                     <td>{{ fullname }}</td>
-                </tr>
-                <tr>
-                    <td>School</td>
-                    <td>{{ school }}</td>
-                </tr>
-                <tr>
-                    <td>Grade</td>
-                    <td>{{ grade }}</td>
                 </tr>
                 <tr>
                     <td>Gender</td>
@@ -51,8 +42,28 @@
                     <td>{{ dob }}</td>
                 </tr>
                 <tr>
-                    <td>v1username</td>
-                    <td>{{ v1username }}</td>
+                    <td>Qualification</td>
+                    <td>{{ qualification }}</td>
+                </tr>
+                <tr>
+                    <td>Institute</td>
+                    <td>{{ institute }}</td>
+                </tr>
+                <tr>
+                    <td>Roles</td>
+                    <td>{{ roles }}</td>
+                </tr>
+                <tr>
+                    <td>internal</td>
+                    <td>{{ internal }}</td>
+                </tr>
+                <tr>
+                    <td>Skills</td>
+                    <td>{{ skills }}</td>
+                </tr>
+                <tr>
+                    <td>Headline</td>
+                    <td>{{ headline }}</td>
                 </tr>
                 <tr>
                     <td>Modified on</td>
@@ -64,7 +75,7 @@
                 </tr>
                 <tr>
                     <td>location</td>
-                    <td>{{ location }}</td>
+                    <td>{{ profiles.location }}</td>
                 </tr>
             </table>
         </div>

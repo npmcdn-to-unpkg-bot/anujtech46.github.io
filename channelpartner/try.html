@@ -1,0 +1,23 @@
+<body ng-controller="myCtrl">
+<form novalidate id="paperForm"  class="form-horizontal" name="formPaper">
+<div class="form-group">
+<label class="col-sm-3 control-label" for="name">
+    Name
+</label>
+<div class="col-sm-8">
+    <input type="text" id="name" placeholder="Please Enter Name"  class="form-control" ng-model="paper.name" ng-name="name" required>
+</div>
+
+<label class="col-sm-3 control-label" for="name">
+    Department
+</label>
+<div class="col-sm-8">
+    <input type="text" id="department" placeholder="Please Enter Department"  class="form-control" ng-model="paper.department" ng-name="department" required>
+</div>
+
+</div>
+
+ <button type="button" class="btn btn-default" ng-click="reset(paper)">Reset</button>
+
+</form>
+</body>
