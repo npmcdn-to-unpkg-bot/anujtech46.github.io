@@ -1,50 +1,58 @@
-var login = angular.module('login');
+angular
+    .module('login')
+    .controller('loginCtrl', loginCtrl)
+    .factory('loginFactory', loginFactory);
+    
+loginFactory.$inject = ['user', 'apiService', '$log'];
 
-login.factory('loginFactory', function($log, user, $http, $location) {
+function loginFactory(user, apiService, $log) {
     
-    var factory = {};
+    var factory = {
+        doLogin : doLogin
+    };
     
-    factory.doLogin = function($scope, callback) {
+    function doLogin(data, callback) {
         
         var url = user.apiEndPoint + 'login/admin';
-        $log.log("calling api [%s]"+ url);
+        
+        var config = {
+            headers : {
+                'application-id'    : 'tutradmin',
+                'secret-id'         : 'MviLb1cVNVE6j1vPwd93zGvD',
+                'content-type'      : 'application/json'
+            }
+        };
+        
+        apiService.doPost(url, data, config, function(err, res) {
+            $log.info("res", res);
+            return callback(err, res);
+        });
+    };
+    return factory ;
+};
+
+//inject the all dependencies
+loginCtrl.$inject = ['$scope', '$log', 'user', '$location', 'loginFactory', 'toastr'];
+
+function loginCtrl($scope, $log, user, $location, loginFactory, toastr) {
+        
+    $scope.loginFunction =  function() {
+        
         var data = {
             'email'  : $scope.username,
             'password'  : $scope.password
         };
-        var config = {
-            headers : {
-                'application-id'    : 'tutr',
-                'secret-id'         : 'SIz2DMxqeOHzCAqNefE5',
-                'content-type'      : 'application/json'
-            }
-        };
-        $http.post(url, data, config).then(function(res) {            
-            if(res.data.token) {
+        
+        $log.info("Calling login function");
+        
+        loginFactory.doLogin(data, function(err, res){
+            if(res.status.code === 303000) {
                 user.username  = $scope.username;
-                user.token     = res.data.token;
+                user.token     = res.token;
                 $location.path('/profile');
-                return callback(null, res.data);
             } else {
-                return callback(true, null);
+                toastr.error('Invalid Credentials', 'Please check username and password');
             }
-        },
-        function(res,status) {
-            return callback(true, null);
         });
     };
-    return factory ;
-});
-
-login.controller('loginCtrl',function($scope, $log, loginFactory) {
-        
-    $scope.loginFunction =  function() {
-        
-        loginFactory.doLogin($scope, function(err, res) {
-            if(err) {
-                $scope.message = "Invalid parameter";
-            }
-            $scope.message = "Login success";
-        });
-    };
-});
+};

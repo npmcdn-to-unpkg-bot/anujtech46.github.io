@@ -52,7 +52,7 @@ and open the template in the editor.
                     <th>created</th>
                 </tr>
                 <tr ng-repeat=" user in users ">
-                    <td ><a ng-href="#/profile/{{user._id}}">{{ user._id }} </a></td>
+                    <td ><a ng-href="#/profile/{{user._id}}/{{ user.roles }}">{{ user._id }} </a></td>
                     <td>{{ user.fullname }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.appid }}</td>
