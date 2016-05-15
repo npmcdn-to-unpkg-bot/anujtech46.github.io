@@ -1,3 +1,4 @@
+// login.controller.js
 angular
     .module('login')
     .controller('loginCtrl', loginCtrl)
