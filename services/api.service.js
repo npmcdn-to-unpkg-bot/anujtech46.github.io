@@ -48,18 +48,18 @@ function apiService($log, $http) {
         });
     };
     
-    this.doGet = function(url, config) {
+    this.doGet = function(url, config, callback) {
         $log.info("calling api [%s]"+ url);
         
         $http.get(url, config).
         success(function(data, status, headers, config) {
             $log.info("res", data);
-            return data;
+            return callback(null, data);
         }).
         error(function(data, status, headers, config) {
             // never reached even for 400/500 status codes
             $log.error("error", data);
-            return data;
+            return callback(true, null);
         });
     };
 };

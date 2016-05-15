@@ -1,12 +1,12 @@
 // login.config.js
 angular
-    .module('app')
+    .module('login')
     .config(config);
 
 function config($routeProvider) {
     $routeProvider
-        .when('/avengers', {
-            templateUrl :'views/login.view.html',
-            controller : 'loginCtrl'
+        .when('/', {
+            templateUrl :'views/login/login.view.html',
+            controller : 'LoginCtrl'
         });
 }

@@ -16,3 +16,7 @@ app.config(function(toastrConfig) {
     target: 'body'
   });
 });
+
+app.constant('_',
+    window._
+);

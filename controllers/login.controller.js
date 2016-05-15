@@ -1,41 +1,12 @@
 // login.controller.js
 angular
     .module('login')
-    .controller('loginCtrl', loginCtrl)
-    .factory('loginFactory', loginFactory);
-    
-loginFactory.$inject = ['apiService', '$log'];
-
-function loginFactory(apiService, $log) {
-    
-    var factory = {
-        doLogin : doLogin
-    };
-    
-    function doLogin(data, callback) {
-        
-        var url = apiService.getApiEndPoint() + 'login/admin';
-        
-        var config = {
-            headers : {
-                'application-id'    : 'tutradmin',
-                'secret-id'         : 'MviLb1cVNVE6j1vPwd93zGvD',
-                'content-type'      : 'application/json'
-            }
-        };
-        
-        apiService.doPost(url, data, config, function(err, res) {
-            $log.info("res", res);
-            return callback(err, res);
-        });
-    };
-    return factory ;
-};
+    .controller('LoginCtrl', LoginCtrl);
 
 //inject the all dependencies
-loginCtrl.$inject = ['$scope', '$log', 'apiService', '$location', 'loginFactory', 'toastr'];
+LoginCtrl.$inject = ['$scope', '$log', 'apiService', '$location', 'loginFactory', 'toastr'];
 
-function loginCtrl($scope, $log, apiService, $location, loginFactory, toastr) {
+function LoginCtrl($scope, $log, apiService, $location, loginFactory, toastr) {
         
     $scope.loginFunction =  function() {
         

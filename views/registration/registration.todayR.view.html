@@ -1,16 +1,9 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> 
         <style>
             body {
                 background-color : #ffeeff;
@@ -42,8 +35,7 @@ and open the template in the editor.
     </head>
     <body>
         <div ng-include = "'profiles/profile.view.html'"></div><br>
-        <div>Total Registration {{ count }}
-        </div>
+        <div>Total Registration {{ count }}</div> <br />
         <div>
             <table id="t01">
                 <tr>
@@ -55,7 +47,7 @@ and open the template in the editor.
                     <th>On Board</th>
                     <th>created</th>
                 </tr>
-                <tr ng-repeat=" user in users ">
+                <tr ng-repeat=" user in  users ">
                     <td ><a ng-href="#/profile/{{user._id}}">{{ user._id }} </a></td>
                     <td>{{ user.fullname }}</td>
                     <td>{{ user.email }}</td>
@@ -63,33 +55,26 @@ and open the template in the editor.
                     <td>{{ user.roles }}</td>
                     <td>{{ user.onboard }}</td>
                     <td>{{ user.created }}</td>
-<!--                    <td>
-                        <button type="button" ng-click="showProfile()">showProfile</button>
-                        <button type="button" ng-click="hideProfile()">hideProfile</button>
-                    </td>-->
                 </tr>
             </table>
-            <div>
-                
-            </div>
-                
         </div><br>
-        <paging>
-        <ul class="pagination"
-                num-pages="tasks.pageCount"
-                current-page="tasks.currentPage"
-                on-select-page="selectPage(page)">
-                <li ng-class="{disabled: noPrevious()}">
-                    <a ng-click="selectPrevious()">&laquo;</a>
-                </li>
-                <li ng-repeat="page in pages"
-                    ng-class="{active: isActive(page)}">
-                    <a ng-click="selectPage(page)">{{page}}</a>
-                </li>
-                <li ng-class="{disabled: noNext()}">
-                    <a ng-click="selectNext()">&raquo;</a>
-                </li>
-            </ul>
-        </paging>
+        
+        <ul ng-if=" pager.pages.length" class="pagination">
+            <li ng-class="{disabled:pager.currentPage === 1}">
+                <a ng-click=" setPage(1)">First</a>
+            </li>
+            <li ng-class="{disabled:pager.currentPage === 1}">
+                <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li ng-repeat="page in  pager.pages" ng-class="{active: pager.currentPage === page}">
+                <a ng-click=" setPage(page)">{{page}}</a>
+            </li>                
+            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+                <a ng-click=" setPage( pager.currentPage + 1)">Next</a>
+            </li>
+            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+                <a ng-click=" setPage( pager.totalPages)">Last</a>
+            </li>
+        </ul>
     </body>
 </html>
