@@ -16,7 +16,7 @@ function registrationFactory(apiService, $log) {
     
     function getTodayRegister(page, callback) {
         
-        var url = apiService.getApiEndPoint() + "registration/total/" + page;;
+        var url = apiService.getApiEndPoint() + "registration/today/" + page;;
         
         var config = {
             headers : {
@@ -48,7 +48,7 @@ function registrationFactory(apiService, $log) {
     
     function getTempUserRegister(page, callback) {
         
-        var url = apiService.getApiEndPoint() + "registration/total/" + page;;
+        var url = apiService.getApiEndPoint() + "tempusers/" + page;;
         
         var config = {
             headers : {
