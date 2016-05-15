@@ -1,4 +1,4 @@
-// login.service.js
+// educator.service.js
 angular
     .module('educator')
     .factory('educatorFactory', educatorFactory);
@@ -9,7 +9,7 @@ function educatorFactory(apiService, $log) {
     
     var factory = {
         updateEducator  : updateEducator,
-        deleteEducator  : deleteEducator,
+        doDeleteEducator  : doDeleteEducator,
         getAllLookers   : getAllLookers,
         getAllWeights   : getAllWeights,
         setSleepTime    : setSleepTime
@@ -30,7 +30,7 @@ function educatorFactory(apiService, $log) {
         });
     };
     
-    function deleteEducator(data, callback) {
+    function doDeleteEducator(data, callback) {
         
         var url = apiService.getApiEndPoint() + "delete/educator/" + data.email;
         var config = {
@@ -39,8 +39,8 @@ function educatorFactory(apiService, $log) {
                 appid : data.appid
             }
         }; 
-        
-        apiService.doDelete(url, data, config, function(err, res) {
+        $log.info("calling api with data", data);
+        apiService.doDelete(url, config, function(err, res) {
             $log.info("res", res);
             return callback(err, res);
         });

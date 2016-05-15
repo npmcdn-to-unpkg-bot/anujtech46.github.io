@@ -90,20 +90,19 @@ DeleteEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
 
 function DeleteEducatorCtrl($scope, educatorFactory, toastr) {
     
-    var data = {
-        email : $scope.email,
-        appid : $scope.appid
-    };
-
-    $scope.deleteEducator = function(data) {
+    $scope.deleteEducator = function() {
         
-        educatorFactory.deleteEducator(data, function(err, res) {
+        var data = {
+            email : $scope.email,
+            appid : $scope.appid
+        };
+        educatorFactory.doDeleteEducator(data, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
                     toastr.success("educator update successfully");
                     $scope.email = '';
                     $scope.appid = '';
-                    $scope.deleteEducator.$setPristine();
+                    $scope.educator.$setPristine();
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to delete educator');
                 }

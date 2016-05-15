@@ -28,29 +28,29 @@ and open the template in the editor.
         <div>{{ message }}</div>
         
         <div>
-            <form name="update" ng-submit="addCredits()" role="update" ng-hide="hideform" novalidate>
-                <div ng-class="{ 'has-error': update.email.$touched && update.email.$invalid }">
+            <form name="student" ng-submit="deleteStudent()" ng-hide="hideform" role="student" novalidate>
+                <div ng-class="{ 'has-error': !student.email.$pristine && student.email.$error.required }">
                     <p>
                         <label>Email : </label>
-                        <input type="text" name="email" ng-model="email" required>
+                        <input type="text" name="email" ng-model="st.email" required>
                     </p>
-                    <div ng-messages="update.email.$error" ng-if="update.email.$touched">
-                        <span ng-show="update.email.$dirty && update.email.$error.required" class="help-block">Email is required</span>
-                    </div>  
+                    <div ng-messages="student.email.$error" ng-if="!student.email.$pristine && student.email.$error.required && student.email.$invalid">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
                 </div>
-                <div>
+                <div ng-class="{ 'has-error': !student.appid.$pristine && student.appid.$error.required ">
                     <p>
                         <label>AppID : </label>
-                        <input type="text" name="appid" ng-model="appid" required>
+                        <input type="text" name="appid" ng-model="st.appid" required>
                     </p>
-                    <div ng-messages="update.appid.$error" ng-if="update.appid.$touched">
-                        <span ng-show="update.appid.$dirty && update.appid.$error.required" class="help-block">App Id is required</span>
+                    <div ng-messages="student.appid.$error" ng-if="!student.appid.$pristine && student.appid.$error.required && student.email.$invalid">
+                        <div ng-messages-include="error/error.html"></div>
                     </div> 
                 </div>
                 
                 <div>
                     <p>
-                        <button type="submit" ng-disabled="update.$invalid && update.$dirty">Submit</button>
+                        <button type="submit" ng-disabled="student.$invalid">Submit</button>
                     </p>
                 </div>
             </form>    

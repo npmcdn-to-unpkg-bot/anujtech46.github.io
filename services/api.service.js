@@ -79,7 +79,7 @@ function apiService($log, $http) {
         });     
     };
     
-    this.doDelete = function(url, data, config, callback) {
+    this.doDelete = function(url, config, callback) {
         
         $log.info("calling api [%s]"+ url);
         

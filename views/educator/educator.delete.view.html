@@ -28,28 +28,28 @@ and open the template in the editor.
         <div>{{ message }}</div>
         
         <div>
-            <form name="deleteEducator" ng-submit="deleteEducator()" ng-hide="hideform" role="update" novalidate>
-                <div ng-class="{ 'has-error': !deleteEducator.email.$pristine && deleteEducator.email.$error.required }">
+            <form name="educator" ng-submit="deleteEducator()" ng-hide="hideform" role="update" novalidate>
+                <div ng-class="{ 'has-error': !educator.email.$pristine && educator.email.$error.required }">
                     <p>
                         <label>Email : </label>
                         <input type="email" name="email" ng-model="email" required>
                     </p>
-                    <div ng-messages="deleteEducator.email.$error" ng-if="deleteEducator.wakeuptime.$invalid && !deleteEducator.email.$pristine && deleteEducator.email.$error.required">
+                    <div ng-messages="educator.email.$error" ng-if="educator.wakeuptime.$invalid && !educator.email.$pristine && educator.email.$error.required">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': !deleteEducator.email.$pristine && deleteEducator.email.$error.required }">
+                <div ng-class="{ 'has-error': !educator.email.$pristine && educator.email.$error.required }">
                     <p>
                         <label>AppID : </label>
                         <input type="text" name="appid" ng-model="appid" required>
                     </p>
-                    <div ng-messages="deleteEducator.appid.$error" ng-if="deleteEducator.wakeuptime.$invalid && !deleteEducator.appid.$pristine && deleteEducator.email.$error.required">
+                    <div ng-messages="educator.appid.$error" ng-if="educator.wakeuptime.$invalid && !educator.appid.$pristine && educator.email.$error.required">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
                 <div>
                     <p>
-                        <button type="submit" ng-disabled="deleteEducator.$invalid">Submit</button>
+                        <button type="submit" ng-disabled="educator.$invalid">Submit</button>
                     </p>
                 </div>
             </form>    
