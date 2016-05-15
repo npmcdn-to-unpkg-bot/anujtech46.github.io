@@ -46,9 +46,9 @@ profile.factory('userProfileFactory', function($log, $routeParams, user, $http, 
     return factory;
 });
 
-profile.controller('profileCtrl', function($scope, user, $http) {
+profile.controller('profileCtrl', function($scope, apiService, $http) {
     
-    $scope.username = user.username;
+    $scope.username = apiService.getUsername();
     
 });
 profile.controller('showProfileCtrl', function($scope, $log, $location, userProfileFactory) {
