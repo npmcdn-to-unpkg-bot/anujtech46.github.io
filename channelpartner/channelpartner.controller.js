@@ -29,6 +29,7 @@ cpCtrl.factory('registerFactory', function($log, user, $http, $location) {
             if(data.code === 303000) {
                 $log.info("cp register successfully");
                 $location.path('/showCP');
+                $scope.register.$setPristine();
                 return callback(null, data);
             } 
             if(data.status) {
@@ -72,19 +73,20 @@ cpCtrl.factory('registerFactory', function($log, user, $http, $location) {
     return factory ;
 });
 
-cpCtrl.controller('registerCP',function($scope, $log, registerFactory) {
+cpCtrl.controller('registerCP',function($scope, $log) {
     
     $log.info('register CP');
     $scope.registerCP =  function() {
         
-        registerFactory.doRegisterCP($scope, function(err, res) {
-            if(err) {
-                $scope.message = "Unable to register";
-            } else {
-                $scope.message = "Register successfully";
-                $scope.hideform = true;
-            } 
-        });
+//        registerFactory.doRegisterCP($scope, function(err, res) {
+//            if(err) {
+//                $scope.message = "Unable to register";
+//            } else {
+//                $scope.message = "Register successfully";
+//                $scope.hideform = true;
+//            } 
+//        });
+$scope.message = "Unable to register";
     };
 });
 

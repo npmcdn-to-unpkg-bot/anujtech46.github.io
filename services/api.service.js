@@ -8,8 +8,8 @@ function apiService($log, $http) {
     
     var token = '';
     var username = '';
-//    var apiEndPoint = 'https://localhost:4000/api/admin/v1/';
-    var apiEndPoint = 'https://trringconnect.com:14000/api/admin/v1/';
+    var apiEndPoint = 'https://localhost:4000/api/admin/v1/';
+//    var apiEndPoint = 'https://trringconnect.com:14000/api/admin/v1/';
     
     this.setToken = function(token) {
         this.token = token;
@@ -62,5 +62,35 @@ function apiService($log, $http) {
             $log.error("error", data);
             return callback(true, null);
         });
+    };
+    
+    this.doPut = function(url, data, config, callback) {
+        
+        $log.info("calling api [%s]"+ url);
+        
+        $http.put(url, data, config).success(function(data, status, headers, config) {
+            $log.info("data", data);
+            return callback(null, data);
+        }).
+        error(function(data, status, headers, config) {
+            // never reached even for 400/500 status codes
+            $log.error("error", data);
+            return callback(true, null);
+        });     
+    };
+    
+    this.doDelete = function(url, data, config, callback) {
+        
+        $log.info("calling api [%s]"+ url);
+        
+        $http.delete(url, config).success(function(data, status, headers, config) {
+            $log.info("data", data);
+            return callback(null, data);
+        }).
+        error(function(data, status, headers, config) {
+            // never reached even for 400/500 status codes
+            $log.error("error", data);
+            return callback(true, null);
+        });     
     };
 };

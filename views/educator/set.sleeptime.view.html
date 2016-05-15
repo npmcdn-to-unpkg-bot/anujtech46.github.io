@@ -101,35 +101,33 @@ body {
     
     <body align="center">
         <div ng-include = "'profiles/profile.view.html'"></div><br>
-        <div>{{ message }}</div>
-        
         <div>
-            <form name="sleep" ng-submit="sleepEducator()" ng-hide="hideform" role="sleep" novalidate>
-                <div ng-class="{ 'has-error': sleep.sleeptime.$touched && sleep.sleeptime.$invalid }">
+            <form name="sleep" ng-submit="sleepEducator()" ng-show="showField" role="sleep" novalidate>
+                <div ng-class="{ 'has-error': !sleep.sleeptime.$pristine && sleep.sleeptime.$error.required }">
                     <p>
                         <label>Sleep Time : </label>
                         <input name="sleeptime" ng-model="sleeptime" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />
                     </p>
-                    <div ng-messages="sleep.sleeptime.$error" ng-if="sleep.sleeptime.$touched">
+                    <div ng-messages="sleep.sleeptime.$error" ng-if="sleep.sleeptime.$invalid && !sleep.sleeptime.$pristine && sleep.sleeptime.$error.required">
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
                 </div>
-                <div ng-class="{ 'has-error': sleep.wakeuptime.$touched && sleep.wakeuptime.$invalid }">
+                <div ng-class="{ 'has-error': !sleep.wakeuptime.$pristine && sleep.wakeuptime.$error.required }">
                     <p>
                         <label>WakeUp Time : </label>
                         <input type = "text" name="wakeuptime" ng-model="wakeuptime" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />
                     </p>
-                    <div ng-messages="sleep.wakeuptime.$error" ng-if="sleep.wakeuptime.$touched">
+                    <div ng-messages="sleep.wakeuptime.$error" ng-if="sleep.wakeuptime.$invalid && !sleep.wakeuptime.$pristine && sleep.wakeuptime.$error.required">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
                 <div>
                     <p>
-                        <button type="submit" ng-disabled="sleepEducator.$invalid && sleepEducator.$dirty">Submit</button>
+                        <button type="submit" ng-disabled="sleep.$invalid">Submit</button>
                     </p>
                 
                 </div>
-            </form>    
+            </form>
         </div>
     </body>
 </html>

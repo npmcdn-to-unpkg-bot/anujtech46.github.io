@@ -29,27 +29,27 @@ and open the template in the editor.
         
         <div>
             <form name="deleteEducator" ng-submit="deleteEducator()" ng-hide="hideform" role="update" novalidate>
-                <div ng-class="{ 'has-error': deleteEducator.email.$touched && deleteEducator.email.$invalid }">
+                <div ng-class="{ 'has-error': !deleteEducator.email.$pristine && deleteEducator.email.$error.required }">
                     <p>
                         <label>Email : </label>
                         <input type="email" name="email" ng-model="email" required>
                     </p>
-                    <div ng-messages="deleteEducator.email.$error" ng-if="deleteEducator.email.$touched">
+                    <div ng-messages="deleteEducator.email.$error" ng-if="deleteEducator.wakeuptime.$invalid && !deleteEducator.email.$pristine && deleteEducator.email.$error.required">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': deleteEducator.email.$touched && deleteEducator.email.$invalid }">
+                <div ng-class="{ 'has-error': !deleteEducator.email.$pristine && deleteEducator.email.$error.required }">
                     <p>
                         <label>AppID : </label>
                         <input type="text" name="appid" ng-model="appid" required>
                     </p>
-                    <div ng-messages="deleteEducator.appid.$error" ng-if="deleteEducator.appid.$touched">
+                    <div ng-messages="deleteEducator.appid.$error" ng-if="deleteEducator.wakeuptime.$invalid && !deleteEducator.appid.$pristine && deleteEducator.email.$error.required">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
                 <div>
                     <p>
-                        <button type="submit" ng-disabled="deleteEducator.$invalid && deleteEducator.$dirty">Submit</button>
+                        <button type="submit" ng-disabled="deleteEducator.$invalid">Submit</button>
                     </p>
                 </div>
             </form>    

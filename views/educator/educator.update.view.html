@@ -29,21 +29,21 @@ and open the template in the editor.
         
         <div>
             <form name="update" ng-submit="updateEducator()" ng-hide="hideform" role="update" novalidate>
-                <div ng-class="{ 'has-error': update.email.$touched && update.email.$invalid }">
+                <div ng-class="{ 'has-error': !update.email.$pristine && update.email.$error.required }">
                     <p>
                         <label>Email : </label>
                         <input type="text" name="email" ng-model="updateE.email" required>
                     </p>
-                    <div ng-messages="update.email.$error" ng-if="update.email.$touched">
+                    <div ng-messages="update.email.$error" ng-if="!update.email.$pristine && update.email.$error.required && update.email.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
                 </div>
-                <div ng-class="{ 'has-error': update.email.$touched && update.email.$invalid }">
+                <div ng-class="{ 'has-error': !update.appid.$pristine && update.appid.$error.required }">
                     <p>
                         <label>AppID : </label>
                         <input type="text" name="appid" ng-model="updateE.appid" required>
                     </p>
-                    <div ng-messages="update.appid.$error" ng-if="update.appid.$touched">
+                    <div ng-messages="update.appid.$error" ng-if="!update.appid.$pristine && update.appid.$error.required && update.appid.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
                 </div>
@@ -80,7 +80,7 @@ and open the template in the editor.
                 </div>
                 <div>
                     <p>
-                        <button type="submit" ng-disabled="updateEducator.$invalid && updateEducator.$dirty">Submit</button>
+                        <button type="submit" ng-disabled="update.$invalid">Submit</button>
                     </p>
                 </div>
             </form>    
