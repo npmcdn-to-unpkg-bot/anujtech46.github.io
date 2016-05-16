@@ -36,33 +36,29 @@
                 <tr>
                     <th>Product Identifier</th>
                     <th>Name</th>
-                    <th>Description</th>
+                    <th>description</th>
                     <th>Credits</th>
                     <th>CVFD</th>
-                    <th>Available For</th>
                     <th>Code</th>
-                    <th>Code Minor</th>
-                    <th>Code Major</th>
+                    <th>Available for</th>
                     <th>Usage Count</th>
                     <th>Created</th>
                     <th>Expired</th>
                 </tr>
-                <tr ng-repeat=" voucher in vouchers ">
-                    <td>{{ voucher.productidentifier}}</td>
-                    <td>{{ voucher.name}}</td>
-                    <td>{{ voucher.description}}</td>
-                    <td>{{ voucher.credits }}</td>
-                    <td>{{ voucher.creditsvalidfordays}}</td>
-                    <td>{{ voucher.availablefor}}</td>
-                    <td>{{ voucher.code }}</td>
-                    <td>{{ voucher.codeminor }}</td>
-                    <td>{{ voucher.codemajor }}</td>
-                    <td>{{ voucher.usagecount }}</td>
-                    <td>{{ voucher.created }}</td>
-                    <td>{{ voucher.expired }}</td>
+                <tr ng-repeat=" promo in products ">
+                    <td>{{ promo.productidentifier}}</td>
+                    <td>{{ promo.name}}</td>
+                    <td>{{ promo.description }}</td>
+                    <td>{{ promo.credits }}</td>
+                    <td>{{ promo.creditsvalidfordays }}</td>
+                    <td>{{ promo.code }}</td>
+                    <td>{{ promo.availablefor }}</td>
+                    <td>{{ promo.usagecount }}</td>
+                    <td>{{ promo.created }}</td>
+                    <td>{{ promo.expired }}</td>
                 </tr>
             </table>
         </div><br>
-        <div>Total Voucher {{ count }}</div>
+        <div>Total promo product available = {{count }}</div>
     </body>
 </html>

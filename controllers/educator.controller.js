@@ -13,8 +13,6 @@ UpdateEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
  * desc : update educator role and subjects
  */
 function UpdateEducatorCtrl($scope, educatorFactory, toastr) {
-
-    $scope.ctrl = 'updateEducatorCtrl';
     
     $scope.updateEducator = function() {
         

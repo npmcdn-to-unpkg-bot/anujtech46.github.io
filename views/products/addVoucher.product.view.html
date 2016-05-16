@@ -18,106 +18,123 @@
                 width:200px;
                 margin: 0 auto;
             }
+            div{
+                text-align:center;
+            }
+            button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 50%;
+
+            }
         </style>
     </head>
     <body>
         <div ng-include = "'profiles/profile.view.html'"></div><br>
         <div>{{ message }}</div>
         <div>
-            <form name="VoucherP" ng-submit="addVoucherProduct()" ng-hide="hideform" role="addVoucher" novalidate>
-                <div ng-class="{ 'has-error': VoucherP.pi.$touched && VoucherP.pi.$invalid }">
+            <form name="product" ng-submit="addVoucher1Product()" ng-hide="hideform" role="addVoucher" novalidate>
+                <div ng-class="{ 'has-error': !product.pi.$pristine && product.pi.$error.required }">
                     <p>
                         <label>Product Identifier : </label>
                         <input type="text" name="pi" ng-model="voucher.pi" required>
                     </p>
-                    <div ng-messages="VoucherP.pi.$error" ng-if="VoucherP.pi.$touched">
+                    <div ng-messages="product.pi.$error" ng-if="!product.pi.$pristine && product.pi.$error.required && product.pi.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
                 </div>
-                <div ng-class="{ 'has-error': VoucherP.pname.$touched && VoucherP.pname.$invalid }">
+                <div ng-class="{ 'has-error': !product.pname.$pristine && product.pname.$error.required }">
                     <p>
                         <label>Product Name : </label>
                         <input type="text" name="pname" ng-model="voucher.pname" required>
                     </p>
-                    <div ng-messages="VoucherP.pname.$error" ng-if="VoucherP.pname.$touched">
+                    <div ng-messages="product.pname.$error" ng-if="!product.pname.$pristine && product.pname.$error.required && product.pname.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': VoucherP.description.$touched && VoucherP.description.$invalid }">
+                <div ng-class="{ 'has-error': !product.description.$pristine && product.description.$error.required }">
                     <p>
                         <label>Description : </label>
                         <input type="text" name="description" ng-model="voucher.description" required>
                     </p>
-                    <div ng-messages="VoucherP.description.$error" ng-if="VoucherP.description.$touched">
+                    <div ng-messages="product.description.$error" ng-if="!product.description.$pristine && product.description.$error.required && product.description.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': VoucherP.credits.$touched && VoucherP.credits.$invalid }">
+                <div ng-class="{ 'has-error': !product.credits.$pristine && product.credits.$error.required }">
                     <p>
                         <label>Credits : </label>
                         <input type="text" name="credits" ng-model="voucher.credits" required>
                     </p>
-                    <div ng-messages="VoucherP.credits.$error" ng-if="VoucherP.credits.$touched">
+                    <div ng-messages="product.credits.$error" ng-if="!product.credits.$pristine && product.credits.$error.required && product.credits.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': VoucherP.cvfd.$touched && VoucherP.cvfd.$invalid }">
+                <div ng-class="{ 'has-error': !product.cvfd.$pristine && product.cvfd.$error.required }">
                     <p>
                         <label>Credits valid for days : </label>
                         <input type="text" name="cvfd" ng-model="voucher.cvfd" required>
                     </p>
-                    <div ng-messages="VoucherP.cvfd.$error" ng-if="VoucherP.cvfd.$touched">
+                    <div ng-messages="product.cvfd.$error" ng-if="!product.cvfd.$pristine && product.cvfd.$error.required && product.cvfd.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': VoucherP.availablefor.$touched && VoucherP.availablefor.$invalid }">
+                <div ng-class="{ 'has-error': !product.availablefor.$pristine && product.availablefor.$error.required }">
                     <p>
                         <label>Available For : </label>
                         <input type="text" name="availablefor" ng-model="voucher.availablefor" required>
                     </p>
-                    <div ng-messages="VoucherP.availablefor.$error" ng-if="VoucherP.availablefor.$touched">
+                    <div ng-messages="product.availablefor.$error" ng-if="!product.availablefor.$pristine && product.availablefor.$error.required && product.availablefor.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': VoucherP.code.$touched && VoucherP.code.$invalid }">
+                <div ng-class="{ 'has-error': !product.code.$pristine && product.code.$error.required }">
                     <p>
                         <label>Code : </label>
                         <input type="text" name="code" ng-model="voucher.code" required>
                     </p>
-                    <div ng-messages="VoucherP.code.$error" ng-if="VoucherP.code.$touched">
+                    <div ng-messages="product.code.$error" ng-if="!product.code.$pristine && product.code.$error.required && product.code.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': VoucherP.codemajor.$touched && VoucherP.codemajor.$invalid }">
+                <div ng-class="{ 'has-error': !product.codemajor.$pristine && product.codemajor.$error.required }">
                     <p>
                         <label>Code Major : </label>
                         <input type="text" name="codemajor" ng-model="voucher.codemajor" required>
                     </p>
-                    <div ng-messages="VoucherP.codemajor.$error" ng-if="VoucherP.codemajor.$touched">
+                    <div ng-messages="product.codemajor.$error" ng-if="!product.codemajor.$pristine && product.codemajor.$error.required && product.codemajor.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': VoucherP.codeminor.$touched && VoucherP.codeminor.$invalid }">
+                <div ng-class="{ 'has-error': !product.codeminor.$pristine && product.codeminor.$error.required }">
                     <p>
                         <label>Code Minor : </label>
                         <input type="text" name="codeminor" ng-model="voucher.codeminor" required>
                     </p>
-                    <div ng-messages="VoucherP.codeminor.$error" ng-if="VoucherP.codeminor.$touched">
+                    <div ng-messages="product.codeminor.$error" ng-if="!product.codeminor.$pristine && product.codeminor.$error.required && product.codeminor.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': VoucherP.usagecount.$touched && VoucherP.usagecount.$invalid }">
+                <div ng-class="{ 'has-error': !product.usagecount.$pristine && product.usagecount.$error.required }">
                     <p>
                         <label>Usage Count : </label>
                         <input type="text" name="usagecount" ng-model="voucher.usagecount" required>
                     </p>
-                    <div ng-messages="VoucherP.usagecount.$error" ng-if="VoucherP.usagecount.$touched">
+                    <div ng-messages="product.usagecount.$error" ng-if="!product.usagecount.$pristine && product.usagecount.$error.required && product.usagecount.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
                 <div>
-                    <p style="align-content: center">
-                        <button type="submit" ng-disabled="VoucherP.$invalid && VoucherP.$dirty">Submit</button>
+                    <p>
+                        <button type="submit" ng-disabled="product.$invalid">Submit</button>
                     </p>
                 </div>
             </form>

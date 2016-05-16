@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -35,6 +30,7 @@ and open the template in the editor.
     </head>
     <body>
         <div ng-include = "'profiles/profile.view.html'"></div><br>
+        
         <div>
             <table id="t01">
                 <tr>
@@ -42,23 +38,25 @@ and open the template in the editor.
                     <th>Name</th>
                     <th>description</th>
                     <th>Credits</th>
-                    <th>Credits valid for days</th>
+                    <th>CVFD</th>
+                    <th>Credit Validity</th>
                     <th>Available for</th>
                     <th>Created</th>
                     <th>Expired</th>
                 </tr>
-                <tr ng-repeat=" shop in shops ">
-                    <td>{{ shop.productidentifier}}</td>
-                    <td>{{ shop.name}}</td>
-                    <td>{{ shop.description }}</td>
-                    <td>{{ shop.credits }}</td>
-                    <td>{{ shop.creditsvalidfordays }}</td>
-                    <td>{{ shop.availablefor }}</td>
-                    <td>{{ shop.created }}</td>
-                    <td>{{ shop.expired }}</td>
+                <tr ng-repeat=" promo in products ">
+                    <td>{{ promo.productidentifier}}</td>
+                    <td>{{ promo.name}}</td>
+                    <td>{{ promo.description }}</td>
+                    <td>{{ promo.credits }}</td>
+                    <td>{{ promo.creditsvalidfordays }}</td>
+                    <td>{{ promo.creditvalidity }}</td>
+                    <td>{{ promo.availablefor }}</td>
+                    <td>{{ promo.created }}</td>
+                    <td>{{ promo.expired }}</td>
                 </tr>
             </table>
         </div><br>
-        <div>Total Shop product available = {{count }}.</div>
+        <div>Total promo product available = {{count }}</div>
     </body>
 </html>

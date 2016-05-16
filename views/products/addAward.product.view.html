@@ -24,67 +24,67 @@
         <div ng-include = "'profiles/profile.view.html'"></div><br>
         <div>{{ message }}</div>
         <div>
-            <form name="AwardP" ng-submit="addAwardProduct()" ng-hide="hideform" role="addAward" novalidate>
-                <div ng-class="{ 'has-error': AwardP.pi.$touched && AwardP.pi.$invalid }">
+            <form name="product" ng-submit="addAwardProduct()" ng-hide="hideform" role="addAward" novalidate>
+                <div ng-class="{ 'has-error': product.pi.$touched && product.pi.$invalid }">
                     <p>
                         <label>Product Identifier : </label>
                         <input type="text" name="pi" ng-model="award.pi" required>
                     </p>
-                    <div ng-messages="AwardP.pi.$error" ng-if="AwardP.pi.$touched">
+                    <div ng-messages="product.pi.$error" ng-if="product.pi.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
                 </div>
 
-                <div ng-class="{ 'has-error': AwardP.pname.$touched && AwardP.pname.$invalid }">
+                <div ng-class="{ 'has-error': product.pname.$touched && product.pname.$invalid }">
                     <p>
                         <label>Product Name : </label>
                         <input type="text" name="pname" ng-model="award.pname" required>
                     </p>
-                    <div ng-messages="AwardP.pname.$error" ng-if="AwardP.pname.$touched">
+                    <div ng-messages="product.pname.$error" ng-if="product.pname.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': AwardP.description.$touched && AwardP.description.$invalid }">
+                <div ng-class="{ 'has-error': product.description.$touched && product.description.$invalid }">
                     <p>
                         <label>Description : </label>
                         <input type="text" name="description" ng-model="award.description" required>
                     </p>
-                    <div ng-messages="AwardP.description.$error" ng-if="AwardP.description.$touched">
+                    <div ng-messages="product.description.$error" ng-if="product.description.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': AwardP.credits.$touched && AwardP.credits.$invalid }">
+                <div ng-class="{ 'has-error': product.credits.$touched && product.credits.$invalid }">
                     <p>
                         <label>Credits : </label>
                         <input type="text" name="credits" ng-model="award.credits" required>
                     </p>
-                    <div ng-messages="AwardP.credits.$error" ng-if="AwardP.credits.$touched">
+                    <div ng-messages="product.credits.$error" ng-if="product.credits.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': AwardP.cvfd.$touched && AwardP.cvfd.$invalid }">
+                <div ng-class="{ 'has-error': product.cvfd.$touched && product.cvfd.$invalid }">
                     <p>
                         <label>Credits valid for days : </label>
                         <input type="text" name="cvfd" ng-model="award.cvfd" required>
                     </p>
-                    <div ng-messages="AwardP.cvfd.$error" ng-if="AwardP.cvfd.$touched">
+                    <div ng-messages="product.cvfd.$error" ng-if="product.cvfd.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
                
                 
-                <div ng-class="{ 'has-error': AwardP.availablefor.$touched && AwardP.availablefor.$invalid }">
+                <div ng-class="{ 'has-error': product.availablefor.$touched && product.availablefor.$invalid }">
                     <p>
                         <label>Available For : </label>
                         <input type="text" name="availablefor" ng-model="award.availablefor" required>
                     </p>
-                    <div ng-messages="AwardP.availablefor.$error" ng-if="AwardP.availablefor.$touched">
+                    <div ng-messages="product.availablefor.$error" ng-if="product.availablefor.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
                 <div>
                     <p style="align-content: center">
-                        <button type="submit" ng-disabled="AwardP.$invalid && AwardP.$dirty">Submit</button>
+                        <button type="submit" ng-disabled="product.$invalid && product.$dirty">Submit</button>
                     </p>
                 </div>
             </form>

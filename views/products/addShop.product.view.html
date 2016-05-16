@@ -24,58 +24,58 @@
         <div ng-include = "'profiles/profile.view.html'"></div><br>
         <div>{{ message }}</div>
         <div>
-            <form name="ShopP" ng-submit="addShopProduct()" ng-hide="hideform" role="addPromo" novalidate>
-                <div ng-class="{ 'has-error': ShopP.pi.$touched && ShopP.pi.$invalid }">
+            <form name="product" ng-submit="addShopProduct()" ng-hide="hideform" role="addPromo" novalidate>
+                <div ng-class="{ 'has-error': product.pi.$touched && product.pi.$invalid }">
                     <p>
                         <label>Product Identifier : </label>
                         <input type="text" name="pi" ng-model="shop.pi" required>
                     </p>
-                    <div ng-messages="ShopP.pi.$error" ng-if="ShopP.pi.$touched">
+                    <div ng-messages="product.pi.$error" ng-if="product.pi.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
                 </div>
-                <div ng-class="{ 'has-error': ShopP.pname.$touched && ShopP.pname.$invalid }">
+                <div ng-class="{ 'has-error': product.pname.$touched && product.pname.$invalid }">
                     <p>
                         <label>Product Name : </label>
                         <input type="text" name="pname" ng-model="shop.pname" required>
                     </p>
-                    <div ng-messages="ShopP.pname.$error" ng-if="ShopP.pname.$touched">
+                    <div ng-messages="product.pname.$error" ng-if="product.pname.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': ShopP.description.$touched && ShopP.description.$invalid }">
+                <div ng-class="{ 'has-error': product.description.$touched && product.description.$invalid }">
                     <p>
                         <label>Description : </label>
                         <input type="text" name="description" ng-model="shop.description" required>
                     </p>
-                    <div ng-messages="ShopP.description.$error" ng-if="ShopP.description.$touched">
+                    <div ng-messages="product.description.$error" ng-if="product.description.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': ShopP.credits.$touched && ShopP.credits.$invalid }">
+                <div ng-class="{ 'has-error': product.credits.$touched && product.credits.$invalid }">
                     <p>
                         <label>Credits : </label>
                         <input type="text" name="credits" ng-model="shop.credits" required>
                     </p>
-                    <div ng-messages="ShopP.credits.$error" ng-if="ShopP.credits.$touched">
+                    <div ng-messages="product.credits.$error" ng-if="product.credits.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': ShopP.cvfd.$touched && ShopP.cvfd.$invalid }">
+                <div ng-class="{ 'has-error': product.cvfd.$touched && product.cvfd.$invalid }">
                     <p>
                         <label>Credits valid for days : </label>
                         <input type="text" name="cvfd" ng-model="shop.cvfd" required>
                     </p>
-                    <div ng-messages="ShopP.cvfd.$error" ng-if="ShopP.cvfd.$touched">
+                    <div ng-messages="product.cvfd.$error" ng-if="product.cvfd.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': ShopP.availablefor.$touched && ShopP.availablefor.$invalid }">
+                <div ng-class="{ 'has-error': product.availablefor.$touched && product.availablefor.$invalid }">
                     <p>
                         <label>Available For : </label>
                         <input type="text" name="availablefor" ng-model="shop.availablefor" required>
                     </p>
-                    <div ng-messages="ShopP.availablefor.$error" ng-if="ShopP.availablefor.$touched">
+                    <div ng-messages="product.availablefor.$error" ng-if="product.availablefor.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
