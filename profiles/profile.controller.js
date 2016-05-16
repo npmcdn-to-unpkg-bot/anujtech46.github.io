@@ -1,6 +1,6 @@
 var profile = angular.module('profile');
 
-profile.factory('userProfileFactory', function($log, $routeParams, user, $http, $log, $location) {
+profile.factory('userProfileFactory', function($log, $routeParams, apiService, $http, $log, $location) {
     var factory  ={};
     var userProfile = {};
     
@@ -18,13 +18,13 @@ profile.factory('userProfileFactory', function($log, $routeParams, user, $http, 
     factory.apiR = function(callback) {
         
         var userid = $routeParams.userid;
-        var url = user.apiEndPoint + "get/profile/"+userid;
+        var url = apiService.getApiEndPoint() + "get/profile/"+userid;
         
         $log.info("call url "+ url);
         
         var config = {
             headers : {
-                'token' : user.token
+                'token' : apiService.getToken()
             }
         };
         
