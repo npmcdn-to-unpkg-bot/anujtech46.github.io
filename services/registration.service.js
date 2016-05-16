@@ -11,7 +11,8 @@ function registrationFactory(apiService, $log) {
     var factory = {
         getTodayRegister : getTodayRegister,
         getTotalRegister : getTotalRegister,
-        getTempUserRegister : getTempUserRegister
+        getTempUserRegister : getTempUserRegister,
+        getDevices          : getDevices
     };
     
     function getTodayRegister(page, callback) {
@@ -25,7 +26,6 @@ function registrationFactory(apiService, $log) {
         };
         
         apiService.doGet(url, config, function(err, res) {
-            $log.info("res", res);
             return callback(err, res);
         });
     };
@@ -41,7 +41,6 @@ function registrationFactory(apiService, $log) {
         };
         
         apiService.doGet(url, config, function(err, res) {
-            $log.info("res", res);
             return callback(err, res);
         });
     };
@@ -58,6 +57,21 @@ function registrationFactory(apiService, $log) {
         
         apiService.doGet(url, config, function(err, res) {
             $log.info("res", res);
+            return callback(err, res);
+        });
+    };
+    
+    function getDevices(page, callback) {
+        
+        var url = apiService.getApiEndPoint() + "devices/" + page;;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
             return callback(err, res);
         });
     };

@@ -16,5 +16,9 @@ function config($routeProvider) {
         .when('/tempUser', {
             templateUrl :'views/registration/tempuser.view.html',
             controller : 'TempUserCtrl'
+        })
+        .when('/devices', {
+            templateUrl :'views/registration/device.view.html',
+            controller : 'DeviceCtrl'
         });
 }

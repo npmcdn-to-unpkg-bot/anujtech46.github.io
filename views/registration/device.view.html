@@ -1,7 +1,12 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <title>Last day Registration</title>
+        <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -35,30 +40,35 @@
     </head>
     <body>
         <div ng-include = "'profiles/profile.view.html'"></div><br>
-        <div>Last day Registration is = {{ count }}</div> <br />
+        <div>Total Device {{ count }} </div>
         <div>
             <table id="t01">
                 <tr>
                     <th>user ID</th>
-                    <th>Full Name</th>
-                    <th>Email</th>
-                    <th>App Id</th>
-                    <th>Role</th>
-                    <th>On Board</th>
+                    <th>Device Type</th>
+                    <th>Device Model</th>
+                    <th>OS Version</th>
+                    <th>App Major Version</th>
+                    <th>App Minor Version</th>
+                    <th>Status</th>
+                    <th>Operator Name</th>
                     <th>created</th>
+                    <th>Pushtoken</th>
                 </tr>
-                <tr ng-repeat=" user in  users ">
-                    <td ><a ng-href="#/profile/{{user._id}}">{{ user._id }} </a></td>
-                    <td>{{ user.fullname }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.appid }}</td>
-                    <td>{{ user.roles }}</td>
-                    <td>{{ user.onboard }}</td>
+                <tr ng-repeat=" user in devices ">
+                    <td>{{ user.userid }} </a></td>
+                    <td>{{ user.devicetype }}</td>
+                    <td>{{ user.devicemodel }}</td>
+                    <td>{{ user.osversion }}</td>
+                    <td>{{ user.appmajorversion }}</td>
+                    <td>{{ user.appminorversion }}</td>
+                    <td>{{ user.status }}</td>
+                    <td>{{ user.operatorname }}</td>
                     <td>{{ user.created }}</td>
+                    <td>{{ user.pushtoken }}</td>
                 </tr>
             </table>
         </div><br>
-        
         <ul ng-if=" pager.pages.length" class="pagination">
             <li ng-class="{disabled:pager.currentPage === 1}">
                 <a ng-click=" setPage(1)">First</a>
