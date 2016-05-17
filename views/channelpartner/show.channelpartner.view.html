@@ -18,7 +18,7 @@ and open the template in the editor.
             table {
                 width:100%;
             }
-            table, th, td {
+            table#t02, th, td#02 {
                 border: 1px solid black;
                 border-collapse: collapse;
             }
@@ -39,38 +39,32 @@ and open the template in the editor.
         </style>
     </head>
     <body>
-        <div ng-include = "'profiles/profile.view.html'"></div><br>
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
+
+        <div>Total Registration {{ count }}</div>
         <div>
-            <table id="t01">
+            <table id="t01" id="t02">
                 <tr>
                     <th>user ID</th>
                     <th>Full Name</th>
                     <th>Email</th>
+                    <th>Institute</th>
                     <th>App Id</th>
                     <th>Role</th>
                     <th>On Board</th>
                     <th>created</th>
                 </tr>
                 <tr ng-repeat=" user in users ">
-                    <td ><a ng-href="#/profile/{{user._id}}/{{ user.roles }}">{{ user._id }} </a></td>
-                    <td>{{ user.fullname }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.appid }}</td>
-                    <td>{{ user.roles }}</td>
-                    <td>{{ user.onboard }}</td>
-                    <td>{{ user.created }}</td>
-<!--                    <td>
-                        <button type="button" ng-click="showProfile()">showProfile</button>
-                        <button type="button" ng-click="hideProfile()">hideProfile</button>
-                    </td>-->
+                    <td id="t02"><a ng-href="#/profile/{{user.userid}}/{{ user.roles }}">{{ user.userid }} </a></td>
+                    <td id="t02">{{ user.fullname }}</td>
+                    <td id="t02">{{ user.email }}</td>
+                    <td id="t02">{{ user.institute }}</td>
+                    <td id="t02">{{ user.appid }}</td>
+                    <td id="t02">{{ user.roles }}</td>
+                    <td id="t02">{{ user.onboard }}</td>
+                    <td id="t02">{{ user.created }}</td>
                 </tr>
             </table>
-            <div>
-                
-            </div>
-                
-        </div><br>
-        <div>Total Registration {{ count }}</div>
-        
+        </div>
     </body>
 </html>

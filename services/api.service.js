@@ -8,8 +8,8 @@ function apiService($log, $http) {
     
     var token = '';
     var username = '';
-//    var apiEndPoint = 'https://localhost:4000/api/admin/v1/';
-    var apiEndPoint = 'https://trringconnect.com:14000/api/admin/v1/';
+    var apiEndPoint = 'https://localhost:4000/api/admin/v1/';
+//    var apiEndPoint = 'https://trringconnect.com:14000/api/admin/v1/';
 //    var apiEndPoint = 'https://trringconnect.com:4000/api/admin/v1/';
     
     this.setToken = function(token) {
@@ -40,7 +40,6 @@ function apiService($log, $http) {
         
         $http.post(url, data, config).
         success(function(data, status, headers, config) {
-            $log.info("data", data);
             return callback(null, data);
         }).
         error(function(data, status, headers, config) {

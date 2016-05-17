@@ -21,8 +21,7 @@
         </style>
     </head>
     <body>
-        <div ng-include = "'profiles/profile.view.html'"></div><br>
-        <div>{{ message }}</div>
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
         <div>
             <form name="product" ng-submit="addPromoProduct()" role="addPromo" novalidate>
                 <div ng-class="{ 'has-error': product.pi.$touched && product.pi.$invalid }">
