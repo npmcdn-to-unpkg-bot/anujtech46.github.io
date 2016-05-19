@@ -5,13 +5,13 @@ angular
     .controller('TempUserCtrl', TempUserCtrl)
     .controller('DeviceCtrl', DeviceCtrl);
 
-TodayRegistrationCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log']);
+TodayRegistrationCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location']);
 
-function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr, $log) {
+function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr, $log, $location) {
     
     $scope.pager = {};
     $scope.setPage = setPage;
-
+    
     initController();
 
     function initController() {
@@ -43,13 +43,13 @@ function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr
 }
 
 
-TotalRegistrationCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log']);
+TotalRegistrationCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location']);
 
-function TotalRegistrationCtrl($scope, PagerService, registrationFactory, toastr, $log) {
+function TotalRegistrationCtrl($scope, PagerService, registrationFactory, toastr, $log, $location) {
     
     $scope.pager = {};
     $scope.setPage = setPage;
-
+    $scope.getProfiles = getProfiles;
     initController();
 
     function initController() {
@@ -77,6 +77,19 @@ function TotalRegistrationCtrl($scope, PagerService, registrationFactory, toastr
                 toastr.error('Server not working');
             }
         }); 
+    }
+    
+    function getProfiles() {
+        console.log("userid");
+//        if(roles === 'student') {
+//            $location.path('/profile/student/'+userid);
+//        }
+//        if(roles === 'educator') {
+//            $location.path('/profile/educator/'+userid);
+//        }
+//        if(roles === 'channelpartner') {
+//            $location.path('/profile/channelpartner/'+userid);
+//        }
     }
 }
 

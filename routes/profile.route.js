@@ -2,22 +2,20 @@ angular.module('profile')
         .config(config);
 
 function config($routeProvider) {
-    $routeProvider.
-        when('/profile', {
-            templateUrl :'views/profile/profile.view.html',
-            controller : 'ProfileCtrl'
+    $routeProvider
+        .when('/profile', {
+            controller : 'ProfileCtrl',
+            templateUrl :'views/profile/profile.view.html'
         })
-        .when('/profile/:userid/', {
+        .when('/profile/student/:userid', {
+            controller : 'ShowStudentProfileCtrl',
             templateUrl :'views/profile/profile.showProfile.student.view.html'
-        }).
-        when('/profile/student', {
-            templateUrl :'views/profile/profile.showProfile.student.view.html'
-        }).
-        when('/profile/educator', {
+        })
+        .when('/profile/educator/:userid', {
             controller : 'ShowEducatorProfileCtrl',
             templateUrl :'views/profile/profile.showProfile.educator.view.html'
         }).
-        when('/profile/channelpartner', {
+        when('/profile/channelpartner/:userid', {
             controller : 'ShowCPProfileCtrl',
             templateUrl :'views/profile/profile.showProfile.cp.view.html'
         }); 
