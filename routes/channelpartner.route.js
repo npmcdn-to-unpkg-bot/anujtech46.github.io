@@ -8,7 +8,7 @@ function config($routeProvider) {
             controller :'RegisterCPCtrl'
         })
         .when('/showCP', {
-            templateUrl :'views/channelpartner/show.channelpartner.view.html',
+            templateUrl :'views/channelpartner/show.allchannelpartner.view.html',
             controller :'ShowAllCPCtrl'
         });
     };

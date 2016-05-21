@@ -4,7 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            
+            table {
+                width: 100%
+            }
             table, th, td {
                 border: 1px solid black;
                 border-collapse: collapse;
@@ -23,12 +25,28 @@
                 background-color: black;
                 color: white;
             }
+            button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 50%;
+
+            }
         </style>
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
         <div>
             <table align="center">
+                <tr>
+                    <td  align="center" colspan="2"><b>Profile Info</b></td>
+                </tr>
                 <tr>
                     <td>Fullname</td>
                     <td>{{ fullname }}</td>
@@ -74,13 +92,41 @@
                     <td>{{ createdon }}</td>
                 </tr>
                 <tr>
-                    <td>location</td>
-                    <td>{{ profiles.location }}</td>
+                    <td>Location</td>
+                    <td>{{ location }}</td>
+                </tr>
+            </table><br>
+            <table>
+                <tr align="center" >
+                    <td><b>Device info</b></td>
+                </tr>
+                <tr>
+                    <th>Device Type</th>
+                    <th>Device Model</th>
+                    <th>OS Version</th>
+                    <th>App Major Version</th>
+                    <th>App Minor Version</th>
+                    <th>Status</th>
+                    <th>Operator Name</th>
+                    <th>created</th>
+                    <th>Pushtoken</th>
+                </tr>
+                <tr ng-repeat=" device in devices ">
+                    <td>{{ device.devicetype }}</td>
+                    <td>{{ device.devicemodel }}</td>
+                    <td>{{ device.osversion }}</td>
+                    <td>{{ device.appmajorversion }}</td>
+                    <td>{{ device.appminorversion }}</td>
+                    <td>{{ device.status }}</td>
+                    <td>{{ device.operatorname }}</td>
+                    <td>{{ device.created }}</td>
+                    <td>{{ device.pushtoken }}</td>
                 </tr>
             </table>
         </div>
-        <div>
-            <a href="#totalR">Back</a>
+        <div align="center">
+            <a href="#totalR">Back To Registration</a>&nbsp;
+            <a href="#showAllEducatorProfile">Back To Educator </a>
         </div>
     </body>
 </html>

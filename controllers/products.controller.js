@@ -8,8 +8,8 @@ angular.module('products')
         .controller('ShowVoucherCtrl', ShowVoucherCtrl)
         .controller('ShowShopCtrl', ShowShopCtrl); 
 
-AddAwardCtrl.$inject = ['$scope', 'productsFactory', 'toastr'];
-function AddAwardCtrl($scope, productsFactory, toastr) {
+AddAwardCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location'];
+function AddAwardCtrl($scope, productsFactory, toastr, $location) {
     
     $scope.addAwardProduct = function() {
         
@@ -28,6 +28,7 @@ function AddAwardCtrl($scope, productsFactory, toastr) {
                     toastr.success("add award product successfully");
                     $scope.award = '';
                     $scope.update.$setPristine();
+                    $location.path('/showAward');
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to add award product');
                 } 
@@ -38,8 +39,8 @@ function AddAwardCtrl($scope, productsFactory, toastr) {
     };
 };
 
-AddPromoCtrl.$inject = ['$scope', 'productsFactory', 'toastr'];
-function AddPromoCtrl($scope, productsFactory, toastr) {
+AddPromoCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location'];
+function AddPromoCtrl($scope, productsFactory, toastr, $location) {
     
     $scope.addPromoProduct = function() {
         var data = {
@@ -59,6 +60,7 @@ function AddPromoCtrl($scope, productsFactory, toastr) {
                     toastr.success("add promo product successfully");
                     $scope.promo = '';
                     $scope.update.$setPristine();
+                    $location.path('/showPromo');
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to add promo product');
                 }
@@ -69,8 +71,8 @@ function AddPromoCtrl($scope, productsFactory, toastr) {
     };
 };
 
-AddShopCtrl.$inject = ['$scope', 'productsFactory', 'toastr'];
-function AddShopCtrl($scope, productsFactory, toastr) {
+AddShopCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location'];
+function AddShopCtrl($scope, productsFactory, toastr, $location) {
 
     $scope.addShopProduct = function() {
       
@@ -89,6 +91,7 @@ function AddShopCtrl($scope, productsFactory, toastr) {
                     toastr.success("add shop product successfully");
                     $scope.shop = '';
                     $scope.product.$setPristine();
+                    $location.path('/showShop');
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to add shop product');
                 }
@@ -99,11 +102,17 @@ function AddShopCtrl($scope, productsFactory, toastr) {
     };
 };
 
-AddVoucherCtrl.$inject = ['$scope', 'productsFactory', 'toastr'];
-function AddVoucherCtrl($scope, productsFactory, toastr) {
+AddVoucherCtrl.$inject = ['$scope', 'productsFactory', 'toastr', 'cpProfileService', '$location'];
+function AddVoucherCtrl($scope, productsFactory, toastr, cpProfileService, $location) {
+    
+    var cpCode = cpProfileService.getCPCode();
+    $scope.voucher = {
+        code : cpCode
+    };
+    
+    $scope.institute = cpProfileService.getInstitute();
     
     $scope.addVoucherProduct = function() {
-        
         var data = {
             productidentifier: $scope.voucher.pi,
             name: $scope.voucher.pname,
@@ -123,6 +132,7 @@ function AddVoucherCtrl($scope, productsFactory, toastr) {
                     toastr.success("add voucher successfully");
                     $scope.voucher = '';
                     $scope.product.$setPristine();
+                    $location.path('/showVoucher');
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to add voucher product');
                 }

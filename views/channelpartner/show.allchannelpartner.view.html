@@ -36,12 +36,25 @@ and open the template in the editor.
                 background-color: black;
                 color: white;
             }
+            button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 50%;
+
+            }
         </style>
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
 
-        <div>Total Registration {{ count }}</div>
+        <div>Total channel partner = {{ count }}</div><br>
         <div>
             <table id="t01" id="t02">
                 <tr>
@@ -55,7 +68,7 @@ and open the template in the editor.
                     <th>created</th>
                 </tr>
                 <tr ng-repeat=" user in users ">
-                    <td id="t02"><a ng-href="#/profile/{{user.userid}}/{{ user.roles }}">{{ user.userid }} </a></td>
+                    <td ng-click="getProfiles(user.userid, user.roles)">{{ user.userid }} </td>
                     <td id="t02">{{ user.fullname }}</td>
                     <td id="t02">{{ user.email }}</td>
                     <td id="t02">{{ user.institute }}</td>

@@ -31,8 +31,10 @@ function RegisterCPCtrl($scope, cpFactory, toastr, $location) {
     };
 };
 
-ShowAllCPCtrl.$inject = ['$scope', 'toastr', 'cpFactory'];
-function ShowAllCPCtrl($scope, toastr, cpFactory) {
+ShowAllCPCtrl.$inject = ['$scope', 'toastr', 'cpFactory', '$location'];
+function ShowAllCPCtrl($scope, toastr, cpFactory, $location) {
+    
+    $scope.getProfiles = getProfiles;
   
     cpFactory.getAllCP(function(err, res) {
         if(res) {
@@ -50,8 +52,12 @@ function ShowAllCPCtrl($scope, toastr, cpFactory) {
             toastr.error('Server not working');
         }
     });
+    
+    function getProfiles(userid, roles) {
+        if(roles[0] === 'channelpartner') {
+            $location.path('/profile/channelpartner/'+userid);
+        } else {
+            toastr.error('Invalid request');
+        }
+    }
 };
-
-
-
-

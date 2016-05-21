@@ -8,7 +8,9 @@ LoginCtrl.$inject = ['$scope', '$log', 'apiService', '$location', 'loginFactory'
 
 function LoginCtrl($scope, $log, apiService, $location, loginFactory, toastr) {
         
-    $scope.loginFunction =  function() {
+    $scope.loginFunction = loginFunction;
+    
+    function loginFunction() {
         
         var data = {
             'email'  : $scope.username,

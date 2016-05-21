@@ -13,6 +13,9 @@
                 padding: 5px;
                 text-align: left;
             }
+            table {
+                width: 100%
+            }
             table#t01 tr:nth-child(even) {
                 background-color: #eee;
             }
@@ -23,13 +26,27 @@
                 background-color: black;
                 color: white;
             }
+            button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 50%;
+
+            }
         </style>
     </head>
     <body>
-        <div ng-controller="showProfileCtrl"></div>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
-        <div ng-controller="showStudnetProfileCtrl">
             <table align="center">
+                <tr>
+                    <td  align="center" colspan="2"><b>Profile Info</b></td>
+                </tr>
                 <tr>
                     <td>Fullname</td>
                     <td>{{ fullname }}</td>
@@ -63,13 +80,63 @@
                     <td>{{ createdon }}</td>
                 </tr>
                 <tr>
-                    <td>location</td>
+                    <td>Location</td>
                     <td>{{ location }}</td>
                 </tr>
+            </table><br>
+            <table>
+                <tr>
+                    <td  align="center" colspan="6"><b>Subscription</b></td>
+                </tr>
+                <tr>
+                    <th>Product Identifier</th>
+                    <th>Product name</th>
+                    <th>Credits</th>
+                    <th>credit Validity</th>
+                    <th>Description</th>
+                    <th>Created</th>
+                </tr>
+                <tr ng-repeat="products in subscriptions">
+                        <td>{{products.productidentifier}}</td>
+                        <td>{{ products.name }}</td>
+                        <td>{{ products.credits }}</td>
+                        <td>{{ products.creditvalidity }}</td>
+                        <td>{{ products.description }}</td>
+                        <td>{{ products.created }}</td>
+                </tr>
+            </table><br>
+            <table>
+                <tr>
+                    
+                    <td  align="center" colspan="10"><b>Device info</b></td>
+                </tr>
+                <tr>
+                    <th>Device Type</th>
+                    <th>Device Model</th>
+                    <th>OS Version</th>
+                    <th>App Major Version</th>
+                    <th>App Minor Version</th>
+                    <th>Status</th>
+                    <th>Operator Name</th>
+                    <th>created</th>
+                    <th>Pushtoken</th>
+                </tr>
+                <tr ng-repeat=" device in devices ">
+                    <td>{{ device.devicetype }}</td>
+                    <td>{{ device.devicemodel }}</td>
+                    <td>{{ device.osversion }}</td>
+                    <td>{{ device.appmajorversion }}</td>
+                    <td>{{ device.appminorversion }}</td>
+                    <td>{{ device.status }}</td>
+                    <td>{{ device.operatorname }}</td>
+                    <td>{{ device.created }}</td>
+                    <td>{{ device.pushtoken }}</td>
+                </tr>
             </table>
-        </div>
-        <div>
-            <a href="#totalR">Back</a>
+        </div> <br>
+        <div align="center">
+            <a href="#totalR">Back To Registration</a>&nbsp;
+            <a href="#showAllEducatorProfile">Back To Educator </a>
         </div>
     </body>
 </html>

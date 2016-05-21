@@ -48,7 +48,7 @@
                     <th>created</th>
                 </tr>
                 <tr ng-repeat=" user in  users ">
-                    <td ><a ng-href="#/profile/{{user._id}}">{{ user._id }} </a></td>
+                    <td ng-click="getProfiles(user._id, user.roles)">{{ user._id }} </td>
                     <td>{{ user.fullname }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.appid }}</td>

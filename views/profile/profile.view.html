@@ -9,14 +9,27 @@
                 background-color : #DCDCDC;
                 margin-top: 10px;
             }
+            button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 50%;
+
+            }
         </style>
     <body>
         <div ng-controller="ProfileCtrl">
-            <table style="width:100%">
+            <table style="width:100%"  id="t03">
                 <tr>
                     <td>
                         <span style="float:left;">Hi {{username}}</span>
-                        <span style="float:right; margin-right: 5%"><button>Logout</button></span>
+                        <span style="float:right; margin-right: 5%"><button ng-click="logout()">Logout</button></span>
                     </td>
                 </tr>
             </table>

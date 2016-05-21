@@ -9,17 +9,35 @@ and open the template in the editor.
         <title>Add Educator</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <style type="text/css">
+        <style type="text/css">
             body {
                 background-color : #ffeeff;
                 margin: 0;
                 padding: 0;
             }
-            form p label {
-                display:block;
-                float:left;
+            form p input {
+                /*display:block;*/
+                float:right;
                 width:200px;
                 margin: 0 auto;
+                
+            }
+            form p{
+                width:400px;
+                
+            }
+            button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 50%;
+
             }
         </style>
     </head>
@@ -27,7 +45,7 @@ and open the template in the editor.
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
         
         
-        <div>
+        <div align="center">
             <form name="student" ng-submit="deleteStudent()" ng-hide="hideform" role="student" novalidate>
                 <div ng-class="{ 'has-error': !student.email.$pristine && student.email.$error.required }">
                     <p>

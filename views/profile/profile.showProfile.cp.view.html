@@ -23,6 +23,19 @@
                 background-color: black;
                 color: white;
             }
+            button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 50%;
+
+            }
         </style>
     </head>
     <body>
@@ -38,6 +51,14 @@
                     <td>{{ gender }}</td>
                 </tr>
                 <tr>
+                    <td>Code</td>
+                    <td>{{ code }}</td>
+                </tr>
+                <tr>
+                    <td>Institute</td>
+                    <td>{{ institute }}</td>
+                </tr>
+                <tr>
                     <td>Date Of Birth</td>
                     <td>{{ dob }}</td>
                 </tr>
@@ -45,21 +66,18 @@
                     <td>Qualification</td>
                     <td>{{ qualification }}</td>
                 </tr>
-                <tr>
-                    <td>Institute</td>
-                    <td>{{ institute }}</td>
-                </tr>
+                
                 <tr>
                     <td>Roles</td>
                     <td>{{ roles }}</td>
                 </tr>
                 <tr>
-                    <td>internal</td>
-                    <td>{{ internal }}</td>
+                    <td>Onboard</td>
+                    <td>{{ onboard }}</td>
                 </tr>
                 <tr>
-                    <td>Skills</td>
-                    <td>{{ skills }}</td>
+                    <td>Address</td>
+                    <td>{{ address }}</td>
                 </tr>
                 <tr>
                     <td>Headline</td>
@@ -75,12 +93,14 @@
                 </tr>
                 <tr>
                     <td>location</td>
-                    <td>{{ profiles.location }}</td>
+                    <td>{{ location }}</td>
                 </tr>
             </table>
         </div>
-        <div>
-            <a href="#totalR">Back</a>
+        <div align="center">
+            <a href="#showCP">Back</a>
+            <button ng-click="updateCPProfile()">Update Profile</button>
+            <button ng-click="createVoucher()">Create Voucher</button>
         </div>
     </body>
-</html>
+</html> 

@@ -16,14 +16,12 @@ and open the template in the editor.
                 margin: 0;
                 padding: 0;
             }
-            table {
+            table#t01 {
                 width:100%;
             }
-            table, th, td {
+            table#t01, th, td {
                 border: 1px solid black;
                 border-collapse: collapse;
-            }
-            th, td {
                 padding: 5px;
                 text-align: left;
             }
@@ -52,8 +50,8 @@ and open the template in the editor.
                     <th>On Board</th>
                     <th>created</th>
                 </tr>
-                <tr ng-repeat=" user in users ">
-                    <td>{{ user._id }} </td>
+                <tr ng-repeat=" user in users">
+                    <td ng-click="getProfiles(user._id, user.roles)">{{ user._id }} </td>
                     <td>{{ user.fullname }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.appid }}</td>

@@ -6,31 +6,33 @@
         <title>Add Voucher product</title>
   
         <!-- CSS -->
+        
         <style type="text/css">
             body {
                 background-color : #ffeeff;
                 margin: 0;
                 padding: 0;
             }
-            form p label {
-                display:block;
-                float:left;
+            form p input {
+                /*display:block;*/
+                float:right;
                 width:200px;
                 margin: 0 auto;
+                
             }
-            div{
-                text-align:center;
+            form p{
+                width:400px;
+                
             }
             button {
                 background-color: #4CAF50; /* Green */
                 border: none;
                 color: white;
-                padding: 15px 32px;
+                padding: 10px 20px;
                 text-align: center;
                 text-decoration: none;
                 display: inline-block;
                 font-size: 16px;
-                margin: 4px 2px;
                 cursor: pointer;
                 border-radius: 50%;
 
@@ -39,7 +41,7 @@
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
-        <div>
+        <div align="center">
             <form name="product" ng-submit="addVoucher1Product()" ng-hide="hideform" role="addVoucher" novalidate>
                 <div ng-class="{ 'has-error': !product.pi.$pristine && product.pi.$error.required }">
                     <p>
@@ -56,7 +58,7 @@
                         <input type="text" name="pname" ng-model="voucher.pname" required>
                     </p>
                     <div ng-messages="product.pname.$error" ng-if="!product.pname.$pristine && product.pname.$error.required && product.pname.$invalid">
-                        <div ng-messages-include="error/error.html"></div>
+                        <span ng-messages-include="error/error.html"></span>
                     </div>
                 </div>
                 <div ng-class="{ 'has-error': !product.description.$pristine && product.description.$error.required }">
@@ -71,7 +73,7 @@
                 <div ng-class="{ 'has-error': !product.credits.$pristine && product.credits.$error.required }">
                     <p>
                         <label>Credits : </label>
-                        <input type="text" name="credits" ng-model="voucher.credits" required>
+                        <input type="text" name="credits" ng-model="voucher.credits"  required>
                     </p>
                     <div ng-messages="product.credits.$error" ng-if="!product.credits.$pristine && product.credits.$error.required && product.credits.$invalid">
                         <div ng-messages-include="error/error.html"></div>
@@ -98,7 +100,7 @@
                 <div ng-class="{ 'has-error': !product.code.$pristine && product.code.$error.required }">
                     <p>
                         <label>Code : </label>
-                        <input type="text" name="code" ng-model="voucher.code" required>
+                        <input type="text" name="code" ng-model="voucher.code"  readonly required>
                     </p>
                     <div ng-messages="product.code.$error" ng-if="!product.code.$pristine && product.code.$error.required && product.code.$invalid">
                         <div ng-messages-include="error/error.html"></div>
@@ -133,7 +135,7 @@
                 </div>
                 <div>
                     <p>
-                        <button type="submit" ng-disabled="product.$invalid">Submit</button>
+                        <button type="submit" ng-disabled="product.$invalid && product.$dirty">Submit</button>
                     </p>
                 </div>
             </form>

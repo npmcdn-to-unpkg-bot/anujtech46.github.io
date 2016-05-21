@@ -5,34 +5,51 @@
         <meta charset="utf-8">
         <title>Add Award product</title>
   
-        <!-- CSS -->
         <style type="text/css">
             body {
                 background-color : #ffeeff;
                 margin: 0;
                 padding: 0;
             }
-            form p label {
-                display:block;
-                float:left;
+            form p input {
+                /*display:block;*/
+                float:right;
                 width:200px;
                 margin: 0 auto;
+                
+            }
+            form p{
+                width:400px;
+                
+            }
+            button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 50%;
+
             }
         </style>
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
-        <div>
+        <div align="center">
             <form name="product" ng-submit="addAwardProduct()" ng-hide="hideform" role="addAward" novalidate>
-                <div ng-class="{ 'has-error': product.pi.$touched && product.pi.$invalid }">
-                    <p>
-                        <label>Product Identifier : </label>
-                        <input type="text" name="pi" ng-model="award.pi" required>
-                    </p>
-                    <div ng-messages="product.pi.$error" ng-if="product.pi.$touched">
-                        <div ng-messages-include="error/error.html"></div>
-                    </div> 
-                </div>
+                        <div ng-class="{ 'has-error': product.pi.$touched && product.pi.$invalid }">
+                            <p>
+                                <label>Product Identifier : </label>
+                                <input type="text" name="pi" ng-model="award.pi" required>
+                            </p>
+                            <div ng-messages="product.pi.$error" ng-if="product.pi.$touched">
+                                <div ng-messages-include="error/error.html"></div>
+                            </div> 
+                        </div>
 
                 <div ng-class="{ 'has-error': product.pname.$touched && product.pname.$invalid }">
                     <p>

@@ -11,6 +11,7 @@ function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr
     
     $scope.pager = {};
     $scope.setPage = setPage;
+    $scope.getProfiles = getProfiles;
     
     initController();
 
@@ -40,8 +41,20 @@ function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr
             }
         }); 
     }
+    
+    function getProfiles(userid, roles) {
+        console.log("userid", userid, roles);
+        if(roles[0] === 'student') {
+            $location.path('/profile/student/'+userid);
+        }
+        if(roles[0] === 'educator') {
+            $location.path('/profile/educator/'+userid);
+        }
+        if(roles[0] === 'channelpartner') {
+            $location.path('/profile/channelpartner/'+userid);
+        }
+    }
 }
-
 
 TotalRegistrationCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location']);
 
@@ -51,7 +64,7 @@ function TotalRegistrationCtrl($scope, PagerService, registrationFactory, toastr
     $scope.setPage = setPage;
     $scope.getProfiles = getProfiles;
     initController();
-
+    
     function initController() {
         // initialize to page 1
          $scope.setPage(1);
@@ -79,17 +92,17 @@ function TotalRegistrationCtrl($scope, PagerService, registrationFactory, toastr
         }); 
     }
     
-    function getProfiles() {
-        console.log("userid");
-//        if(roles === 'student') {
-//            $location.path('/profile/student/'+userid);
-//        }
-//        if(roles === 'educator') {
-//            $location.path('/profile/educator/'+userid);
-//        }
-//        if(roles === 'channelpartner') {
-//            $location.path('/profile/channelpartner/'+userid);
-//        }
+    function getProfiles(userid, roles) {
+
+        if(roles[0] === 'student') {
+            $location.path('/profile/student/'+userid);
+        }
+        if(roles[0] === 'educator') {
+            $location.path('/profile/educator/'+userid);
+        }
+        if(roles[0] === 'channelpartner') {
+            $location.path('/profile/channelpartner/'+userid);
+        }
     }
 }
 
@@ -167,5 +180,3 @@ function DeviceCtrl($scope, PagerService, registrationFactory, toastr, $log) {
         }); 
     }
 }
-
-

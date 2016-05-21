@@ -1,29 +1,60 @@
 angular.module('profile')
-        .factory('userProfileFactory', userProfileFactory);
+        .factory('userProfileFactory', userProfileFactory)
+        .service('cpProfileService', cpProfileService);
 
-userProfileFactory.$inject = ['$log', '$routeParams', 'apiService', '$log'];
-function userProfileFactory($log, $routeParams, apiService, $log) {
+userProfileFactory.$inject = ['$log', 'apiService', '$log'];
+function userProfileFactory($log, apiService, $log) {
+    
     var factory  ={
-        getUserProfile : getUserProfile
-//        apiR           : apiR
+        getStudentProfileWithToken  : getStudentProfileWithToken,
+        getEducatorProfileWithToken : getEducatorProfileWithToken,
+        getCPProfile                : getCPProfile
     };
-//    var userProfile = {};
     
-    
-//    function setUserProfile(profile) {
-//        $log.info("inside setUserProfile");
-//        userProfile = profile;
-//        return ;
-//    };
-//    
-//    function getUserProfile() {
-//        return userProfile;
-//    };
+    function getStudentProfileWithToken(userid, callback) {
 
+        getProfile(userid, function(err, profile) {
+            if(profile.status.code === 303000) {
+                getDevice(userid, function(err, devices) {
+                    if(devices.status.code === 303000) {                        
+                        return callback(err, profile, devices);
+                    } else {
+                        return callback(err, profile, null);
+                    }
+                });
+            } else {
+                return callback(err, profile, null);
+            }
+        });
+    };
     
-    function getUserProfile(callback) {
+    function getEducatorProfileWithToken(userid, callback) {
         
-        var userid = $routeParams.userid;
+        getProfile(userid, function(err, profile) {
+            if(profile.status.code === 303000) {
+                getDevice(userid, function(err, devices) {
+                    if(devices.status.code === 303000) {                        
+                        return callback(err, profile, devices);
+                    } else {
+                        return callback(err, profile, null);
+                    }
+                });
+            } else {
+                return callback(err, profile, null);
+            }
+        });
+    };
+    
+    function getCPProfile(userid, callback) {
+        
+        getProfile(userid, function(err, profile) {
+            return callback(err, profile);
+
+        });
+    };
+    
+    function getProfile(userid, callback) {
+        
         var url = apiService.getApiEndPoint() + "get/profile/"+userid;
         
         $log.info("call url "+ url);
@@ -35,9 +66,58 @@ function userProfileFactory($log, $routeParams, apiService, $log) {
         };
         
         apiService.doGet(url, config, function(err, res) {
-            $log.info("res", res);
+            return callback(err, res);
+        });
+    }
+    
+    function getDevice(userid, callback) {
+        var url = apiService.getApiEndPoint() + "get/device/"+userid;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
             return callback(err, res);
         });
     };
     return factory;
 };
+
+cpProfileService.$inject = [];
+function cpProfileService() {
+    var code = '';
+    var userid = '';
+    var institute = '';
+    
+    this.saveCPCode = function(code) {
+        this.code = code; 
+        return;
+    };
+    
+    this.getCPCode= function() {
+        return this.code;
+    };
+    
+    this.saveUserID = function(userid) {
+        this.userid = userid;
+        return;
+    };
+    
+    this.getUserID = function(){
+        return this.userid;
+    };
+    
+    this.saveInstitute = function(institute) {
+        this.institute = institute;
+        return;
+    };
+    
+    this.getInstitute = function(){
+        return this.institute;
+    };
+    
+    
+}
