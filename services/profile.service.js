@@ -16,6 +16,9 @@ function userProfileFactory($log, apiService, $log) {
         getProfile(userid, function(err, profile) {
             if(profile.status.code === 303000) {
                 getDevice(userid, function(err, devices) {
+                    if(err) {
+                        return callback(err, profile, null);
+                    }
                     if(devices.status.code === 303000) {                        
                         return callback(err, profile, devices);
                     } else {
@@ -33,6 +36,9 @@ function userProfileFactory($log, apiService, $log) {
         getProfile(userid, function(err, profile) {
             if(profile.status.code === 303000) {
                 getDevice(userid, function(err, devices) {
+                    if(err) {
+                        return callback(err, profile, null);
+                    }
                     if(devices.status.code === 303000) {                        
                         return callback(err, profile, devices);
                     } else {
