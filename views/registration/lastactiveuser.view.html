@@ -48,8 +48,8 @@ and open the template in the editor.
                     <th>created</th>
                 </tr>
                 <tr ng-repeat=" user in users ">
-                    <td>{{ user.userid }} </a></td>
-                    <td>{{ user.created }}</td>
+                    <td ng-click="getProfiles(user._id, user.roles)">{{ user._id }} </td>
+                    <td>{{ user.createdAt }}</td>
                 </tr>
             </table>
         </div><br>
