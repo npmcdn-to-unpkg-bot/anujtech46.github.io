@@ -184,7 +184,7 @@ function DeviceCtrl($scope, PagerService, registrationFactory, toastr, $log) {
 
 LastActiveUserCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$location', '$log']);
 
-function LastActiveUserCtrl($scope, PagerService, registrationFactory, toastr, $log, $location) {
+function LastActiveUserCtrl($scope, PagerService, registrationFactory, toastr, $location, $log) {
     
     $scope.pager        = {};
     $scope.setPage      = setPage;
