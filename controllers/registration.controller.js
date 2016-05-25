@@ -205,7 +205,7 @@ function LastActiveUserCtrl($scope, PagerService, registrationFactory, toastr, $
         registrationFactory.getLastActiveUser(page, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
-                    $log.info("getting res", res.user.user);
+                    $log.info("getting all last active users", res.user.user);
                     $scope.pager = PagerService.GetPager(res.user.count, page, res.user.pageSize);
                     $scope.users =  res.user.user;
                     $scope.count = res.user.count;
