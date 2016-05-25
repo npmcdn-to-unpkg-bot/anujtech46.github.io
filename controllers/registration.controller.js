@@ -44,7 +44,10 @@ function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr
     }
     
     function getProfiles(userid, roles) {
-        console.log("userid", userid, roles);
+        $log.info(roles);
+        if(roles) {
+            $location.path('/profile/student/'+userid);
+        }
         if(roles[0] === 'student') {
             $location.path('/profile/student/'+userid);
         }
@@ -94,7 +97,10 @@ function TotalRegistrationCtrl($scope, PagerService, registrationFactory, toastr
     }
     
     function getProfiles(userid, roles) {
-
+        $log.info(roles);
+        if(roles) {
+            $location.path('/profile/student/'+userid);
+        }
         if(roles[0] === 'student') {
             $location.path('/profile/student/'+userid);
         }
