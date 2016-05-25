@@ -182,12 +182,13 @@ function DeviceCtrl($scope, PagerService, registrationFactory, toastr, $log) {
     }
 }
 
-LastActiveUserCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log']);
+LastActiveUserCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$location', '$log']);
 
-function LastActiveUserCtrl($scope, PagerService, registrationFactory, toastr, $log) {
+function LastActiveUserCtrl($scope, PagerService, registrationFactory, toastr, $log, $location) {
     
-    $scope.pager = {};
-    $scope.setPage = setPage;
+    $scope.pager        = {};
+    $scope.setPage      = setPage;
+    $scope.getProfiles  = getProfiles;
 
     initController();
 
@@ -216,5 +217,9 @@ function LastActiveUserCtrl($scope, PagerService, registrationFactory, toastr, $
                 toastr.error('Server not working');
             }
         });
+    }
+    
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
     }
 }
