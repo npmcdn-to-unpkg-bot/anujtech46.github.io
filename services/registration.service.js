@@ -9,15 +9,16 @@ registrationFactory.$inject = ['apiService', '$log'];
 function registrationFactory(apiService, $log) {
     
     var factory = {
-        getTodayRegister : getTodayRegister,
-        getTotalRegister : getTotalRegister,
+        getTodayRegister    : getTodayRegister,
+        getTotalRegister    : getTotalRegister,
         getTempUserRegister : getTempUserRegister,
-        getDevices          : getDevices
+        getDevices          : getDevices,
+        getLastActiveUser   :getLastActiveUser
     };
     
     function getTodayRegister(page, callback) {
         
-        var url = apiService.getApiEndPoint() + "registration/today/" + page;;
+        var url = apiService.getApiEndPoint() + "registration/today/" + page;
         
         var config = {
             headers : {
@@ -32,7 +33,7 @@ function registrationFactory(apiService, $log) {
     
     function getTotalRegister(page, callback) {
         
-        var url = apiService.getApiEndPoint() + "registration/total/" + page;;
+        var url = apiService.getApiEndPoint() + "registration/total/" + page;
         
         var config = {
             headers : {
@@ -47,7 +48,7 @@ function registrationFactory(apiService, $log) {
     
     function getTempUserRegister(page, callback) {
         
-        var url = apiService.getApiEndPoint() + "tempusers/" + page;;
+        var url = apiService.getApiEndPoint() + "tempusers/" + page;
         
         var config = {
             headers : {
@@ -63,7 +64,22 @@ function registrationFactory(apiService, $log) {
     
     function getDevices(page, callback) {
         
-        var url = apiService.getApiEndPoint() + "devices/" + page;;
+        var url = apiService.getApiEndPoint() + "devices/" + page;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function getLastActiveUser(page, callback) {
+        
+        var url = apiService.getApiEndPoint() + "lastactive/" + page;
         
         var config = {
             headers : {

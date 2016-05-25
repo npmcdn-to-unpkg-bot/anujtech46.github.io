@@ -20,5 +20,9 @@ function config($routeProvider) {
         .when('/devices', {
             templateUrl :'views/registration/device.view.html',
             controller : 'DeviceCtrl'
+        })
+        .when('/lastActive', {
+            templateUrl :'views/registration/lastactiveuser.view.html',
+            controller : 'LastActiveUserCtrl'
         });
 }

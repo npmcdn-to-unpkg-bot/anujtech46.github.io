@@ -3,8 +3,9 @@ angular
     .controller('TodayRegistrationCtrl', TodayRegistrationCtrl)
     .controller('TotalRegistrationCtrl', TotalRegistrationCtrl)
     .controller('TempUserCtrl', TempUserCtrl)
-    .controller('DeviceCtrl', DeviceCtrl);
-
+    .controller('DeviceCtrl', DeviceCtrl)
+    .controller('LastActiveUserCtrl', LastActiveUserCtrl);
+    
 TodayRegistrationCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location']);
 
 function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr, $log, $location) {
@@ -178,5 +179,42 @@ function DeviceCtrl($scope, PagerService, registrationFactory, toastr, $log) {
                 toastr.error('Server not working');
             }
         }); 
+    }
+}
+
+LastActiveUserCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log']);
+
+function LastActiveUserCtrl($scope, PagerService, registrationFactory, toastr, $log) {
+    
+    $scope.pager = {};
+    $scope.setPage = setPage;
+
+    initController();
+
+    function initController() {
+        // initialize to page 1
+         $scope.setPage(1);
+    }
+
+    function setPage(page) {
+        if (page < 1 || page >  $scope.pager.totalPages) {
+            return;
+        }
+        
+        registrationFactory.getLastActiveUser(page, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    $log.info("getting res", res.user.user);
+                    $scope.pager = PagerService.GetPager(res.user.count, page, res.user.pageSize);
+                    $scope.users =  res.user.user;
+                    $scope.count = res.user.count;
+                    return;
+                } else {
+                    toastr.error('Invalid request');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        });
     }
 }
