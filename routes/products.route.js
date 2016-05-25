@@ -35,5 +35,9 @@ function config($routeProvider) {
             when('/showVoucher', {
                 templateUrl :'views/products/showVoucher.product.view.html',
                 controller :'ShowVoucherCtrl'
+            }).
+            when('/showPurchase', {
+                templateUrl :'views/products/purchase.product.view.html',
+                controller :'ShowPurchaseCtrl'
         });
 };

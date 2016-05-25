@@ -6,7 +6,8 @@ angular.module('products')
         .controller('ShowAwardCtrl', ShowAwardCtrl)
         .controller('ShowPromoCtrl', ShowPromoCtrl)
         .controller('ShowVoucherCtrl', ShowVoucherCtrl)
-        .controller('ShowShopCtrl', ShowShopCtrl); 
+        .controller('ShowShopCtrl', ShowShopCtrl)
+        .controller('ShowPurchaseCtrl', ShowPurchaseCtrl); 
 
 AddAwardCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location'];
 function AddAwardCtrl($scope, productsFactory, toastr, $location) {
@@ -213,4 +214,33 @@ function ShowVoucherCtrl($scope, productsFactory, toastr) {
             toastr.error('Server not working');
         }
     });
+};
+
+ShowPurchaseCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location'];
+
+function ShowPurchaseCtrl($scope, productsFactory, toastr, $location) {
+    
+    $scope.getProfiles = getProfiles;
+
+    productsFactory.getPurchaseProduct(function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                if(res.count === 0) {
+                    $scope.count = res.count;
+                    $scope.hidetable = true;
+                    return;
+                }
+                $scope.products = res.products;
+                $scope.count = res.count;
+            } else {
+                toastr.error('Invalid Credentials', 'Unable to get purchase products');
+            }
+        } else {
+            toastr.error('Server not working');
+        }
+    });
+    
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
+    }
 };

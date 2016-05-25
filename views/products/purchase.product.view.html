@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            table {
+                width:100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color:#fff;
+            }
+            table#t01 th	{
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
+        <div>Total promo product available = {{count }}</div><br>
+        <div>
+            <table id="t01">
+                <tr>
+                    <th>User Id</th>
+                    <th>Product Identifier</th>
+                    <th>Platform</th>
+                    <th>Created</th>
+                </tr>
+                <tr ng-repeat=" product in products ">
+                   <td ng-click="getProfiles(product.userid)">{{ product.userid}}</td>
+                    <td>{{ product.productidentifier}}</td>
+                    <td>{{ product.platform }}</td>
+                    <td>{{ product.created }}</td>
+                </tr>
+            </table>
+        </div><br>
+    </body>
+</html>
