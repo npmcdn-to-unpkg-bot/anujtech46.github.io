@@ -90,13 +90,34 @@ and open the template in the editor.
                 margin: 0;
                 padding: 0;
             }
+            table {
+                width:100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color:#fff;
+            }
+            table#t01 th	{
+                background-color: black;
+                color: white;
+            }
             
         </style>
     </head>
     
     <body align="center">
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
-        <div>
+        <div ng-controller="SetSleepTimeCtrl">
             <form name="sleep" ng-submit="sleepEducator()" ng-show="showField" role="sleep" novalidate>
                 <div ng-class="{ 'has-error': !sleep.sleeptime.$pristine && sleep.sleeptime.$error.required }">
                     <p>
@@ -123,6 +144,19 @@ and open the template in the editor.
                 
                 </div>
             </form>
+        </div><br>
+        <div ng-controller="ShowServiceTimeCtrl">
+            <table id="t01">
+                <tr>
+                    <th>SleepTime</th>
+                    <th>WakeUpTime</th>
+                </tr>
+                <tr ng-repeat=" service in services ">
+                    <td >{{ service.sleeptime }}</td>
+                    <td >{{ service.wakeuptime }}</td>
+                </tr>
+            </table> 
         </div>
+        
     </body>
 </html>

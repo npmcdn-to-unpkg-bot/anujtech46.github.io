@@ -22,7 +22,6 @@ function config($routeProvider) {
             controller :'ShowWeightsCtrl'
         }).
         when('/setSleepTime', {
-            templateUrl :'views/educator/set.sleeptime.view.html',
-            controller :'SetSleepTimeCtrl'
+            templateUrl :'views/educator/set.sleeptime.view.html'
     });
 }

@@ -3,7 +3,8 @@ angular.module('educator')
     .controller('DeleteEducatorCtrl', DeleteEducatorCtrl)
     .controller('ShowLookersCtrl', ShowLookersCtrl)
     .controller('ShowWeightsCtrl', ShowWeightsCtrl)
-    .controller('SetSleepTimeCtrl', SetSleepTimeCtrl);
+    .controller('SetSleepTimeCtrl', SetSleepTimeCtrl)
+    .controller('ShowServiceTimeCtrl', ShowServiceTimeCtrl);
 
 //inject UpdateEducatorCtrl
 UpdateEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
@@ -145,9 +146,9 @@ function ShowWeightsCtrl($scope, educatorFactory, toastr) {
     });  
 };
 
-SetSleepTimeCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
+SetSleepTimeCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', '$route'];
 
-function SetSleepTimeCtrl($scope, educatorFactory, toastr) {
+function SetSleepTimeCtrl($scope, educatorFactory, toastr, $route) {
 $scope.showField = true;
     $scope.sleepEducator = function() {
         
@@ -166,6 +167,7 @@ $scope.showField = true;
                     $scope.sleeptime = '';
                     $scope.wakeuptime = '';
                     $scope.sleep.$setPristine();
+                    $route.reload();
                 } else {
                     toastr.error('Unable to apply');
                 }
@@ -174,4 +176,21 @@ $scope.showField = true;
             }
         });
     };
+};
+
+ShowServiceTimeCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
+
+function ShowServiceTimeCtrl($scope, educatorFactory, toastr) {
+  
+    educatorFactory.getSleepTime(function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                $scope.services = res.serviceTime;
+            } else {
+                toastr.error('Unable to get sleep timr');
+            }
+        } else {
+            toastr.error('Server not working');
+        }
+    });
 };

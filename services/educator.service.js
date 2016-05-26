@@ -9,10 +9,11 @@ function educatorFactory(apiService, $log) {
     
     var factory = {
         updateEducator  : updateEducator,
-        doDeleteEducator  : doDeleteEducator,
+        doDeleteEducator: doDeleteEducator,
         getAllLookers   : getAllLookers,
         getAllWeights   : getAllWeights,
-        setSleepTime    : setSleepTime
+        setSleepTime    : setSleepTime,
+        getSleepTime    : getSleepTime
     };
     
     function updateEducator(data, callback) {
@@ -79,7 +80,7 @@ function educatorFactory(apiService, $log) {
     
     function setSleepTime(data, callback) {
         
-        var url = apiService.getApiEndPoint() + "sleep";
+        var url = apiService.getApiEndPoint() + 'service/sleep';
         
         var config = {
             headers : {
@@ -88,6 +89,22 @@ function educatorFactory(apiService, $log) {
         }; 
         
         apiService.doPost(url, data, config, function(err, res) {
+            $log.info("res", res);
+            return callback(err, res);
+        });
+    };
+    
+    function getSleepTime(callback) {
+        
+        var url = apiService.getApiEndPoint() + 'service/sleep';
+        
+        var config = {
+            headers : {
+                token : apiService.getToken()
+            }
+        }; 
+        
+        apiService.doGet(url, config, function(err, res) {
             $log.info("res", res);
             return callback(err, res);
         });
