@@ -7,7 +7,8 @@ angular.module('products')
         .controller('ShowPromoCtrl', ShowPromoCtrl)
         .controller('ShowVoucherCtrl', ShowVoucherCtrl)
         .controller('ShowShopCtrl', ShowShopCtrl)
-        .controller('ShowPurchaseCtrl', ShowPurchaseCtrl); 
+        .controller('ShowPurchaseCtrl', ShowPurchaseCtrl)
+        .controller('ShowReferralCodeCtrl', ShowReferralCodeCtrl); 
 
 AddAwardCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location'];
 function AddAwardCtrl($scope, productsFactory, toastr, $location) {
@@ -239,6 +240,50 @@ function ShowPurchaseCtrl($scope, productsFactory, toastr, $location) {
             toastr.error('Server not working');
         }
     });
+    
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
+    }
+};
+
+ShowReferralCodeCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', '$log', 'PagerService'];
+
+function ShowReferralCodeCtrl($scope, productsFactory, toastr, $location, $log, PagerService) {
+    
+    $scope.getProfiles = getProfiles;
+
+    $scope.pager = {};
+    $scope.setPage = setPage;
+    $scope.getProfiles = getProfiles;
+    
+    initController();
+
+    function initController() {
+        // initialize to page 1
+         $scope.setPage(1);
+    }
+
+    function setPage(page) {
+        if (page < 1 || page >  $scope.pager.totalPages) {
+            return;
+        }
+        
+        productsFactory.getReferralCode(page, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    $log.info("getting res", res.referralcodes.referralcode);
+                    $scope.pager = PagerService.GetPager(res.referralcodes.count, page, res.referralcodes.pageSize);
+                    $scope.referralcodes =  res.referralcodes.referralcode;
+                    $scope.count = res.referralcodes.count;
+                    return;
+                } else {
+                    toastr.error('Invalid request');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        }); 
+    }
     
     function getProfiles(userid) {
         $location.path('/profile/student/'+userid);

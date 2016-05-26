@@ -39,5 +39,9 @@ function config($routeProvider) {
             when('/showPurchase', {
                 templateUrl :'views/products/purchase.product.view.html',
                 controller :'ShowPurchaseCtrl'
+            }).
+            when('/showReferralCode', {
+                templateUrl :'views/products/product.referralCode.view.html',
+                controller :'ShowReferralCodeCtrl'
         });
 };

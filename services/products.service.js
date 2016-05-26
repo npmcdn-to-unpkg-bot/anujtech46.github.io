@@ -16,7 +16,8 @@ function productsFactory(apiService) {
         getPromo : getPromo,
         getShop : getShop,
         getVoucher : getVoucher,
-        getPurchaseProduct : getPurchaseProduct
+        getPurchaseProduct : getPurchaseProduct,
+        getReferralCode : getReferralCode
     };
     
     function addAward(data, callback) {
@@ -139,6 +140,21 @@ function productsFactory(apiService) {
     function getPurchaseProduct(callback) {
         
         var url = apiService.getApiEndPoint() + "product/purchase";
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function getReferralCode(pageIndex, callback) {
+        
+        var url = apiService.getApiEndPoint() + "referralcode/" + pageIndex;
         
         var config = {
             headers : {
