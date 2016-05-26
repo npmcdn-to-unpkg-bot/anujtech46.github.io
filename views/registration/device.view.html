@@ -55,17 +55,17 @@ and open the template in the editor.
                     <th>created</th>
                     <th>Pushtoken</th>
                 </tr>
-                <tr ng-repeat=" user in devices ">
-                    <td>{{ user.userid }} </a></td>
-                    <td>{{ user.devicetype }}</td>
-                    <td>{{ user.devicemodel }}</td>
-                    <td>{{ user.osversion }}</td>
-                    <td>{{ user.appmajorversion }}</td>
-                    <td>{{ user.appminorversion }}</td>
-                    <td>{{ user.status }}</td>
-                    <td>{{ user.operatorname }}</td>
-                    <td>{{ user.created }}</td>
-                    <td>{{ user.pushtoken }}</td>
+                <tr ng-repeat=" device in devices ">
+                    <td ng-click="getProfiles(device.userid)">{{ device.userid }} </a></td>
+                    <td>{{ device.devicetype }}</td>
+                    <td>{{ device.devicemodel }}</td>
+                    <td>{{ device.osversion }}</td>
+                    <td>{{ device.appmajorversion }}</td>
+                    <td>{{ device.appminorversion }}</td>
+                    <td>{{ device.status }}</td>
+                    <td>{{ device.operatorname }}</td>
+                    <td>{{ device.created }}</td>
+                    <td>{{ device.pushtoken }}</td>
                 </tr>
             </table>
         </div><br>

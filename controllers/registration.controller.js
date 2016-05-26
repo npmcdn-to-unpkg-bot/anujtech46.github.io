@@ -6,7 +6,7 @@ angular
     .controller('DeviceCtrl', DeviceCtrl)
     .controller('LastActiveUserCtrl', LastActiveUserCtrl);
     
-TodayRegistrationCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location']);
+TodayRegistrationCtrl.$inject = ['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location'];
 
 function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr, $log, $location) {
     
@@ -60,7 +60,7 @@ function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr
     }
 }
 
-TotalRegistrationCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location']);
+TotalRegistrationCtrl.$inject = ['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location'];
 
 function TotalRegistrationCtrl($scope, PagerService, registrationFactory, toastr, $log, $location) {
     
@@ -114,7 +114,7 @@ function TotalRegistrationCtrl($scope, PagerService, registrationFactory, toastr
 }
 
 
-TempUserCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log']);
+TempUserCtrl.$inject = ['$scope','PagerService', 'registrationFactory', 'toastr', '$log'];
 
 function TempUserCtrl($scope, PagerService, registrationFactory, toastr, $log) {
     
@@ -151,12 +151,13 @@ function TempUserCtrl($scope, PagerService, registrationFactory, toastr, $log) {
     }
 }
 
-DeviceCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$log']);
+DeviceCtrl.$inject = ['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location'];
 
-function DeviceCtrl($scope, PagerService, registrationFactory, toastr, $log) {
+function DeviceCtrl($scope, PagerService, registrationFactory, toastr, $log, $location) {
     
     $scope.pager = {};
     $scope.setPage = setPage;
+    $scope.getProfiles = getProfiles;
 
     initController();
 
@@ -185,6 +186,9 @@ function DeviceCtrl($scope, PagerService, registrationFactory, toastr, $log) {
                 toastr.error('Server not working');
             }
         }); 
+    }
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
     }
 }
 
