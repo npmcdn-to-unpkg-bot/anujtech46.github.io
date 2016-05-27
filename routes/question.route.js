@@ -18,5 +18,9 @@ function config($routeProvider) {
             when('/totalQ', {
                 templateUrl :'views/question/question.totalQ.view.html',
                 controller :'AQCtrl'
+            }).
+            when('/repeatUserSessions', {
+                templateUrl :'views/question/question.repeatuserssession.view.html',
+                controller :'RepeatUserSessionCtrl'
             });
 };

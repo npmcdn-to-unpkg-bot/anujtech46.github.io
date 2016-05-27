@@ -43,9 +43,14 @@
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
+        <div>
             <table align="center">
                 <tr>
                     <td  align="center" colspan="2"><b>Profile Info</b></td>
+                </tr>
+                <tr>
+                    <td>User Id</td>
+                    <td>{{ userid }}</td>
                 </tr>
                 <tr>
                     <td>Fullname</td>
@@ -86,7 +91,7 @@
             </table><br>
             <table>
                 <tr>
-                    <td  align="center" colspan="6"><b>Subscription</b></td>
+                    <td align="center" colspan="6"><b>Subscription</b></td>
                 </tr>
                 <tr>
                     <th>Product Identifier</th>
@@ -107,8 +112,7 @@
             </table><br>
             <table>
                 <tr>
-                    
-                    <td  align="center" colspan="10"><b>Device info</b></td>
+                    <td align="center" colspan="9"><b>Device info</b></td>
                 </tr>
                 <tr>
                     <th>Device Type</th>
@@ -121,7 +125,7 @@
                     <th>created</th>
                     <th>Pushtoken</th>
                 </tr>
-                <tr ng-repeat=" device in devices ">
+                <tr ng-repeat="device in devices">
                     <td>{{ device.devicetype }}</td>
                     <td>{{ device.devicemodel }}</td>
                     <td>{{ device.osversion }}</td>
@@ -131,6 +135,25 @@
                     <td>{{ device.operatorname }}</td>
                     <td>{{ device.created }}</td>
                     <td>{{ device.pushtoken }}</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td align="center" colspan="5"><b>Session info</b></td>
+                </tr>
+                <tr>
+                    <th> Student Id</th>
+                    <th> Status</th>
+                    <th> Educator Id</th>
+                    <th> Question</th>
+                    <th> Created</th>
+                </tr>
+                <tr ng-repeat="session in sessions">
+                    <td>{{ session.studentid }}</td>
+                    <td>{{ session.status }}</td>
+                    <td>{{ session.educatorid }}</td>
+                    <td>{{ session.questionid }}</td>
+                    <td>{{ session.created }}</td>>
                 </tr>
             </table>
         </div> <br>

@@ -2,13 +2,14 @@ angular.module('question')
     .controller('AQCtrl', AQCtrl)
     .controller('MQCtrl', MQCtrl)
     .controller('SQCtrl', SQCtrl)
-    .controller('EQCtrl', EQCtrl);
+    .controller('EQCtrl', EQCtrl)
+    .controller('RepeatUserSessionCtrl', RepeatUserSessionCtrl);
     
 AQCtrl.$inject = ['$scope', 'questionFactory', 'toastr'];
 
 function AQCtrl($scope, questionFactory, toastr) {
 
-    questionFactory.getAllQoestion(function(err, res) {
+    questionFactory.getAllSession(function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
                     $scope.totalQuestion = res.count;
@@ -30,7 +31,7 @@ function MQCtrl($scope, questionFactory, toastr) {
         subject : "maths"
     };
     
-    questionFactory.getSubjectQoestion(data, function(err, res) {
+    questionFactory.getSubjectSession(data, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
                     $scope.mathsQuestion = res.count;
@@ -51,7 +52,7 @@ function SQCtrl($scope, questionFactory, toastr) {
         subject : "science"
     };
     
-    questionFactory.getSubjectQoestion(data, function(err, res) {
+    questionFactory.getSubjectSession(data, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
                     $scope.scienceQuestion = res.count;
@@ -72,7 +73,7 @@ function EQCtrl($scope, questionFactory, toastr) {
         subject : "english"
     };
     
-    questionFactory.getSubjectQoestion(data, function(err, res) {
+    questionFactory.getSubjectSession(data, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
                     $scope.englishQuestion = res.count;
@@ -83,4 +84,28 @@ function EQCtrl($scope, questionFactory, toastr) {
                 toastr.error('Server not working');
             }
     });
+};
+
+RepeatUserSessionCtrl.$inject = ['$scope', 'questionFactory', 'toastr', '$location'];
+
+function RepeatUserSessionCtrl($scope, questionFactory, toastr, $location) {
+    
+    $scope.getProfiles = getProfiles;
+    
+    questionFactory.getRepeatUserSession(function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                $scope.repeatUserCount = res.count;
+                $scope.users = res.sessions;
+            } else {
+                toastr.error('Invalid Credentials', 'Unable to find Repeat User count');
+            }
+        } else {
+            toastr.error('Server not working');
+        }
+    });
+    
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
+    }
 };

@@ -15,18 +15,27 @@ function userProfileFactory($log, apiService, $log) {
 
         getProfile(userid, function(err, profile) {
             if(profile.status.code === 303000) {
-                getDevice(userid, function(err, devices) {
-                    if(err) {
-                        return callback(err, profile, null);
-                    }
-                    if(devices.status.code === 303000) {                        
-                        return callback(err, profile, devices);
+                getSession(userid, function(err, sessions) {
+                    if(sessions.status.code === 303000) {
+                        getDevice(userid, function(err, devices) {
+                            if(devices.status.code === 303000) {
+                                return callback(err, profile, sessions, devices);
+                            } else {
+                                return callback(err, profile, sessions, null);
+                            }
+                        });
                     } else {
-                        return callback(err, profile, null);
+                        getDevice(userid, function(err, devices) {
+                            if(devices.status.code === 303000) {
+                                return callback(err, profile, null, devices);
+                            } else {
+                                return callback(err, profile, null, null);
+                            }
+                        });
                     }
                 });
             } else {
-                return callback(err, profile, null);
+                return callback(err, profile, null, null);
             }
         });
     };
@@ -78,6 +87,20 @@ function userProfileFactory($log, apiService, $log) {
     
     function getDevice(userid, callback) {
         var url = apiService.getApiEndPoint() + "get/device/"+userid;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function getSession(userid, callback) {
+        var url = apiService.getApiEndPoint() + "get/session/"+userid;
         
         var config = {
             headers : {

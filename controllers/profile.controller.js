@@ -24,11 +24,12 @@ function ShowStudentProfileCtrl($scope, $log, $routeParams, toastr, userProfileF
     $scope.deleteStudent = deleteStudent;
     
 
-    userProfileFactory.getStudentProfileWithToken(userid, function(err, res, devices) {
+    userProfileFactory.getStudentProfileWithToken(userid, function(err, res, sessions, devices) {
         if(res) {
             if(res.status.code === 303000) {
                 $log.info("getting res of user", res);
                 var profiles = res.profile;
+                $scope.userid = profiles.userid ; 
                 $scope.fullname = profiles.fullname ; 
                 $scope.gender = profiles.gender ; 
                 $scope.school = profiles.school ; 
@@ -42,6 +43,10 @@ function ShowStudentProfileCtrl($scope, $log, $routeParams, toastr, userProfileF
                 if(devices) {
                     $log.info("devices", devices);
                     $scope.devices = devices;
+                }
+                if(sessions) {
+                    $log.info("sessions", sessions);
+                    $scope.sessions = sessions.sessions;
                 }
                 return;
             } else {

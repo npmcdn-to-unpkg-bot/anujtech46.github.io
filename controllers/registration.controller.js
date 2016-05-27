@@ -4,7 +4,9 @@ angular
     .controller('TotalRegistrationCtrl', TotalRegistrationCtrl)
     .controller('TempUserCtrl', TempUserCtrl)
     .controller('DeviceCtrl', DeviceCtrl)
-    .controller('LastActiveUserCtrl', LastActiveUserCtrl);
+    .controller('LastActiveUserCtrl', LastActiveUserCtrl)
+    .controller('RepeatUserCtrl', RepeatUserCtrl)
+    .controller('SessionCtrl', SessionCtrl);
     
 TodayRegistrationCtrl.$inject = ['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location'];
 
@@ -192,7 +194,7 @@ function DeviceCtrl($scope, PagerService, registrationFactory, toastr, $log, $lo
     }
 }
 
-LastActiveUserCtrl.$inject = (['$scope','PagerService', 'registrationFactory', 'toastr', '$location', '$log']);
+LastActiveUserCtrl.$inject = ['$scope','PagerService', 'registrationFactory', 'toastr', '$location', '$log'];
 
 function LastActiveUserCtrl($scope, PagerService, registrationFactory, toastr, $location, $log) {
     
@@ -233,3 +235,46 @@ function LastActiveUserCtrl($scope, PagerService, registrationFactory, toastr, $
         $location.path('/profile/student/'+userid);
     }
 }
+
+RepeatUserCtrl.$inject = ['$scope','PagerService', 'registrationFactory', 'toastr', '$location', '$log'];
+
+function RepeatUserCtrl($scope, PagerService, registrationFactory, toastr, $location, $log) {
+    
+//    $scope.pager        = {};
+//    $scope.setPage      = setPage;
+    $scope.getProfiles  = getProfiles;
+//
+//    initController();
+//
+//    function initController() {
+//        // initialize to page 1
+//         $scope.setPage(1);
+//    }
+//
+//    function setPage(page) {
+//        if (page < 1 || page >  $scope.pager.totalPages) {
+//            return;
+//        }
+        
+        registrationFactory.getRepeatUser(function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    $log.info("getting all repeat active users", res.user);
+//                    $scope.pager = PagerService.GetPager(res.user.count, page, res.user.pageSize);
+                    $scope.users =  res.user;
+                    $scope.count = res.count;
+                    return;
+                } else {
+                    toastr.error('Invalid request');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        });
+//    }
+    
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
+    }
+}
+SessionCtrl

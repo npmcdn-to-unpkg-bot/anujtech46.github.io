@@ -24,5 +24,9 @@ function config($routeProvider) {
         .when('/lastActive', {
             templateUrl :'views/registration/lastactiveuser.view.html',
             controller : 'LastActiveUserCtrl'
+        })
+        .when('/repeatUser', {
+            templateUrl :'views/registration/repeatUser.view.html',
+            controller : 'RepeatUserCtrl'
         });
 }

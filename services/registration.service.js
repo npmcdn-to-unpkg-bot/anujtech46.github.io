@@ -13,7 +13,8 @@ function registrationFactory(apiService, $log) {
         getTotalRegister    : getTotalRegister,
         getTempUserRegister : getTempUserRegister,
         getDevices          : getDevices,
-        getLastActiveUser   :getLastActiveUser
+        getLastActiveUser   : getLastActiveUser,
+        getRepeatUser       : getRepeatUser
     };
     
     function getTodayRegister(page, callback) {
@@ -80,6 +81,21 @@ function registrationFactory(apiService, $log) {
     function getLastActiveUser(page, callback) {
         
         var url = apiService.getApiEndPoint() + "lastactive/" + page;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function getRepeatUser(callback) {
+        
+        var url = apiService.getApiEndPoint() + "repeatUser";
         
         var config = {
             headers : {

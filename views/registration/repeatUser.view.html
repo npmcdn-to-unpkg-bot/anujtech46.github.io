@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Repeat User</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+            }
+            table {
+                width:100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color:#fff;
+            }
+            table#t01 th	{
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
+        <div>Repeat user are = {{ count }}</div> <br />
+        <div>
+            <table id="t01">
+                <tr>
+                    <th>user ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>App Id</th>
+                    <th>Role</th>
+                    <th>On Board</th>
+                    <th>created</th>
+                </tr>
+                <tr ng-repeat=" user in  users ">
+                    <td ng-click="getProfiles(user._id, user.roles)">{{ user._id }} </td>
+                    <td>{{ user.fullname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.appid }}</td>
+                    <td>{{ user.roles }}</td>
+                    <td>{{ user.onboard }}</td>
+                    <td>{{ user.created }}</td>
+                </tr>
+            </table>
+        </div><br>
+        
+<!--        <ul ng-if=" pager.pages.length" class="pagination">
+            <li ng-class="{disabled:pager.currentPage === 1}">
+                <a ng-click=" setPage(1)">First</a>
+            </li>
+            <li ng-class="{disabled:pager.currentPage === 1}">
+                <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li ng-repeat="page in  pager.pages" ng-class="{active: pager.currentPage === page}">
+                <a ng-click=" setPage(page)">{{page}}</a>
+            </li>                
+            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+                <a ng-click=" setPage( pager.currentPage + 1)">Next</a>
+            </li>
+            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+                <a ng-click=" setPage( pager.totalPages)">Last</a>
+            </li>
+        </ul>-->
+    </body>
+</html>

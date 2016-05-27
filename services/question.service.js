@@ -8,11 +8,12 @@ questionFactory.$inject = ['apiService', '$log'];
 function questionFactory(apiService, $log) {
     
     var factory = {
-        getAllQoestion : getAllQoestion,
-        getSubjectQoestion : getSubjectQoestion
+        getAllSession      : getAllSession,
+        getSubjectSession  : getSubjectSession,
+        getRepeatUserSession: getRepeatUserSession
     };
     
-    function getAllQoestion(callback) {
+    function getAllSession(callback) {
         
         var url = apiService.getApiEndPoint() + "question";
         
@@ -27,7 +28,7 @@ function questionFactory(apiService, $log) {
         });
     };
     
-    function getSubjectQoestion(data, callback) {
+    function getSubjectSession(data, callback) {
         
         var url = apiService.getApiEndPoint() + "question" ;
         
@@ -38,6 +39,22 @@ function questionFactory(apiService, $log) {
         };
         
         apiService.doPost(url, data, config, function(err, res) {
+            $log.info("res", res);
+            return callback(err, res);
+        });
+    };
+    
+    function getRepeatUserSession(callback) {
+        
+        var url = apiService.getApiEndPoint() + "repeatUserSession" ;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
             $log.info("res", res);
             return callback(err, res);
         });
