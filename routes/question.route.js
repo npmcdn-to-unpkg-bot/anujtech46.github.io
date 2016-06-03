@@ -22,5 +22,9 @@ function config($routeProvider) {
             when('/repeatUserSessions', {
                 templateUrl :'views/question/question.repeatuserssession.view.html',
                 controller :'RepeatUserSessionCtrl'
+            }).
+            when('/getSessions', {
+                templateUrl :'views/question/sessions.view.html',
+                controller :'AllSessionCtrl'
             });
 };

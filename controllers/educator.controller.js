@@ -4,7 +4,8 @@ angular.module('educator')
     .controller('ShowLookersCtrl', ShowLookersCtrl)
     .controller('ShowWeightsCtrl', ShowWeightsCtrl)
     .controller('SetSleepTimeCtrl', SetSleepTimeCtrl)
-    .controller('ShowServiceTimeCtrl', ShowServiceTimeCtrl);
+    .controller('ShowServiceTimeCtrl', ShowServiceTimeCtrl)
+    .controller('ShowRatingCtrl', ShowRatingCtrl);
 
 //inject UpdateEducatorCtrl
 UpdateEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
@@ -186,6 +187,23 @@ function ShowServiceTimeCtrl($scope, educatorFactory, toastr) {
         if(res) {
             if(res.status.code === 303000) {
                 $scope.services = res.serviceTime;
+            } else {
+                toastr.error('Unable to get sleep timr');
+            }
+        } else {
+            toastr.error('Server not working');
+        }
+    });
+};
+
+ShowRatingCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
+
+function ShowRatingCtrl($scope, educatorFactory, toastr) {
+  
+    educatorFactory.getRating(function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                $scope.ratings = res.ratings;
             } else {
                 toastr.error('Unable to get sleep timr');
             }

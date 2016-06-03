@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Sessions</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+            }
+            table {
+                width:100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color:#fff;
+            }
+            table#t01 th	{
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
+        <div><p> Total session = {{  sessionCount }} </p></div> <br />
+        <div>
+            <table id="t01">
+                <tr>
+                    <th>Student ID</th>
+                    <th>Rating</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Session Duration</th>
+                    <th>Topics</th>
+                    <th>Session status</th>
+                    <th>Educator ID</th>
+                </tr>
+                <tr ng-repeat=" session in  sessions ">
+                    <td ng-click="getProfiles(session.studentid)">{{ session.studentid}} </td>
+                    <td>{{ session.rating}} </td>
+                    <td>{{ session.starttime}} </td>
+                    <td>{{ session.endtime}} </td>
+                    <td>{{ session.sessionduration}} </td>
+                    <td>{{ session.topics}} </td>
+                    <td>{{ session.status}} </td>
+                    <td>{{ session.educatorid}} </td>
+                </tr>
+            </table>
+        </div><br>
+        <ul ng-if=" pager.pages.length" class="pagination">
+            <li ng-class="{disabled:pager.currentPage === 1}">
+                <a ng-click=" setPage(1)">First</a>
+            </li>
+            <li ng-class="{disabled:pager.currentPage === 1}">
+                <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li ng-repeat="page in  pager.pages" ng-class="{active: pager.currentPage === page}">
+                <a ng-click=" setPage(page)">{{page}}</a>
+            </li>                
+            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+                <a ng-click=" setPage( pager.currentPage + 1)">Next</a>
+            </li>
+            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+                <a ng-click=" setPage( pager.totalPages)">Last</a>
+            </li>
+        </ul>
+    </body>
+</html>

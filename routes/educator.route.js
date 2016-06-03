@@ -21,6 +21,10 @@ function config($routeProvider) {
             templateUrl :'views/educator/show.weights.view.html',
             controller :'ShowWeightsCtrl'
         }).
+        when('/showRating', {
+            templateUrl :'views/educator/show.ratings.view.html',
+            controller :'ShowRatingCtrl'
+        }).
         when('/setSleepTime', {
             templateUrl :'views/educator/set.sleeptime.view.html'
     });

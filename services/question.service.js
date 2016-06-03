@@ -10,7 +10,8 @@ function questionFactory(apiService, $log) {
     var factory = {
         getAllSession      : getAllSession,
         getSubjectSession  : getSubjectSession,
-        getRepeatUserSession: getRepeatUserSession
+        getRepeatUserSession: getRepeatUserSession,
+        getSessions         : getSessions
     };
     
     function getAllSession(callback) {
@@ -47,6 +48,22 @@ function questionFactory(apiService, $log) {
     function getRepeatUserSession(callback) {
         
         var url = apiService.getApiEndPoint() + "repeatUserSession" ;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            $log.info("res", res);
+            return callback(err, res);
+        });
+    };
+    
+    function getSessions(page, callback) {
+        
+        var url = apiService.getApiEndPoint() + "get/sessions/" + page;
         
         var config = {
             headers : {

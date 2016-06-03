@@ -3,7 +3,8 @@ angular.module('question')
     .controller('MQCtrl', MQCtrl)
     .controller('SQCtrl', SQCtrl)
     .controller('EQCtrl', EQCtrl)
-    .controller('RepeatUserSessionCtrl', RepeatUserSessionCtrl);
+    .controller('RepeatUserSessionCtrl', RepeatUserSessionCtrl)
+    .controller('AllSessionCtrl', AllSessionCtrl);
     
 AQCtrl.$inject = ['$scope', 'questionFactory', 'toastr'];
 
@@ -109,3 +110,44 @@ function RepeatUserSessionCtrl($scope, questionFactory, toastr, $location) {
         $location.path('/profile/student/'+userid);
     }
 };
+
+AllSessionCtrl.$inject = ['$scope','PagerService', 'questionFactory', 'toastr', '$log', '$location'];
+
+function AllSessionCtrl($scope, PagerService, questionFactory, toastr, $log, $location) {
+    
+    $scope.pager = {};
+    $scope.setPage = setPage;
+    $scope.getProfiles = getProfiles;
+
+    initController();
+
+    function initController() {
+        // initialize to page 1
+         $scope.setPage(1);
+    }
+
+    function setPage(page) {
+        if (page < 1 || page >  $scope.pager.totalPages) {
+            return;
+        }
+        
+        questionFactory.getSessions(page, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    $log.info("getting res", res.sessions.device);
+                    $scope.pager = PagerService.GetPager(res.sessions.count, page, res.sessions.pageSize);
+                    $scope.sessionCount = res.sessions.count;
+                    $scope.sessions = res.sessions.sessions;
+                    return;
+                } else {
+                    toastr.error('Invalid request');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        }); 
+    }
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
+    }
+}

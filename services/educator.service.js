@@ -13,7 +13,8 @@ function educatorFactory(apiService, $log) {
         getAllLookers   : getAllLookers,
         getAllWeights   : getAllWeights,
         setSleepTime    : setSleepTime,
-        getSleepTime    : getSleepTime
+        getSleepTime    : getSleepTime,
+        getRating       : getRating
     };
     
     function updateEducator(data, callback) {
@@ -97,6 +98,22 @@ function educatorFactory(apiService, $log) {
     function getSleepTime(callback) {
         
         var url = apiService.getApiEndPoint() + 'service/sleep';
+        
+        var config = {
+            headers : {
+                token : apiService.getToken()
+            }
+        }; 
+        
+        apiService.doGet(url, config, function(err, res) {
+            $log.info("res", res);
+            return callback(err, res);
+        });
+    };
+    
+    function getRating(callback) {
+        
+        var url = apiService.getApiEndPoint() + 'get/rating';
         
         var config = {
             headers : {

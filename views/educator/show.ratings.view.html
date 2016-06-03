@@ -44,19 +44,15 @@ and open the template in the editor.
             <table id="t01">
                 <tr>
                     <th>user ID</th>
-                    <th>Internal</th>
-                    <th>Status</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Topics</th>
+                    <th>Rating</th>
+                    <th>No Of Question</th>
+                    <th>Created</th>
                 </tr>
-                <tr ng-repeat=" looker in lookers ">
-                    <td >{{ looker.userid }}</td>
-                    <td >{{ looker.internal }}</td>
-                    <td >{{ looker.status }}</td>
-                    <td >{{ looker.starttime }}</td>
-                    <td >{{ looker.endtime }}</td>
-                    <td >{{ looker.topics }}</td>
+                <tr ng-repeat=" rating in ratings ">
+                    <td >{{ rating.userid }}</td>
+                    <td >{{ rating.rating }}</td>
+                    <td >{{ rating.noq }}</td>
+                    <td >{{ rating.created }}</td>
 
 <!--                    <td>
                         <button type="button" ng-click="showProfile()">showProfile</button>
