@@ -25,8 +25,16 @@ function config($routeProvider) {
             templateUrl :'views/registration/lastactiveuser.view.html',
             controller : 'LastActiveUserCtrl'
         })
-        .when('/repeatUser', {
+        .when('/lastDayActiveUser', {
             templateUrl :'views/registration/repeatUser.view.html',
             controller : 'RepeatUserCtrl'
+        })
+        .when('/AllUserProfileLocation', {
+            templateUrl :'views/registration/allProfile.view.html',
+            controller : 'AllProfileCtrl'
+        })
+        .when('/AllUserIPAddress', {
+            templateUrl :'views/registration/allIP.view.html',
+            controller : 'AllIPCtrl'
         });
 }

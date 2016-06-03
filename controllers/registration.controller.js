@@ -6,7 +6,8 @@ angular
     .controller('DeviceCtrl', DeviceCtrl)
     .controller('LastActiveUserCtrl', LastActiveUserCtrl)
     .controller('RepeatUserCtrl', RepeatUserCtrl)
-    .controller('SessionCtrl', SessionCtrl);
+    .controller('AllProfileCtrl', AllProfileCtrl)
+    .controller('AllIPCtrl', AllIPCtrl);
     
 TodayRegistrationCtrl.$inject = ['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location'];
 
@@ -277,4 +278,85 @@ function RepeatUserCtrl($scope, PagerService, registrationFactory, toastr, $loca
         $location.path('/profile/student/'+userid);
     }
 }
-SessionCtrl
+
+AllProfileCtrl.$inject = ['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location'];
+
+function AllProfileCtrl($scope, PagerService, registrationFactory, toastr, $log, $location) {
+    
+    $scope.pager = {};
+    $scope.setPage = setPage;
+    $scope.getProfiles = getProfiles;
+
+    initController();
+
+    function initController() {
+        // initialize to page 1
+         $scope.setPage(1);
+    }
+
+    function setPage(page) {
+        if (page < 1 || page >  $scope.pager.totalPages) {
+            return;
+        }
+        
+        registrationFactory.getProfiles(page, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    $log.info("getting res", res.profiles);
+                    $scope.pager = PagerService.GetPager(res.profiles.count, page, res.profiles.pageSize);
+                    $scope.users =  res.profiles.profile;
+                    $scope.count = res.profiles.count;
+                    return;
+                } else {
+                    toastr.error('Invalid request');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        }); 
+    }
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
+    }
+}
+
+AllIPCtrl.$inject = ['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location'];
+
+function AllIPCtrl($scope, PagerService, registrationFactory, toastr, $log, $location) {
+    
+    $scope.pager = {};
+    $scope.setPage = setPage;
+    $scope.getProfiles = getProfiles;
+
+    initController();
+
+    function initController() {
+        // initialize to page 1
+         $scope.setPage(1);
+    }
+
+    function setPage(page) {
+        if (page < 1 || page >  $scope.pager.totalPages) {
+            return;
+        }
+        
+        registrationFactory.getIP(page, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    $log.info("getting res", res.ips.device);
+                    $scope.pager = PagerService.GetPager(res.ips.count, page, res.ips.pageSize);
+                    $scope.users =  res.ips.ip;
+                    $scope.count = res.ips.count;
+                    return;
+                } else {
+                    toastr.error('Invalid request');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        }); 
+    }
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
+    }
+}

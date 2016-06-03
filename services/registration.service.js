@@ -14,7 +14,9 @@ function registrationFactory(apiService, $log) {
         getTempUserRegister : getTempUserRegister,
         getDevices          : getDevices,
         getLastActiveUser   : getLastActiveUser,
-        getRepeatUser       : getRepeatUser
+        getRepeatUser       : getRepeatUser,
+        getProfiles         : getProfiles,
+        getIP               : getIP
     };
     
     function getTodayRegister(page, callback) {
@@ -96,6 +98,34 @@ function registrationFactory(apiService, $log) {
     function getRepeatUser(callback) {
         
         var url = apiService.getApiEndPoint() + "repeatUser";
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    function getProfiles(page, callback) {
+
+        var url = apiService.getApiEndPoint() + "get/allprofiles/" + page;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    function getIP(page, callback) {
+        
+        var url = apiService.getApiEndPoint() + "get/ip/" + page;
         
         var config = {
             headers : {
