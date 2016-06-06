@@ -29,7 +29,8 @@ function ShowStudentProfileCtrl($scope, $log, $routeParams, toastr, userProfileF
             if(res.status.code === 303000) {
                 $log.info("getting res of user", res);
                 var profiles = res.profile;
-                $scope.userid = profiles.userid ; 
+                $scope.userid = profiles.userid ;
+                $scope.email = res.email ;
                 $scope.fullname = profiles.fullname ; 
                 $scope.gender = profiles.gender ; 
                 $scope.school = profiles.school ; 

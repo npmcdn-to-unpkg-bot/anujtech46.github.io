@@ -53,6 +53,7 @@ and open the template in the editor.
                     <th>Topics</th>
                     <th>Session status</th>
                     <th>Educator ID</th>
+                    <th>Session ID</th>
                 </tr>
                 <tr ng-repeat=" session in  sessions ">
                     <td ng-click="getProfiles(session.studentid)">{{ session.studentid}} </td>
@@ -63,6 +64,7 @@ and open the template in the editor.
                     <td>{{ session.topics}} </td>
                     <td>{{ session.status}} </td>
                     <td>{{ session.educatorid}} </td>
+                    <td>{{ session.sessionid}} </td>
                 </tr>
             </table>
         </div><br>

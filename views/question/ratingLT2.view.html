@@ -1,9 +1,15 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <title>IP</title>
+        <title>Rating LT2</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <style>
             body {
                 background-color : #ffeeff;
@@ -35,20 +41,29 @@
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
-        <div>Repeat user are = {{ count }}</div> <br />
+        <div><p> Total Rating Less than 2 = {{  ratingCount }} </p></div>
         <div>
             <table id="t01">
                 <tr>
-                    <th>user ID</th>
-                    <th>IP</th>
+                    <th>Student ID</th>
+                    <th>Rating</th>
+                    <th>Educator ID</th>
+                    <th>Topics</th>
+                    <th>comment</th>
+                    <th>Session ID</th>
+                    <th>Created</th>
                 </tr>
-                <tr ng-repeat=" user in  users ">
-                    <td ng-click="getProfiles(user.userid)">{{ user.userid }} </td>
-                    <td>{{ user.ip }}</td>
+                <tr ng-repeat=" rating in  ratings ">
+                    <td ng-click="getProfiles(rating.rater)">{{ rating.rater}} </td>
+                    <td>{{ rating.rating}} </td>
+                    <td>{{ rating.ratee}} </td>
+                    <td>{{ rating.topics}} </td>
+                    <td>{{ rating.comment}} </td>
+                    <td>{{ rating.sessionid}} </td>
+                    <td>{{ rating.created}} </td>
                 </tr>
             </table>
         </div><br>
-        
         <ul ng-if=" pager.pages.length" class="pagination">
             <li ng-class="{disabled:pager.currentPage === 1}">
                 <a ng-click=" setPage(1)">First</a>

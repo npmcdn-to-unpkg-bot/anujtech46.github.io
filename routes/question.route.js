@@ -26,5 +26,13 @@ function config($routeProvider) {
             when('/getSessions', {
                 templateUrl :'views/question/sessions.view.html',
                 controller :'AllSessionCtrl'
+            }).
+            when('/getRatingLT2', {
+                templateUrl :'views/question/ratingLT2.view.html',
+                controller :'AllRatingLT2Ctrl'
+            }).
+            when('/getRatingGT4', {
+                templateUrl :'views/question/ratingGT4.view.html',
+                controller :'AllRatingGT4Ctrl'
             });
 };
