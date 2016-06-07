@@ -41,11 +41,13 @@
                 <tr>
                     <th>user ID</th>
                     <th>Full Name</th>
+                    <th>School</th>
                     <th>Location</th>
                 </tr>
                 <tr ng-repeat=" user in  users ">
                     <td ng-click="getProfiles(user.userid)">{{ user.userid }} </td>
                     <td>{{ user.fullname }}</td>
+                    <td>{{ user.school }}</td>
                     <td>{{ user.location }}</td>
                 </tr>
             </table>
