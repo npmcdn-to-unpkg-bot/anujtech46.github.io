@@ -340,12 +340,12 @@ function AllIPCtrl($scope, PagerService, registrationFactory, toastr, $log, $loc
             return;
         }
         
-        registrationFactory.getIP(page, function(err, res) {
+        registrationFactory.getIPWithLocation(page, function(err, location, res) {
             if(res) {
                 if(res.status.code === 303000) {
-                    $log.info("getting res", res.ips.device);
+                    $log.info("getting res", location);
                     $scope.pager = PagerService.GetPager(res.ips.count, page, res.ips.pageSize);
-                    $scope.users =  res.ips.ip;
+                    $scope.users =  location;
                     $scope.count = res.ips.count;
                     return;
                 } else {

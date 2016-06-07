@@ -41,10 +41,14 @@
                 <tr>
                     <th>user ID</th>
                     <th>IP</th>
+                    <th>City</th>
+                    <th>Country</th>
                 </tr>
                 <tr ng-repeat=" user in  users ">
                     <td ng-click="getProfiles(user.userid)">{{ user.userid }} </td>
                     <td>{{ user.ip }}</td>
+                    <td>{{ user.city }}</td>
+                    <td>{{ user.country }}</td>
                 </tr>
             </table>
         </div><br>

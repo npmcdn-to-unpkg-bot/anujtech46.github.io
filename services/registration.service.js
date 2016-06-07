@@ -16,7 +16,7 @@ function registrationFactory(apiService, $log) {
         getLastActiveUser   : getLastActiveUser,
         getRepeatUser       : getRepeatUser,
         getProfiles         : getProfiles,
-        getIP               : getIP
+        getIPWithLocation   : getIPWithLocation
     };
     
     function getTodayRegister(page, callback) {
@@ -123,6 +123,20 @@ function registrationFactory(apiService, $log) {
             return callback(err, res);
         });
     };
+    
+    function getIPWithLocation(page, callback) {
+
+        getIP(page, function(err, ip) {
+            if(ip.status.code === 303000) {
+                getLocWithIP(ip.ips.ip, function(err, res) {
+                    return callback(null, res, ip);
+                });
+            } else {
+                return callback(err, null, null);
+            }
+        });
+    };
+    
     function getIP(page, callback) {
         
         var url = apiService.getApiEndPoint() + "get/ip/" + page;
@@ -134,6 +148,20 @@ function registrationFactory(apiService, $log) {
         };
         
         apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function getLocWithIP(ip, callback) {
+        
+        var url = 'http://localhost:3000/api/admin/v1/' + "get/iplocation";
+        
+        var data = {
+            ip : ip
+        };
+        
+        apiService.doPost(url, data, {}, function(err, res) {
+            console.log("ips", res);
             return callback(err, res);
         });
     };
