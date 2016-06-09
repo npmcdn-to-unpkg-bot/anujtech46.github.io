@@ -12,5 +12,13 @@ function config($routeProvider) {
             when('/deleteStudent', {
                 templateUrl :'views/student/student.delete.view.html',
                 controller :'DeleteStudentCtrl'
+            }).
+            when('/referralUser', {
+                templateUrl :'views/student/student.referred.view.html',
+                controller :'ReferralUserCtrl'
+            }).
+            when('/upgradeUser', {
+                templateUrl :'views/student/student.upgraded.view.html',
+                controller :'UgradeUserCtrl'
         });
 };

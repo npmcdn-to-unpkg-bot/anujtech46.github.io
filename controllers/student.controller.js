@@ -1,6 +1,8 @@
 angular.module('student')
     .controller('UpdateStudentCtrl', UpdateStudentCtrl)
-    .controller('DeleteStudentCtrl', DeleteStudentCtrl);
+    .controller('DeleteStudentCtrl', DeleteStudentCtrl)
+    .controller('ReferralUserCtrl', ReferralUserCtrl)
+    .controller('UgradeUserCtrl', UgradeUserCtrl);
     
 UpdateStudentCtrl.$inject = ['$scope', 'studentFactory', 'toastr'];
 
@@ -54,4 +56,62 @@ function DeleteStudentCtrl($scope, studentFactory, toastr) {
             }
         });
     };
+};
+
+ReferralUserCtrl.$inject = ['$scope', 'studentFactory', 'toastr', '$location'];
+
+function ReferralUserCtrl($scope, studentFactory, toastr, $location) {
+    
+    $scope.getProfiles = getProfiles;
+    
+    studentFactory.getReferral(function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                if(res.count === 0) {
+                    $scope.count = res.count;
+                    $scope.hidetable = true;
+                    return;
+                }
+                $scope.referralUsers = res.referralUsers;
+                $scope.count = res.count;
+            } else {
+                toastr.error('Invalid Credentials', 'Unable to get purchase products');
+            }
+        } else {
+            toastr.error('Server not working');
+        }
+    });
+    
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
+    }
+};
+
+UgradeUserCtrl.$inject = ['$scope', 'studentFactory', 'toastr', '$location'];
+
+function UgradeUserCtrl($scope, studentFactory, toastr, $location) {
+    
+    $scope.getProfiles = getProfiles;
+    
+    studentFactory.getUgradeUser(function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                if(res.count === 0) {
+                    $scope.count = res.count;
+                    $scope.hidetable = true;
+                    return;
+                }
+                $scope.upgradeUsers = res.upgradeUsers;
+                $scope.count = res.count;
+            } else {
+                toastr.error('Invalid Credentials', 'Unable to get purchase products');
+            }
+        } else {
+            toastr.error('Server not working');
+        }
+    });
+    
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
+    }
 };

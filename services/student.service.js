@@ -8,9 +8,10 @@ studentFactory.$inject = ['apiService', '$log'];
 function studentFactory(apiService, $log) {
     
     var factory = {
-        addCredits  : addCredits,
-        deleteStudent  : deleteStudent
-        
+        addCredits      : addCredits,
+        deleteStudent   : deleteStudent,
+        getUgradeUser   : getUgradeUser,
+        getReferral     : getReferral
     };
     
     function addCredits(data, callback) {
@@ -40,6 +41,36 @@ function studentFactory(apiService, $log) {
         
         apiService.doDelete(url, config, function(err, res) {
             $log.info("res", res);
+            return callback(err, res);
+        });
+    };
+    
+    function getUgradeUser(callback) {
+
+        var url = apiService.getApiEndPoint() + "upgraded/user";
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function getReferral(callback) {
+        
+        var url = apiService.getApiEndPoint() + "referralBy/user";
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
             return callback(err, res);
         });
     };

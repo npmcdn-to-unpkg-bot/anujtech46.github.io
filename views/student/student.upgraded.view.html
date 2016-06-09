@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Purchased User</title>
+        <title>Upgrade User</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -35,15 +35,15 @@
             <table id="t01">
                 <tr>
                     <th>User Id</th>
-                    <th>Product Identifier</th>
-                    <th>Platform</th>
-                    <th>Created</th>
+                    <th>v1username</th>
+                    <th>products</th>
+                    <th>created</th>
                 </tr>
-                <tr ng-repeat=" product in products ">
-                   <td ng-click="getProfiles(product.userid)">{{ product.userid}}</td>
-                    <td>{{ product.productidentifier}}</td>
-                    <td>{{ product.platform }}</td>
-                    <td>{{ product.created }}</td>
+                <tr ng-repeat=" user in upgradeUsers ">
+                   <td ng-click="getProfiles(user.userid)">{{ user.userid}}</td>
+                    <td>{{ user.v1username}}</td>
+                    <td>{{ user.products }}</td>
+                    <td>{{ user.created }}</td>
                 </tr>
             </table>
         </div><br>
