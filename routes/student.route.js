@@ -20,5 +20,9 @@ function config($routeProvider) {
             when('/upgradeUser', {
                 templateUrl :'views/student/student.upgraded.view.html',
                 controller :'UgradeUserCtrl'
+            }).
+            when('/getRegisteredUser', {
+                templateUrl :'views/student/student.registered.credits.view.html',
+                controller :'GetUserWithCredits'
         });
 };

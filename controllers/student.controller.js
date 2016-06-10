@@ -2,7 +2,8 @@ angular.module('student')
     .controller('UpdateStudentCtrl', UpdateStudentCtrl)
     .controller('DeleteStudentCtrl', DeleteStudentCtrl)
     .controller('ReferralUserCtrl', ReferralUserCtrl)
-    .controller('UgradeUserCtrl', UgradeUserCtrl);
+    .controller('UgradeUserCtrl', UgradeUserCtrl)
+    .controller('GetUserWithCredits', GetUserWithCredits);
     
 UpdateStudentCtrl.$inject = ['$scope', 'studentFactory', 'toastr'];
 
@@ -115,3 +116,58 @@ function UgradeUserCtrl($scope, studentFactory, toastr, $location) {
         $location.path('/profile/student/'+userid);
     }
 };
+
+GetUserWithCredits.$inject = ['$scope','PagerService', 'studentFactory', 'toastr', '$log', '$location'];
+
+function GetUserWithCredits($scope, PagerService, studentFactory, toastr, $log, $location) {
+
+    
+    $scope.setUsers = function() {
+        $scope.pager        = {};
+        $scope.setPage      = setPage;
+        $scope.getProfiles  = getProfiles;
+        var data = {};
+        var date        = new Date();
+        $scope.year     = date.getFullYear();
+        $scope.month    = date.getMonth();
+        $scope.day      = date.getDate();
+        
+        data = {
+            "startdate" : $scope.startdate,
+            "enddate"   : $scope.enddate
+        };
+        initController();
+
+        function initController() {
+            // initialize to page 1
+             $scope.setPage(1);
+        }
+
+        function setPage(page) {
+            if (page < 1 || page >  $scope.pager.totalPages) {
+                return;
+            }
+
+            studentFactory.getRegisteredUser(page, data, function(err, res) {
+                if(res) {
+                    if(res.status.code === 303000) {
+                        $log.info("getting res", res.users.user);
+                        $scope.pager = PagerService.GetPager(res.users.count, page, res.users.pageSize);
+                        $scope.users =  res.users.user;
+                        $scope.count = res.users.count;
+                        return;
+                    } else {
+                        toastr.error('Invalid request');
+                    }
+                } else {
+                    toastr.error('Server not working');
+                }
+            }); 
+        }
+
+        function getProfiles(userid) {
+            $location.path('/profile/student/'+userid);
+        }
+        };
+    
+}

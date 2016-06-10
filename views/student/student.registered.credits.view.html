@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .angularjs-datetime-picker {
+              color: #333;
+              font: normal 14px sans-serif;
+              border: 1px solid #ddd;
+              display: inline-block;
+              background: #fff;
+            }
+            .angularjs-datetime-picker > .adp-month {
+              text-align: center;
+              line-height: 22px;
+              padding: 10px;
+              background: #fcfcfc;
+              text-transform: uppercase;
+              font-weight: bold;
+              border-bottom: 1px solid #ddd;
+              position: relative;
+            }
+            .angularjs-datetime-picker > .adp-month > button {
+              color: #555;
+              font: normal 14px sans-serif;
+              outline: none;
+              position: absolute;
+              background: transparent;
+              border: none;
+              cursor: pointer;
+            }
+            .angularjs-datetime-picker > .adp-month > button:hover {
+              color: #333;
+            }
+            .angularjs-datetime-picker > .adp-month > button.adp-prev {
+              left: 10px;
+            }
+            .angularjs-datetime-picker > .adp-month > button.adp-next {
+              right: 10px;
+            }
+            .angularjs-datetime-picker > .adp-days {
+              width: 210px; /* 30 x 7 */
+              margin: 10px;
+              text-align: center;
+            }
+            .angularjs-datetime-picker > .adp-days > .adp-day-of-week, .angularjs-datetime-picker > .adp-days > .adp-day {
+              box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              border: 1px solid transparent;
+              width: 30px;
+              line-height: 28px;
+              float: left;
+            }
+            .angularjs-datetime-picker > .adp-days > .adp-day-of-week {
+              font-weight: bold;
+            }
+            .angularjs-datetime-picker > .adp-days > .adp-day:not(.selectable) {
+              opacity: 0.15;
+              cursor: default;
+            }
+            .angularjs-datetime-picker > .adp-days > .adp-day.selectable  {
+              cursor: pointer;
+            }
+            .angularjs-datetime-picker > .adp-days > .adp-day.selected {
+              background: #e0e0e0;
+            }
+            .angularjs-datetime-picker > .adp-days > .adp-day.selectable:hover {
+              background: #eee;
+            }
+            .angularjs-datetime-picker > .adp-days:after {
+              content: '';
+              display: block;
+              clear: left;
+              height: 0;
+            }
+
+            .angularjs-datetime-picker input[type=range] {
+              width: 150px;
+            }
+
+            body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+            }
+            table {
+                width:100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color:#fff;
+            }
+            table#t01 th	{
+                background-color: black;
+                color: white;
+            }
+            
+        </style>
+    </head>
+    
+    <body align="center">
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
+        <div    >
+            <form name="register" ng-submit="setUsers()" role="sleep" novalidate>
+                <div ng-class="{ 'has-error': !register.startdate.$pristine && register.startdate.$error.required }">
+                    <p>
+                        <label>Registration Date From : </label>
+                        <input name="startdate" ng-model="startdate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />
+                    </p>
+                    <div ng-messages="register.startdate.$error" ng-if="register.startdate.$invalid && !register.startdate.$pristine && register.startdate.$error.required">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+                <div ng-class="{ 'has-error': !register.enddate.$pristine && register.enddate.$error.required }">
+                    <p>
+                        <label>Registration Date To : </label>
+                        <input type = "text" name="enddate" ng-model="enddate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />
+                    </p>
+                    <div ng-messages="register.enddate.$error" ng-if="register.enddate.$invalid && !register.enddate.$pristine && register.enddate.$error.required">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        <button type="submit" ng-disabled="register.$invalid">Submit</button>
+                    </p>
+                
+                </div>
+            </form>
+        </div><br>
+        <div>Total Registration {{ count }} </div>
+            <table id="t01">
+                <tr>
+                    <th>User Id</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>credits</th>
+                    <th>created</th>
+                    <th>Last Active Time</th>
+                </tr>
+                <tr ng-repeat=" user in users">
+                    <td ng-click="getProfiles(user.userid)">{{ user.userid }} </td>
+                    <td>{{ user.fullname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.credits }}</td>
+                    <td>{{ user.created }}</td>
+                    <td>{{ user.lastactive }}</td>
+                </tr>
+            </table>
+        </div><br>
+        <ul ng-if=" pager.pages.length" class="pagination">
+            <li ng-class="{disabled:pager.currentPage === 1}">
+                <a ng-click=" setPage(1)">First</a>
+            </li>
+            <li ng-class="{disabled:pager.currentPage === 1}">
+                <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li ng-repeat="page in  pager.pages" ng-class="{active: pager.currentPage === page}">
+                <a ng-click=" setPage(page)">{{page}}</a>
+            </li>                
+            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+                <a ng-click=" setPage( pager.currentPage + 1)">Next</a>
+            </li>
+            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+                <a ng-click=" setPage( pager.totalPages)">Last</a>
+            </li>
+        </ul>
+        
+    </body>
+</html>
