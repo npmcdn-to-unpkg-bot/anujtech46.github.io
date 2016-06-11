@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Find Student by email or fullname</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+            form p input {
+                /*display:block;*/
+                float:right;
+                width:200px;
+                margin: 0 auto;
+                
+            }
+            form p{
+                width:400px;
+                
+            }
+            button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 50%;
+
+            }body {
+                background-color : #ffeeff;
+                margin: 0;
+                padding: 0;
+            }
+            table {
+                width:100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color:#fff;
+            }
+            table#t01 th	{
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
+        
+        
+        <div align="center">
+            <form name="student" ng-submit="getUserProfile()" role="student" novalidate>
+                <div ng-class="{ 'has-error': !student.email.$pristine}">
+                    <p>
+                        <label>Email : </label>
+                        <input type="text" name="email" ng-model="st.email" required>
+                    </p>
+                    <div ng-messages="student.email.$error" ng-if="!student.email.$pristine">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+                <p>OR</p>
+                <div ng-class="{ 'has-error': !student.fullname.$pristine}">
+                    <p>
+                        <label>Fullname : </label>
+                        <input type="text" name="fullname" ng-model="st.fullname" required>
+                    </p>
+                    <div ng-messages="student.fullname.$error" ng-if="!student.fullname.$pristine">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+                <div>
+                    <p>
+                        <button type="submit">Submit</button>
+                    </p>
+                </div>
+            </form>    
+        </div>
+        <div ng-hide="hideform">
+            <table id="t01">
+                <tr>
+                    <th>user ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>App Id</th>
+                    <th>Role</th>
+                    <th>On Board</th>
+                    <th>created</th>
+                </tr>
+                <tr ng-repeat=" user in  users ">
+                    <td ng-click="getProfiles(user._id, user.roles)">{{ user._id }} </td>
+                    <td>{{ user.fullname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.appid }}</td>
+                    <td>{{ user.roles }}</td>
+                    <td>{{ user.onboard }}</td>
+                    <td>{{ user.created }}</td>
+                </tr>
+            </table>
+        </div><br>
+    </body>
+</html>

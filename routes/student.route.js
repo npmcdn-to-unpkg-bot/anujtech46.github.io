@@ -24,5 +24,9 @@ function config($routeProvider) {
             when('/getRegisteredUser', {
                 templateUrl :'views/student/student.registered.credits.view.html',
                 controller :'GetUserWithCredits'
+            }).
+            when('/getStudentProfile', {
+                templateUrl :'views/student/student.find.email.fullname.view.html',
+                controller :'GetStudentProfileCtrl'
         });
 };

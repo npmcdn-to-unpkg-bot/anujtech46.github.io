@@ -3,7 +3,8 @@ angular.module('student')
     .controller('DeleteStudentCtrl', DeleteStudentCtrl)
     .controller('ReferralUserCtrl', ReferralUserCtrl)
     .controller('UgradeUserCtrl', UgradeUserCtrl)
-    .controller('GetUserWithCredits', GetUserWithCredits);
+    .controller('GetUserWithCredits', GetUserWithCredits)
+    .controller('GetStudentProfileCtrl', GetStudentProfileCtrl);
     
 UpdateStudentCtrl.$inject = ['$scope', 'studentFactory', 'toastr'];
 
@@ -168,6 +169,50 @@ function GetUserWithCredits($scope, PagerService, studentFactory, toastr, $log, 
         function getProfiles(userid) {
             $location.path('/profile/student/'+userid);
         }
-        };
-    
+    };
 }
+
+GetStudentProfileCtrl.$inject = ['$scope', 'studentFactory', 'toastr', '$location'];
+
+function GetStudentProfileCtrl($scope, studentFactory, toastr, $location) {
+    
+    $scope.getProfiles  = getProfiles;
+    $scope.hideform     = true;
+    
+    $scope.getUserProfile = function() {
+        var data = {};
+        
+        if($scope.st.email) {
+            data.email = $scope.st.email;
+        }
+        if($scope.st.fullname) {
+            data.fullname = $scope.st.fullname;
+        }
+        if($scope.st.email && $scope.st.fullname) {
+            toastr.error('Invalid Credentials', 'Please send email or fullname');
+            return;
+        }
+        studentFactory.getStudentProfile(data, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    console.log(res.count);
+                    if(res.count === 0) {
+                        toastr.success('User not exit', 'Email or fullname not exist');
+                        return;
+                    }
+                    $scope.st = '';
+                    $scope.student.$setPristine();
+                    $scope.hideform     = false;
+                    $scope.users = res.users;
+                } else {
+                    toastr.error('Invalid Credentials', 'Unable to delete students');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        });
+    };
+    function getProfiles(userid) {
+            $location.path('/profile/student/'+userid);
+        }
+};

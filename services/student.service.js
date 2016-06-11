@@ -12,7 +12,8 @@ function studentFactory(apiService, $log) {
         deleteStudent       : deleteStudent,
         getUgradeUser       : getUgradeUser,
         getReferral         : getReferral,
-        getRegisteredUser   : getRegisteredUser
+        getRegisteredUser   : getRegisteredUser,
+        getStudentProfile   : getStudentProfile
     };
     
     function addCredits(data, callback) {
@@ -78,6 +79,21 @@ function studentFactory(apiService, $log) {
     function getRegisteredUser(pageIndex, data, callback) {
         
         var url = apiService.getApiEndPoint() + "get/studentCredits/" + pageIndex;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doPost(url, data, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function getStudentProfile(data, callback) {
+        
+        var url = apiService.getApiEndPoint() + "get/student/profile";
         
         var config = {
             headers : {
