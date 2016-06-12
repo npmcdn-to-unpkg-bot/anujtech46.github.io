@@ -143,21 +143,25 @@
             </table>
             <table>
                 <tr>
-                    <td align="center" colspan="5"><b>Session info</b></td>
+                    <td align="center" colspan="7"><b>Session info</b></td>
                 </tr>
                 <tr>
-                    <th> Student Id</th>
-                    <th> Status</th>
-                    <th> Educator Id</th>
-                    <th> Question</th>
-                    <th> Created</th>
+                    <th>Session Id+Topics</th>
+                    <th>Rating</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Session Duration</th>
+                    <th>Session status</th>
+                    <th>Educator ID</th>
                 </tr>
-                <tr ng-repeat="session in sessions">
-                    <td>{{ session.studentid }}</td>
-                    <td>{{ session.status }}</td>
-                    <td>{{ session.educatorid }}</td>
-                    <td>{{ session.questionid }}</td>
-                    <td>{{ session.created }}</td>>
+                <tr ng-repeat=" session in  sessions ">
+                    <td>{{ session.questionid}} </td>
+                    <td>{{ session.rating}} </td>
+                    <td>{{ session.starttime}} </td>
+                    <td>{{ session.endtime}} </td>
+                    <td>{{ session.sessionduration}} </td>
+                    <td>{{ session.status}} </td>
+                    <td>{{ session.educatorid}} </td>
                 </tr>
             </table>
         </div> <br>
