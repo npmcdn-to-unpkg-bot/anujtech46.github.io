@@ -46,25 +46,25 @@ and open the template in the editor.
             <table id="t01">
                 <tr>
                     <th>Student ID</th>
+                    <th>Name</th>
                     <th>Rating</th>
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Session Duration</th>
-                    <th>Topics</th>
                     <th>Session status</th>
                     <th>Educator ID</th>
-                    <th>Session ID</th>
+                    <th>Question ID</th>
                 </tr>
                 <tr ng-repeat=" session in  sessions ">
                     <td ng-click="getProfiles(session.studentid)">{{ session.studentid}} </td>
+                    <td>{{ session.fullname}} </td>
                     <td>{{ session.rating}} </td>
                     <td>{{ session.starttime}} </td>
                     <td>{{ session.endtime}} </td>
                     <td>{{ session.sessionduration}} </td>
-                    <td>{{ session.topics}} </td>
                     <td>{{ session.status}} </td>
                     <td>{{ session.educatorid}} </td>
-                    <td>{{ session.sessionid}} </td>
+                    <td>{{ session.questionid}} </td>
                 </tr>
             </table>
         </div><br>
