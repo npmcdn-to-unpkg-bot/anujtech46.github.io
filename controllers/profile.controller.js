@@ -42,8 +42,8 @@ function ShowStudentProfileCtrl($scope, $log, $routeParams, toastr, userProfileF
                 $scope.location = profiles.location ;
                 $scope.subscriptions = profiles.subscription.products || 0;
                 if(devices) {
-                    $log.info("devices", devices);
-                    $scope.devices = devices;
+                    $log.info("devices", devices.devices);
+                    $scope.devices = devices.devices;
                 }
                 if(sessions) {
                     $log.info("sessions", sessions);
