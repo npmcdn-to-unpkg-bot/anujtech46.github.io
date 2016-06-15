@@ -48,8 +48,20 @@
                     <td  align="center" colspan="2"><b>Profile Info</b></td>
                 </tr>
                 <tr>
+                    <td>User Id</td>
+                    <td>{{ userid }}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ email }}</td>
+                </tr>
+                <tr>
                     <td>Fullname</td>
                     <td>{{ fullname }}</td>
+                </tr>
+                <tr>
+                    <td>Mobile No-</td>
+                    <td>{{ countrycode }}-{{mobileno}}</td>
                 </tr>
                 <tr>
                     <td>Gender</td>
@@ -96,37 +108,40 @@
                     <td>{{ location }}</td>
                 </tr>
             </table><br>
-            <table>
-                <tr align="center" >
-                    <td><b>Device info</b></td>
-                </tr>
-                <tr>
-                    <th>Device Type</th>
-                    <th>Device Model</th>
-                    <th>OS Version</th>
-                    <th>App Major Version</th>
-                    <th>App Minor Version</th>
-                    <th>Status</th>
-                    <th>Operator Name</th>
-                    <th>created</th>
-                    <th>Pushtoken</th>
-                </tr>
-                <tr ng-repeat=" device in devices ">
-                    <td>{{ device.devicetype }}</td>
-                    <td>{{ device.devicemodel }}</td>
-                    <td>{{ device.osversion }}</td>
-                    <td>{{ device.appmajorversion }}</td>
-                    <td>{{ device.appminorversion }}</td>
-                    <td>{{ device.status }}</td>
-                    <td>{{ device.operatorname }}</td>
-                    <td>{{ device.created }}</td>
-                    <td>{{ device.pushtoken }}</td>
-                </tr>
-            </table>
         </div>
+            <div>
+                <table>
+                    <tr>
+                        <td align="center" colspan="9"><b>Device info</b></td>
+                    </tr>
+                    <tr>
+                        <th>Device Type</th>
+                        <th>Device Model</th>
+                        <th>OS Version</th>
+                        <th>App Major Version</th>
+                        <th>App Minor Version</th>
+                        <th>Status</th>
+                        <th>Operator Name</th>
+                        <th>created</th>
+                        <th>Pushtoken</th>
+                    </tr>
+                    <tr ng-repeat=" device in devices ">
+                        <td>{{ device.devicetype }}</td>
+                        <td>{{ device.devicemodel }}</td>
+                        <td>{{ device.osversion }}</td>
+                        <td>{{ device.appmajorversion }}</td>
+                        <td>{{ device.appminorversion }}</td>
+                        <td>{{ device.status }}</td>
+                        <td>{{ device.operatorname }}</td>
+                        <td>{{ device.created }}</td>
+                        <td>{{ device.pushtoken }}</td>
+                    </tr>
+                </table>
+            </div><br>
         <div align="center">
-            <a href="#totalR">Back To Registration</a>&nbsp;
-            <!--<a href="#showAllEducatorProfile">Back To Educator </a>-->
+            <a href="#showCP">Back</a>
+            <button ng-click="updateEducatorProfile()">Update Profile</button>
+            <button ng-click="deleteEducator()">Delete</button>
         </div>
     </body>
-</html>
+</html> 

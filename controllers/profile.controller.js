@@ -70,29 +70,52 @@ function ShowStudentProfileCtrl($scope, $log, $routeParams, toastr, userProfileF
     
 };
 
-ShowEducatorProfileCtrl.$inject = ['$scope', '$log', '$routeParams', 'toastr', 'userProfileFactory'];
-function ShowEducatorProfileCtrl($scope, $log, $routeParams, toastr, userProfileFactory) {
+ShowEducatorProfileCtrl.$inject = ['$scope', '$log', '$routeParams', 'toastr', 
+                            'userProfileFactory', 'educatorProfileService', '$location', 'educatorFactory'];
+function ShowEducatorProfileCtrl($scope, $log, $routeParams, toastr, 
+                            userProfileFactory, educatorProfileService, $location, educatorFactory) {
     
     var userid = $routeParams.userid;
-
+    if(!userid) {
+        $scope.hideProfile = true; 
+        return ;
+    }
+    
+    var email = '';
+    var headline = '';
+    var roles = '';
+    var skills = '';
+    var internal = '';
+    
     userProfileFactory.getEducatorProfileWithToken(userid, function(err, res, devices) {
         if(res) {
             if(res.status.code === 303000) {
                 $log.info("getting res of user", res);
-                var profiles = res.profile;
+                var profiles = res.profile ;
+                email = res.email ;
+                headline = profiles.headline;
+                roles = profiles.roles;
+                skills = profiles.skills;
+                internal = profiles.internal;
+                $scope.userid = userid ; 
+                $scope.email = res.email ;
                 $scope.fullname = profiles.fullname ; 
-                $scope.gender = profiles.gender ; 
-                $scope.Qualification = profiles.Qualification ; 
-                $scope.Institute = profiles.Institute ; 
-                $scope.dob = profiles.dob ; 
-                $scope.Roles = profiles.Roles ;
+                $scope.countrycode = profiles.countrycode ; 
+                $scope.mobileno = profiles.mobileno ; 
+                $scope.gender = profiles.gender ;
+                $scope.dob = profiles.dob ;
+                $scope.qualification = profiles.qualification ; 
+                $scope.institute = profiles.institute ;
+                $scope.roles = profiles.roles ;
                 $scope.internal = profiles.internal ;
-                $scope.Skills = profiles.Skills ; 
-                $scope.Headline = profiles.Headline ; 
-                $scope.modifiedon = profiles.modifiedon ; 
+                $scope.skills = profiles.skills ;
+                $scope.headline = profiles.headline ;
+                $scope.modifiedon = profiles.modifiedon ;
                 $scope.createdon = profiles.createdon ; 
                 $scope.location = profiles.location ; 
+                return;
                 if(devices) {
+                    $scope.showDevice = true;
                     $log.info("devices", devices);
                     $scope.devices = devices;
                 }
@@ -104,6 +127,34 @@ function ShowEducatorProfileCtrl($scope, $log, $routeParams, toastr, userProfile
             toastr.error('Server not working');
         }
     });
+    
+    $scope.updateEducatorProfile = updateEducatorProfile;
+    function updateEducatorProfile() {
+        
+        educatorProfileService.saveUserID(userid);
+        educatorProfileService.saveEmail(email);
+        educatorProfileService.saveHeadline(headline);
+        educatorProfileService.saveRoles(roles);
+        educatorProfileService.saveSkills(skills);
+        educatorProfileService.saveInternal(internal);
+        $location.path('/updateEducatorProfile');
+    }
+    
+    $scope.deleteEducator = deleteEducator;
+    function deleteEducator() {
+        educatorFactory.doDeleteEducator(userid, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    toastr.success("educator update successfully");
+                    $location.path('/showEducator');
+                } else {
+                    toastr.error('Invalid Credentials', 'Unable to delete educator');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        });
+    }
 };	
 
 ShowCPProfileCtrl.$inject = ['$scope', '$log', '$routeParams', 'toastr', 'userProfileFactory', '$location', 'cpProfileService'];
@@ -123,9 +174,9 @@ function ShowCPProfileCtrl($scope, $log, $routeParams, toastr, userProfileFactor
                 var profiles = res.profile;
                 userid = profiles.userid;
                 $scope.fullname = profiles.fullname ; 
-                $scope.gender = profiles.gender ; 
-                code = profiles.cpcode ; 
-                $scope.code = profiles.cpcode ; 
+                $scope.gender = profiles.gender ;
+                code = profiles.cpcode ;
+                $scope.code = profiles.cpcode ;
                 $scope.institute = profiles.institute ;
                 institute = profiles.institute;
                 $scope.qualification = profiles.qualification ; 
@@ -133,7 +184,7 @@ function ShowCPProfileCtrl($scope, $log, $routeParams, toastr, userProfileFactor
                 $scope.roles = profiles.roles ;
                 $scope.onboard = profiles.onboard ;
                 $scope.address = profiles.address ;
-                $scope.headline = profiles.headline ; 
+                $scope.headline = profiles.headline ;
                 $scope.modifiedon = profiles.modifiedon ; 
                 $scope.createdon = profiles.createdon ; 
                 $scope.location = profiles.location ; 

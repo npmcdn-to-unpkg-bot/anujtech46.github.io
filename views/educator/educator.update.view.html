@@ -15,6 +15,9 @@ and open the template in the editor.
                 margin: 0;
                 padding: 0;
             }
+            p {
+                margin-left: 20px;
+            }
 /*            form p input {
                 display:block;
                 float:right;
@@ -27,6 +30,7 @@ and open the template in the editor.
                 
             }*/
             button {
+                margin-left: 50px;
                 background-color: #4CAF50; /* Green */
                 border: none;
                 color: white;
@@ -39,6 +43,10 @@ and open the template in the editor.
                 border-radius: 50%;
 
             }
+            label {
+              width:100px;
+              display: inline-block;
+            }
         </style>
     </head>
     <body>
@@ -49,8 +57,8 @@ and open the template in the editor.
             <form name="update" ng-submit="updateEducator()" ng-hide="hideform" role="update" novalidate>
                 <div ng-class="{ 'has-error': !update.email.$pristine && update.email.$error.required }">
                     <p>
-                        <label>Email : </label>
-                        <input type="text" name="email" ng-model="updateE.email" required>
+                        <label>Email        : </label>
+                        <input type="text" name="email" ng-model="updateE.email" readonly required>
                     </p>
                     <div ng-messages="update.email.$error" ng-if="!update.email.$pristine && update.email.$error.required && update.email.$invalid">
                         <div ng-messages-include="error/error.html"></div>
@@ -58,31 +66,36 @@ and open the template in the editor.
                 </div>
                 <div ng-class="{ 'has-error': !update.appid.$pristine && update.appid.$error.required }">
                     <p>
-                        <label>AppID : </label>
+                        <label>AppID        : </label>
                         <input type="text" name="appid" ng-model="updateE.appid" required>
                     </p>
                     <div ng-messages="update.appid.$error" ng-if="!update.appid.$pristine && update.appid.$error.required && update.appid.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
                 </div>
-                
-                <div>
+                <div ng-class="{ 'has-error': !update.headline.$pristine}">
                     <p>
-                        <label>Internal : </label>
-                        <input type="radio" ng-model="updateE.internal" value="true"> true &nbsp;&nbsp;&nbsp;
-                        <input type="radio" ng-model="updateE.internal"  value="false" checked> false                        
+                        <label>Headline     : </label>
+                        <textarea type="text" name="headline" ng-model="updateE.headline" required></textarea>
                     </p>
                 </div>
                 <div>
                     <p>
-                        <label>Roles : </label>
+                        <label>Internal     : </label>
+                        <input type="radio" ng-model="updateE.internal" value="true"> true &nbsp;&nbsp;&nbsp;
+                        <input type="radio" ng-model="updateE.internal"  value="false"> false                   
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <label>Roles        : </label>
                         <input type="checkbox" ng-model="updateE.educator" value="educator"> Educator  
                         <input type="checkbox" ng-model="updateE.channelpartner" value="ChannelPartner"> ChannelPartner  
                     </p>
                 </div>
                 <div>
                     <p>
-                        <label>Skills : </label>
+                        <label>Skills       : </label>
                         <input type="checkbox" ng-model="updateE.c6" value="c6"> c6
                         <input type="checkbox" ng-model="updateE.c7" value="c7"> c7
                         <input type="checkbox" ng-model="updateE.c8" value="c8"> c8

@@ -1,20 +1,102 @@
 angular.module('educator')
+    .controller('ShowAllEducatorCtrl', ShowAllEducatorCtrl)
     .controller('UpdateEducatorCtrl', UpdateEducatorCtrl)
-    .controller('DeleteEducatorCtrl', DeleteEducatorCtrl)
     .controller('ShowLookersCtrl', ShowLookersCtrl)
     .controller('ShowWeightsCtrl', ShowWeightsCtrl)
     .controller('SetSleepTimeCtrl', SetSleepTimeCtrl)
     .controller('ShowServiceTimeCtrl', ShowServiceTimeCtrl)
     .controller('ShowRatingCtrl', ShowRatingCtrl);
 
-//inject UpdateEducatorCtrl
-UpdateEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
+ShowAllEducatorCtrl.$inject = ['$scope', '$log', 'toastr', 'educatorFactory', '$location'];
+function ShowAllEducatorCtrl($scope, $log, toastr, educatorFactory, $location) {
+    
+    $scope.getProfiles = getProfiles;
+    
+    educatorFactory.getAllEducator(function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                if(res.count === 0) {
+                    $scope.count = res.count;
+                    $scope.hideTable = true;
+                } else {
+                    $scope.count = res.count;
+                    $scope.users = res.profiles;
+                }
+            } else {
+                toastr.error('Invalid Credentials', 'Unable to find');
+            }
+        } else {
+            toastr.error('Server not working');
+        }
+    });
+    
+    function getProfiles(userid, roles) {
+        
+        if(roles[0] === 'educator' && userid) {
+            $log.info("Get educator profile", userid, roles);
+            $location.path('/profile/educator/'+userid);
+        } else {
+            toastr.error('Invalid request');
+        }
+    }
+};
 
+//inject UpdateEducatorCtrl
 /*
  * name : UpdateEducatorCtrl
  * desc : update educator role and subjects
  */
-function UpdateEducatorCtrl($scope, educatorFactory, toastr) {
+UpdateEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'educatorProfileService', '$location'];
+function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileService, $location) {
+    
+    var userid      = educatorProfileService.getUserID();
+    var email       = educatorProfileService.getEmail();
+    var roles       = educatorProfileService.getRoles();
+    var skills      = educatorProfileService.getSkills();
+    var internal    = educatorProfileService.getInternal();
+    var headline    = educatorProfileService.getHeadline();
+    
+    $scope.updateE = {
+        email : email,
+        headline : headline
+    };
+    $scope.updateE.internal = internal.toString();
+    if(roles.indexOf("educator") > -1) {
+        $scope.updateE.educator = true;
+    }
+    if(roles.indexOf("channelpartner") > -1) {
+        $scope.updateE.channelpartner = true;
+    }
+    if(skills.indexOf("c6") > -1) {
+        $scope.updateE.c6 = true;
+    }
+    if(skills.indexOf("c7") > -1) {
+        $scope.updateE.c7 = true;
+    }
+    if(skills.indexOf("c8") > -1) {
+        $scope.updateE.c8 = true;
+    }
+    if(skills.indexOf("c9") > -1) {
+        $scope.updateE.c9 = true;
+    }
+    if(skills.indexOf("c10") > -1) {
+        $scope.updateE.c10 = true;
+    }
+    if(skills.indexOf("c11") > -1) {
+        $scope.updateE.c11 = true;
+    }
+    if(skills.indexOf("c12") > -1) {
+        $scope.updateE.c12 = true;
+    }
+    if(skills.indexOf("maths") > -1) {
+        $scope.updateE.maths = true;
+    }
+    if(skills.indexOf("science") > -1) {
+        $scope.updateE.science = true;
+    }
+    if(skills.indexOf("english") > -1) {
+        $scope.updateE.english = true;
+    }
     
     $scope.updateEducator = function() {
         
@@ -70,12 +152,17 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr) {
         if(skills) {
             data.skills = skills;
         }
+        if($scope.updateE.headline) {
+            data.headline = $scope.updateE.headline;
+        }
+        
         educatorFactory.updateEducator(data, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
                     toastr.success("educator update successfully");
                     $scope.updateE = '';
                     $scope.update.$setPristine();
+                    $location.path('/profile/educator/'+userid);
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to update educator role');
                 }
@@ -86,32 +173,32 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr) {
     };
 };
 
-DeleteEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
-
-function DeleteEducatorCtrl($scope, educatorFactory, toastr) {
-    
-    $scope.deleteEducator = function() {
-        
-        var data = {
-            email : $scope.email,
-            appid : $scope.appid
-        };
-        educatorFactory.doDeleteEducator(data, function(err, res) {
-            if(res) {
-                if(res.status.code === 303000) {
-                    toastr.success("educator update successfully");
-                    $scope.email = '';
-                    $scope.appid = '';
-                    $scope.educator.$setPristine();
-                } else {
-                    toastr.error('Invalid Credentials', 'Unable to delete educator');
-                }
-            } else {
-                toastr.error('Server not working');
-            }
-        });
-    };
-};
+//DeleteEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
+//
+//function DeleteEducatorCtrl($scope, educatorFactory, toastr) {
+//    
+//    $scope.deleteEducator = function() {
+//        
+//        var data = {
+//            email : $scope.email,
+//            appid : $scope.appid
+//        };
+//        educatorFactory.doDeleteEducator(data, function(err, res) {
+//            if(res) {
+//                if(res.status.code === 303000) {
+//                    toastr.success("educator update successfully");
+//                    $scope.email = '';
+//                    $scope.appid = '';
+//                    $scope.educator.$setPristine();
+//                } else {
+//                    toastr.error('Invalid Credentials', 'Unable to delete educator');
+//                }
+//            } else {
+//                toastr.error('Server not working');
+//            }
+//        });
+//    };
+//};
 
 ShowLookersCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
 
@@ -130,7 +217,7 @@ function ShowLookersCtrl($scope, educatorFactory, toastr) {
     });  
 };
 
-UpdateEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
+ShowWeightsCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
 
 function ShowWeightsCtrl($scope, educatorFactory, toastr) {
 

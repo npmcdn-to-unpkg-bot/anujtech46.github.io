@@ -8,6 +8,7 @@ educatorFactory.$inject = ['apiService', '$log'];
 function educatorFactory(apiService, $log) {
     
     var factory = {
+        getAllEducator  : getAllEducator,
         updateEducator  : updateEducator,
         doDeleteEducator: doDeleteEducator,
         getAllLookers   : getAllLookers,
@@ -16,6 +17,21 @@ function educatorFactory(apiService, $log) {
         getSleepTime    : getSleepTime,
         getRating       : getRating
     };
+    
+    function getAllEducator(callback) {
+        
+        var url = apiService.getApiEndPoint() + "get/educator" ;
+        var config = {
+            headers : {
+                token : apiService.getToken()
+            }
+        }; 
+        apiService.doGet(url, config, function(err, res) {
+            $log.info("res", res);
+            return callback(err, res);
+        });
+    };
+    
     
     function updateEducator(data, callback) {
         
@@ -32,16 +48,14 @@ function educatorFactory(apiService, $log) {
         });
     };
     
-    function doDeleteEducator(data, callback) {
+    function doDeleteEducator(userid, callback) {
         
-        var url = apiService.getApiEndPoint() + "delete/educator/" + data.email;
+        var url = apiService.getApiEndPoint() + "delete/educator/" + userid;
         var config = {
             headers : {
-                token : apiService.getToken(),
-                appid : data.appid
+                token : apiService.getToken()
             }
         }; 
-        $log.info("calling api with data", data);
         apiService.doDelete(url, config, function(err, res) {
             $log.info("res", res);
             return callback(err, res);

@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>All CP</title>
+        <title>All Educator</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -54,24 +54,22 @@ and open the template in the editor.
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
 
-        <div>Total channel partner = {{ count }}</div><br>
-        <div>
+        <div>Total Educator = {{ count }}</div><br>
+        <div ng-hide="hideTable">
             <table id="t01" id="t02">
                 <tr>
                     <th>user ID</th>
                     <th>Full Name</th>
                     <th>Email</th>
-                    <th>Institute</th>
                     <th>App Id</th>
                     <th>Role</th>
                     <th>On Board</th>
                     <th>created</th>
                 </tr>
                 <tr ng-repeat=" user in users ">
-                    <td ng-click="getProfiles(user.userid, user.roles)">{{ user.userid }} </td>
+                    <td ng-click="getProfiles(user._id, user.roles)">{{ user._id }} </td>
                     <td id="t02">{{ user.fullname }}</td>
                     <td id="t02">{{ user.email }}</td>
-                    <td id="t02">{{ user.institute }}</td>
                     <td id="t02">{{ user.appid }}</td>
                     <td id="t02">{{ user.roles }}</td>
                     <td id="t02">{{ user.onboard }}</td>

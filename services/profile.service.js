@@ -1,6 +1,7 @@
 angular.module('profile')
         .factory('userProfileFactory', userProfileFactory)
-        .service('cpProfileService', cpProfileService);
+        .service('cpProfileService', cpProfileService)
+        .service('educatorProfileService', educatorProfileService);
 
 userProfileFactory.$inject = ['$log', 'apiService', '$log'];
 function userProfileFactory($log, apiService, $log) {
@@ -147,6 +148,76 @@ function cpProfileService() {
     this.getInstitute = function(){
         return this.institute;
     };
+}
+
+educatorProfileService.$inject = ['$log'];
+function educatorProfileService($log) {
+    console.log('Preofile servic');
+    var userid = '';
+    var email = '';
+    var headline = '';
+    var roles = '';
+    var skills = '';
+    var internal = '';
     
+    this.saveUserID = function(userid) {
+        $log.info("set userid", userid);
+        this.userid = userid;
+        return;
+    };
     
+    this.getUserID = function(){
+        return this.userid;
+    };
+    
+    this.saveEmail = function(email) {
+        $log.info("set email", email);
+        this.email = email;
+        return;
+    };
+    
+    this.getEmail = function(){
+        $log.info("return email", this.email);
+        return this.email;
+    };
+    
+    this.saveHeadline = function(headline) {
+        $log.info("set headline", headline);
+        this.headline = headline;
+        return;
+    };
+    
+    this.getHeadline = function(){
+        return this.headline;
+    };
+    
+    this.saveRoles = function(roles) {
+        $log.info("set roles", roles);
+        this.roles = roles;
+        return;
+    };
+    
+    this.getRoles = function(){
+        return this.roles;
+    };
+    
+    this.saveSkills = function(skills) {
+        $log.info("set skills", skills);
+        this.skills = skills;
+        return;
+    };
+    
+    this.getSkills = function(){
+        return this.skills;
+    };
+    
+    this.saveInternal = function(internal) {
+        $log.info("set internal", internal);
+        this.internal = internal;
+        return;
+    };
+    
+    this.getInternal = function(){
+        return this.internal;
+    };  
 }

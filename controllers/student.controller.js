@@ -122,7 +122,7 @@ GetUserWithCredits.$inject = ['$scope','PagerService', 'studentFactory', 'toastr
 
 function GetUserWithCredits($scope, PagerService, studentFactory, toastr, $log, $location) {
 
-    
+    $scope.showTable = false;
     $scope.setUsers = function() {
         $scope.pager        = {};
         $scope.setPage      = setPage;
@@ -152,10 +152,12 @@ function GetUserWithCredits($scope, PagerService, studentFactory, toastr, $log, 
             studentFactory.getRegisteredUser(page, data, function(err, res) {
                 if(res) {
                     if(res.status.code === 303000) {
+                        
                         $log.info("getting res", res.users.user);
                         $scope.pager = PagerService.GetPager(res.users.count, page, res.users.pageSize);
                         $scope.users =  res.users.user;
                         $scope.count = res.users.count;
+                        $scope.showTable = true;
                         return;
                     } else {
                         toastr.error('Invalid request');

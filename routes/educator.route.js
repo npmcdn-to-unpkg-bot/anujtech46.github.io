@@ -5,15 +5,15 @@ angular
 
 function config($routeProvider) {
     $routeProvider
-        .when('/updateEducator', {
+        .when('/showEducator', {
+                templateUrl :'views/educator/show.alleducator.view.html',
+                controller :'ShowAllEducatorCtrl'
+        }).
+        when('/updateEducatorProfile', {
                 templateUrl :'views/educator/educator.update.view.html',
                 controller :'UpdateEducatorCtrl'
-        }).
-        when('/deleteEducator', {
-            templateUrl :'views/educator/educator.delete.view.html',
-            controller :'DeleteEducatorCtrl'
-        }).
-        when('/showLookers', {
+        })
+        .when('/showLookers', {
             templateUrl :'views/educator/show.lookers.view.html',
             controller :'ShowLookersCtrl'
         }).
