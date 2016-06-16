@@ -11,9 +11,10 @@ function questionFactory(apiService, $log) {
         getAllSession       : getAllSession,
         getSubjectSession   : getSubjectSession,
         getRepeatUserSession: getRepeatUserSession,
-        getSessions         : getSessions,
+        getStartedSessions  : getStartedSessions,
         getRatingLT2        : getRatingLT2,
-        getRatingGT4        : getRatingGT4
+        getRatingGT4        : getRatingGT4,
+        getRequestedSessions:getRequestedSessions
     };
     
     function getAllSession(callback) {
@@ -63,9 +64,24 @@ function questionFactory(apiService, $log) {
         });
     };
     
-    function getSessions(page, callback) {
+    function getStartedSessions(page, callback) {
         
-        var url = apiService.getApiEndPoint() + "get/sessions/" + page;
+        var url = apiService.getApiEndPoint() + "get/started/sessions/" + page;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            $log.info("res", res);
+            return callback(err, res);
+        });
+    };
+    function getRequestedSessions(page, callback) {
+        
+        var url = apiService.getApiEndPoint() + "get/requested/sessions/" + page;
         
         var config = {
             headers : {

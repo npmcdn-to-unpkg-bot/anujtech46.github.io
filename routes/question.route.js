@@ -23,9 +23,13 @@ function config($routeProvider) {
                 templateUrl :'views/question/question.repeatuserssession.view.html',
                 controller :'RepeatUserSessionCtrl'
             }).
-            when('/getSessions', {
+            when('/getRequestedSessions', {
+                templateUrl :'views/question/requested.session.view.html',
+                controller :'AllRequestedSessionCtrl'
+            }).
+            when('/getStartedSessions', {
                 templateUrl :'views/question/sessions.view.html',
-                controller :'AllSessionCtrl'
+                controller :'AllStartedSessionCtrl'
             }).
             when('/getRatingLT2', {
                 templateUrl :'views/question/ratingLT2.view.html',

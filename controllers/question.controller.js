@@ -4,7 +4,8 @@ angular.module('question')
     .controller('SQCtrl', SQCtrl)
     .controller('EQCtrl', EQCtrl)
     .controller('RepeatUserSessionCtrl', RepeatUserSessionCtrl)
-    .controller('AllSessionCtrl', AllSessionCtrl)
+    .controller('AllRequestedSessionCtrl', AllRequestedSessionCtrl)
+    .controller('AllStartedSessionCtrl', AllStartedSessionCtrl)
     .controller('AllRatingLT2Ctrl', AllRatingLT2Ctrl)
     .controller('AllRatingGT4Ctrl', AllRatingGT4Ctrl);
     
@@ -113,9 +114,9 @@ function RepeatUserSessionCtrl($scope, questionFactory, toastr, $location) {
     }
 };
 
-AllSessionCtrl.$inject = ['$scope','PagerService', 'questionFactory', 'toastr', '$log', '$location'];
+AllStartedSessionCtrl.$inject = ['$scope','PagerService', 'questionFactory', 'toastr', '$log', '$location'];
 
-function AllSessionCtrl($scope, PagerService, questionFactory, toastr, $log, $location) {
+function AllStartedSessionCtrl($scope, PagerService, questionFactory, toastr, $log, $location) {
     
     $scope.pager = {};
     $scope.setPage = setPage;
@@ -133,7 +134,48 @@ function AllSessionCtrl($scope, PagerService, questionFactory, toastr, $log, $lo
             return;
         }
         
-        questionFactory.getSessions(page, function(err, res) {
+        questionFactory.getStartedSessions(page, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    $log.info("getting res", res.sessions.sessions);
+                    $scope.pager = PagerService.GetPager(res.sessions.count, page, res.sessions.pageSize);
+                    $scope.sessionCount = res.sessions.count;
+                    $scope.sessions = res.sessions.sessions;
+                    return;
+                } else {
+                    toastr.error('Invalid request');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        }); 
+    }
+    function getProfiles(userid) {
+        $location.path('/profile/student/'+userid);
+    }
+}
+
+AllRequestedSessionCtrl.$inject = ['$scope','PagerService', 'questionFactory', 'toastr', '$log', '$location'];
+
+function AllRequestedSessionCtrl($scope, PagerService, questionFactory, toastr, $log, $location) {
+    
+    $scope.pager = {};
+    $scope.setPage = setPage;
+    $scope.getProfiles = getProfiles;
+
+    initController();
+
+    function initController() {
+        // initialize to page 1
+         $scope.setPage(1);
+    }
+
+    function setPage(page) {
+        if (page < 1 || page >  $scope.pager.totalPages) {
+            return;
+        }
+        
+        questionFactory.getRequestedSessions(page, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
                     $log.info("getting res", res.sessions.sessions);
