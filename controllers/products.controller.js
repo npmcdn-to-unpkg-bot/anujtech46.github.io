@@ -1,3 +1,12 @@
+/*
+ * @file    : products.controller.js
+ * @author  : Anuj Gupta
+ * @desc    : functionality of products 
+ */
+
+/*
+ * imports products module
+ */
 angular.module('products')
         .controller('AddAwardCtrl', AddAwardCtrl)
         .controller('AddPromoCtrl', AddPromoCtrl)
@@ -9,8 +18,15 @@ angular.module('products')
         .controller('ShowShopCtrl', ShowShopCtrl)
         .controller('ShowPurchaseCtrl', ShowPurchaseCtrl)
         .controller('ShowReferralCodeCtrl', ShowReferralCodeCtrl)
+        .controller('UpdateAwardCtrl', UpdateAwardCtrl)
         .controller('UpdatePromoCtrl', UpdatePromoCtrl);
 
+/*
+ * @desc    : Add new award product
+ * @name    : AddAwardCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, $location
+ */
 AddAwardCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location'];
 function AddAwardCtrl($scope, productsFactory, toastr, $location) {
     
@@ -40,6 +56,12 @@ function AddAwardCtrl($scope, productsFactory, toastr, $location) {
     };
 };
 
+/*
+ * @desc    : Add new promo product
+ * @name    : AddPromoCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, $location
+ */
 AddPromoCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location'];
 function AddPromoCtrl($scope, productsFactory, toastr, $location) {
     
@@ -70,6 +92,12 @@ function AddPromoCtrl($scope, productsFactory, toastr, $location) {
     };
 };
 
+/*
+ * @desc    : Add new Shop product
+ * @name    : AddShopCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, $location
+ */
 AddShopCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location'];
 function AddShopCtrl($scope, productsFactory, toastr, $location) {
 
@@ -101,6 +129,12 @@ function AddShopCtrl($scope, productsFactory, toastr, $location) {
     };
 };
 
+/*
+ * @desc    : Add new Voucher product, first get the code of channel partner after that we add new product.
+ * @name    : AddVoucherCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, cpProfileService, $location
+ */
 AddVoucherCtrl.$inject = ['$scope', 'productsFactory', 'toastr', 'cpProfileService', '$location'];
 function AddVoucherCtrl($scope, productsFactory, toastr, cpProfileService, $location) {
     
@@ -129,8 +163,6 @@ function AddVoucherCtrl($scope, productsFactory, toastr, cpProfileService, $loca
             if(res) {
                 if(res.status.code === 303000) {
                     toastr.success("add voucher successfully");
-                    $scope.voucher = '';
-                    $scope.product.$setPristine();
                     $location.path('/showVoucher');
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to add voucher product');
@@ -142,9 +174,15 @@ function AddVoucherCtrl($scope, productsFactory, toastr, cpProfileService, $loca
     };
 };;
 
-ShowAwardCtrl.$inject = ['$scope', 'productsFactory', 'toastr'];
+/*
+ * @desc    : Add new Voucher product, first get the code of channel partner after that we add new product.
+ * @name    : AddVoucherCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, cpProfileService, $location
+ */
+ShowAwardCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', 'productService'];
 
-function ShowAwardCtrl($scope, productsFactory, toastr) {
+function ShowAwardCtrl($scope, productsFactory, toastr, $location, productService) {
 
     productsFactory.getAward(function(err, res) {
         if(res) {
@@ -158,8 +196,58 @@ function ShowAwardCtrl($scope, productsFactory, toastr) {
             toastr.error('Server not working');
         }
     });
+    
+    $scope.addAwardProduct = addAwardProduct;
+    function addAwardProduct() {
+        $location.path('/addAward');
+    }
+    
+    $scope.updateAwardProduct = updateAwardProduct;
+    function updateAwardProduct(productidentifier) {
+        productService.saveProductIdentifier(productidentifier);
+        $location.path('/updateAward');
+    }
+    
+    $scope.deleteAwardProduct = deleteAwardProduct;
+    function deleteAwardProduct(productidentifier) {
+        var x = confirm("Are you sure you want to delete?");
+        if(x) { 
+            productsFactory.deletePromo(productidentifier, function(err, res) {
+                if(res) {
+                    if(res.status.code === 303000) {
+                        toastr.success("delete Award product successfully");
+                        productsFactory.getAward(function(err, res) {
+                            if(res) {
+                                if(res.status.code === 303000) {
+                                    $scope.products = res.products;
+                                    $scope.count = res.count;
+                                } else {
+                                    toastr.error('Invalid Credentials', 'Unable to get promo product');
+                                }
+                            } else {
+                                toastr.error('Server not working');
+                            }
+                        });
+                    } else {
+                        toastr.error('Invalid Credentials', 'Unable to add voucher product');
+                    }
+                } else {
+                    toastr.error('Server not working');
+                }
+            });
+        } else { 
+            $location.path('/showPromo');
+            return false;
+        }
+    }
 };
 
+/*
+ * @desc    : show all product.
+ * @name    : AddVoucherCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, $location, productService
+ */
 ShowPromoCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', 'productService'];
 
 function ShowPromoCtrl($scope, productsFactory, toastr, $location, productService) {
@@ -331,8 +419,15 @@ function ShowReferralCodeCtrl($scope, productsFactory, toastr, $location, $log, 
     }
 };
 
-UpdatePromoCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', 'productService'];
-function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productService) {
+/*
+ * @desc    : Update the award product first fetch update product identifier, show data to admin,
+ *            admin update the required field, after that take updated data and update the product.
+ * @name    : UpdateAwardCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, $location, productService
+ */
+UpdateAwardCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', 'productService'];
+function UpdateAwardCtrl($scope, productsFactory, toastr, $location, productService) {
     
     var productidentifier = productService.getProductIdentifier();
     if(!productidentifier) {
@@ -374,6 +469,92 @@ function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productServ
         }
         if($scope.promo.credits) {
             data.credits = $scope.promo.credits;
+        }
+        if($scope.promo.pefd) {
+            data.creditsvalidfordays = $scope.promo.pefd;
+        }
+        if($scope.promo.expiry) {
+            data.expired = $scope.promo.expiry;
+        }
+        if($scope.promo.code) {
+            data.code = $scope.promo.code;
+        }
+        if($scope.promo.usagecount) {
+            data.usagecount = $scope.promo.usagecount;
+        }
+        if($scope.promo.availablefor) {
+            data.availablefor = $scope.promo.availablefor;
+        }
+        
+        productsFactory.updatePromo(data, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    toastr.success("add promo product successfully");
+                    $location.path('/showPromo');
+                } else {
+                    toastr.error('Invalid Credentials', 'Unable to add promo product');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        });
+    };
+};
+
+/*
+ * Update the promo product first fetch update product identifier, show data to admin,
+ * admin update the required field, after that take updated data and update the product.
+ * @name    : UpdatePromoCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, $location, productService
+ */
+UpdatePromoCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', 'productService'];
+function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productService) {
+    
+    var productidentifier = productService.getProductIdentifier();
+    if(!productidentifier) {
+        toastr.error('Invalid Credentials', 'Unable to add promo product');
+        return ;
+    }
+    productsFactory.getPromoProductByID(productidentifier, function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                $scope.promo = {
+                    pi: productidentifier,
+                    pname: res.promo.name,
+                    description: res.promo.description,
+                    credits: res.promo.credits,
+                    cvfd : res.promo.creditsvalidfordays,
+                    expiry: res.promo.expired,
+                    code: res.promo.code,
+                    usagecount: res.promo.usagecount,
+                    availablefor: res.promo.availablefor
+                };
+            } else {
+                toastr.error('Invalid Credentials', 'Unable to add promo product');
+                return ;
+            }
+        } else {
+            toastr.error('Server not working');
+            return ;
+        }
+    });
+    
+    $scope.updatePromoProduct = function() {
+        var data = {
+            productidentifier: $scope.promo.pi
+        };
+        if($scope.promo.pname) {
+            data.name = $scope.promo.pname;
+        }
+        if($scope.promo.description) {
+            data.description = $scope.promo.description;
+        }
+        if($scope.promo.credits) {
+            data.credits = $scope.promo.credits;
+        }
+        if($scope.promo.cvfd) {
+            data.creditsvalidfordays = $scope.promo.cvfd;
         }
         if($scope.promo.pefd) {
             data.extendValidity = $scope.promo.pefd;

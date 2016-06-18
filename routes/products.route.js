@@ -44,6 +44,10 @@ function config($routeProvider) {
                 templateUrl :'views/products/product.referralCode.view.html',
                 controller :'ShowReferralCodeCtrl'
             }).
+            when('/updateAward', {
+                templateUrl :'views/products/updateAward.product.view.html',
+                controller :'UpdateAwardCtrl'
+            }).
             when('/updatePromo', {
                 templateUrl :'views/products/updatePromo.product.view.html',
                 controller :'UpdatePromoCtrl'

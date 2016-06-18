@@ -49,6 +49,15 @@
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
+                <div ng-class="{ 'has-error': product.cvfd.$touched && product.cvfd.$invalid }">
+                    <p>
+                        <label>Extend Validity for days : </label>
+                        <input type="text" name="cvfd" ng-model="promo.cvfd" required>
+                    </p>
+                    <div ng-messages="product.cvfd.$error" ng-if="product.cvfd.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
                 <div ng-class="{ 'has-error': product.expiry.$touched && product.expiry.$invalid }">
                     <p>
                         <label>Expire on : </label>
