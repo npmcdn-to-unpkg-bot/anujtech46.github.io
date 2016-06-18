@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Add Promo product</title>
+        <title>Update Promo product</title>
   
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="css/allCSS.css">
@@ -11,15 +11,15 @@
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
         <div align="center">
-            <form name="product" ng-submit="addPromoProduct()" role="addPromo" novalidate>
+            <form name="product" ng-submit="updatePromoProduct()" role="addPromo" novalidate>
                 <div ng-class="{ 'has-error': product.pi.$touched && product.pi.$invalid }">
                     <p>
                         <label>Product Identifier : </label>
-                        <input type="text" name="pi" ng-model="promo.pi" required>
+                        <input type="text" name="pi" ng-model="promo.pi" readonly required>
                     </p>
                     <div ng-messages="product.pi.$error" ng-if="product.pi.$touched">
                         <div ng-messages-include="error/error.html"></div>
-                    </div> 
+                    </div>
                 </div>
 
                 <div ng-class="{ 'has-error': product.pname.$touched && product.pname.$invalid }">
@@ -49,19 +49,28 @@
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': product.cvfd.$touched && product.cvfd.$invalid }">
+                <div ng-class="{ 'has-error': product.expiry.$touched && product.expiry.$invalid }">
                     <p>
-                        <label>Credits valid for days : </label>
-                        <input type="text" name="cvfd" ng-model="promo.cvfd" required>
+                        <label>Expire on : </label>
+                        <input type="text" name="expiry" ng-model="promo.expiry" readonly required>
                     </p>
-                    <div ng-messages="product.cvfd.$error" ng-if="product.cvfd.$touched">
+                    <div ng-messages="product.expiry.$error" ng-if="product.expiry.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': product.pefd.$touched && product.pefd.$invalid }">
+                    <p>
+                        <label>Extend Validity for days : </label>
+                        <input type="text" name="pefd" ng-model="promo.pefd" required>
+                    </p>
+                    <div ng-messages="product.pefd.$error" ng-if="product.pefd.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
                 <div ng-class="{ 'has-error': product.code.$touched && product.code.$invalid }">
                     <p>
                         <label>Code : </label>
-                        <input type="text" name="code" ng-model="promo.code" required>
+                        <input type="text" name="code" ng-model="promo.code" readonly required>
                     </p>
                     <div ng-messages="product.code.$error" ng-if="product.code.$touched">
                         <div ng-messages-include="error/error.html"></div>

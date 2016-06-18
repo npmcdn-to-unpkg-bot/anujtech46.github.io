@@ -1,23 +1,27 @@
 // question.service.js
 angular
     .module('products')
-    .factory('productsFactory', productsFactory);
+    .factory('productsFactory', productsFactory)
+    .service('productService', productService);
     
 productsFactory.$inject = ['apiService'];
 
 function productsFactory(apiService) {
     
     var factory = {
-        addAward : addAward,
-        addPromo : addPromo,
-        addShop : addShop,
-        addVoucher : addVoucher,
-        getAward : getAward,
-        getPromo : getPromo,
-        getShop : getShop,
-        getVoucher : getVoucher,
-        getPurchaseProduct : getPurchaseProduct,
-        getReferralCode : getReferralCode
+        addAward                : addAward,
+        addPromo                : addPromo,
+        addShop                 : addShop,
+        addVoucher              : addVoucher,
+        getAward                : getAward,
+        getPromo                : getPromo,
+        getShop                 : getShop,
+        getVoucher              : getVoucher,
+        getPurchaseProduct      : getPurchaseProduct,
+        getReferralCode         : getReferralCode,
+        getPromoProductByID     : getPromoProductByID,
+        updatePromo             : updatePromo,
+        deletePromo             : deletePromo
     };
     
     function addAward(data, callback) {
@@ -166,5 +170,64 @@ function productsFactory(apiService) {
             return callback(err, res);
         });
     };
+    
+    function getPromoProductByID(productidentifier, callback) {
+        
+        var url = apiService.getApiEndPoint() + "get/promo/product/" + productidentifier;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function updatePromo(data, callback) {
+        
+        var url = apiService.getApiEndPoint() + "product/promo";
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doPut(url, data, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    function deletePromo(productidentifier, callback) {
+        
+        var url = apiService.getApiEndPoint() + "delete/product/promo/" + productidentifier;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doDelete(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
     return factory ;
+};
+
+productService.inject = [];
+function productService() {
+    
+    var productidentifier = '';
+    
+    this.saveProductIdentifier = function(productidentifier) {
+        this.productidentifier = productidentifier; 
+        return;
+    };
+    
+    this.getProductIdentifier= function() {
+        return this.productidentifier;
+    };
 };

@@ -60,7 +60,9 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
         email : email,
         headline : headline
     };
-    $scope.updateE.internal = internal.toString();
+    if(internal === true || internal === false) {
+        $scope.updateE.internal = internal.toString();
+    }
     if(roles.indexOf("educator") > -1) {
         $scope.updateE.educator = true;
     }

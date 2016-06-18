@@ -8,7 +8,8 @@ angular.module('products')
         .controller('ShowVoucherCtrl', ShowVoucherCtrl)
         .controller('ShowShopCtrl', ShowShopCtrl)
         .controller('ShowPurchaseCtrl', ShowPurchaseCtrl)
-        .controller('ShowReferralCodeCtrl', ShowReferralCodeCtrl); 
+        .controller('ShowReferralCodeCtrl', ShowReferralCodeCtrl)
+        .controller('UpdatePromoCtrl', UpdatePromoCtrl);
 
 AddAwardCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location'];
 function AddAwardCtrl($scope, productsFactory, toastr, $location) {
@@ -28,8 +29,6 @@ function AddAwardCtrl($scope, productsFactory, toastr, $location) {
             if(res) {
                 if(res.status.code === 303000) {
                     toastr.success("add award product successfully");
-                    $scope.award = '';
-                    $scope.update.$setPristine();
                     $location.path('/showAward');
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to add award product');
@@ -60,8 +59,6 @@ function AddPromoCtrl($scope, productsFactory, toastr, $location) {
             if(res) {
                 if(res.status.code === 303000) {
                     toastr.success("add promo product successfully");
-                    $scope.promo = '';
-                    $scope.update.$setPristine();
                     $location.path('/showPromo');
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to add promo product');
@@ -163,9 +160,9 @@ function ShowAwardCtrl($scope, productsFactory, toastr) {
     });
 };
 
-ShowPromoCtrl.$inject = ['$scope', 'productsFactory', 'toastr'];
+ShowPromoCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', 'productService'];
 
-function ShowPromoCtrl($scope, productsFactory, toastr) {
+function ShowPromoCtrl($scope, productsFactory, toastr, $location, productService) {
 
     productsFactory.getPromo(function(err, res) {
         if(res) {
@@ -179,6 +176,50 @@ function ShowPromoCtrl($scope, productsFactory, toastr) {
             toastr.error('Server not working');
         }
     });
+    
+    $scope.addPromoProduct = addPromoProduct;
+    function addPromoProduct() {
+        $location.path('/addPromo');
+    }
+    
+    $scope.updatePromoProduct = updatePromoProduct;
+    function updatePromoProduct(productidentifier) {
+        productService.saveProductIdentifier(productidentifier);
+        $location.path('/updatePromo');
+    }
+    
+    $scope.deletePromoProduct = deletePromoProduct;
+    function deletePromoProduct(productidentifier) {
+        var x = confirm("Are you sure you want to delete?");
+        if(x) { 
+            productsFactory.deletePromo(productidentifier, function(err, res) {
+                if(res) {
+                    if(res.status.code === 303000) {
+                        toastr.success("delete promo successfully");
+                        productsFactory.getPromo(function(err, res) {
+                            if(res) {
+                                if(res.status.code === 303000) {
+                                    $scope.products = res.products;
+                                    $scope.count = res.count;
+                                } else {
+                                    toastr.error('Invalid Credentials', 'Unable to get promo product');
+                                }
+                            } else {
+                                toastr.error('Server not working');
+                            }
+                        });
+                    } else {
+                        toastr.error('Invalid Credentials', 'Unable to add voucher product');
+                    }
+                } else {
+                    toastr.error('Server not working');
+                }
+            });
+        } else { 
+            $location.path('/showPromo');
+            return false;
+        }
+    }
 };
 
 ShowShopCtrl.$inject = ['$scope', 'productsFactory', 'toastr'];
@@ -288,4 +329,79 @@ function ShowReferralCodeCtrl($scope, productsFactory, toastr, $location, $log, 
     function getProfiles(userid) {
         $location.path('/profile/student/'+userid);
     }
+};
+
+UpdatePromoCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', 'productService'];
+function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productService) {
+    
+    var productidentifier = productService.getProductIdentifier();
+    if(!productidentifier) {
+        toastr.error('Invalid Credentials', 'Unable to add promo product');
+        return ;
+    }
+    productsFactory.getPromoProductByID(productidentifier, function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                $scope.promo = {
+                    pi: productidentifier,
+                    pname: res.promo.name,
+                    description: res.promo.description,
+                    credits: res.promo.credits,
+                    expiry: res.promo.expired,
+                    code: res.promo.code,
+                    usagecount: res.promo.usagecount,
+                    availablefor: res.promo.availablefor
+                };
+            } else {
+                toastr.error('Invalid Credentials', 'Unable to add promo product');
+                return ;
+            }
+        } else {
+            toastr.error('Server not working');
+            return ;
+        }
+    });
+    
+    $scope.updatePromoProduct = function() {
+        var data = {
+            productidentifier: $scope.promo.pi
+        };
+        if($scope.promo.pname) {
+            data.name = $scope.promo.pname;
+        }
+        if($scope.promo.description) {
+            data.description = $scope.promo.description;
+        }
+        if($scope.promo.credits) {
+            data.credits = $scope.promo.credits;
+        }
+        if($scope.promo.pefd) {
+            data.extendValidity = $scope.promo.pefd;
+        }
+        if($scope.promo.expiry) {
+            data.expired = $scope.promo.expiry;
+        }
+        if($scope.promo.code) {
+            data.code = $scope.promo.code;
+        }
+        if($scope.promo.usagecount) {
+            data.usagecount = $scope.promo.usagecount;
+        }
+        if($scope.promo.availablefor) {
+            data.availablefor = $scope.promo.availablefor;
+        }
+        
+        productsFactory.updatePromo(data, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    toastr.success("add promo product successfully");
+                    $location.path('/showPromo');
+                } else {
+                    toastr.error('Invalid Credentials', 'Unable to add promo product');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        });
+    };
 };
