@@ -212,31 +212,31 @@ function ShowAwardCtrl($scope, productsFactory, toastr, $location, productServic
     function deleteAwardProduct(productidentifier) {
         var x = confirm("Are you sure you want to delete?");
         if(x) { 
-            productsFactory.deletePromo(productidentifier, function(err, res) {
+            productsFactory.deleteAward(productidentifier, function(err, res) {
                 if(res) {
                     if(res.status.code === 303000) {
-                        toastr.success("delete Award product successfully");
+                        toastr.success("delete award product successfully");
                         productsFactory.getAward(function(err, res) {
                             if(res) {
                                 if(res.status.code === 303000) {
                                     $scope.products = res.products;
                                     $scope.count = res.count;
                                 } else {
-                                    toastr.error('Invalid Credentials', 'Unable to get promo product');
+                                    toastr.error('Invalid Credentials', 'Unable to delete award product');
                                 }
                             } else {
                                 toastr.error('Server not working');
                             }
                         });
                     } else {
-                        toastr.error('Invalid Credentials', 'Unable to add voucher product');
+                        toastr.error('Invalid Credentials', 'Unable to get award product');
                     }
                 } else {
                     toastr.error('Server not working');
                 }
             });
         } else { 
-            $location.path('/showPromo');
+            $location.path('/showAward');
             return false;
         }
     }
@@ -297,7 +297,7 @@ function ShowPromoCtrl($scope, productsFactory, toastr, $location, productServic
                             }
                         });
                     } else {
-                        toastr.error('Invalid Credentials', 'Unable to add voucher product');
+                        toastr.error('Invalid Credentials', 'Unable to delete promo product');
                     }
                 } else {
                     toastr.error('Server not working');
@@ -431,24 +431,25 @@ function UpdateAwardCtrl($scope, productsFactory, toastr, $location, productServ
     
     var productidentifier = productService.getProductIdentifier();
     if(!productidentifier) {
-        toastr.error('Invalid Credentials', 'Unable to add promo product');
+        toastr.error('Invalid Credentials', 'Unable to add award product');
         return ;
     }
-    productsFactory.getPromoProductByID(productidentifier, function(err, res) {
+    productsFactory.getAwardProductByID(productidentifier, function(err, res) {
         if(res) {
             if(res.status.code === 303000) {
-                $scope.promo = {
+                $scope.award = {
                     pi: productidentifier,
-                    pname: res.promo.name,
-                    description: res.promo.description,
-                    credits: res.promo.credits,
-                    expiry: res.promo.expired,
-                    code: res.promo.code,
-                    usagecount: res.promo.usagecount,
-                    availablefor: res.promo.availablefor
+                    pname: res.award.name,
+                    description: res.award.description,
+                    credits: res.award.credits,
+                    cvfd : res.award.creditsvalidfordays,
+                    expiry: res.award.expired,
+                    code: res.award.code,
+                    usagecount: res.award.usagecount,
+                    availablefor: res.award.availablefor
                 };
             } else {
-                toastr.error('Invalid Credentials', 'Unable to add promo product');
+                toastr.error('Invalid Credentials', 'Unable to get award product');
                 return ;
             }
         } else {
@@ -457,42 +458,40 @@ function UpdateAwardCtrl($scope, productsFactory, toastr, $location, productServ
         }
     });
     
-    $scope.updatePromoProduct = function() {
+    $scope.updateAwardProduct = updateAwardProduct;
+    function updateAwardProduct() {
         var data = {
-            productidentifier: $scope.promo.pi
+            productidentifier: $scope.award.pi
         };
-        if($scope.promo.pname) {
-            data.name = $scope.promo.pname;
+        if($scope.award.pname) {
+            data.name = $scope.award.pname;
         }
-        if($scope.promo.description) {
-            data.description = $scope.promo.description;
+        if($scope.award.description) {
+            data.description = $scope.award.description;
         }
-        if($scope.promo.credits) {
-            data.credits = $scope.promo.credits;
+        if($scope.award.credits) {
+            data.credits = $scope.award.credits;
         }
-        if($scope.promo.pefd) {
-            data.creditsvalidfordays = $scope.promo.pefd;
+        if($scope.award.cvfd) {
+            data.creditsvalidfordays = $scope.award.cvfd;
         }
-        if($scope.promo.expiry) {
-            data.expired = $scope.promo.expiry;
+        if($scope.award.expiry) {
+            data.expired = $scope.award.expiry;
         }
-        if($scope.promo.code) {
-            data.code = $scope.promo.code;
+        if($scope.award.evfd) {
+            data.extendValidity = $scope.award.evfd;
         }
-        if($scope.promo.usagecount) {
-            data.usagecount = $scope.promo.usagecount;
-        }
-        if($scope.promo.availablefor) {
-            data.availablefor = $scope.promo.availablefor;
+        if($scope.award.availablefor) {
+            data.availablefor = $scope.award.availablefor;
         }
         
-        productsFactory.updatePromo(data, function(err, res) {
+        productsFactory.updateAward(data, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
-                    toastr.success("add promo product successfully");
-                    $location.path('/showPromo');
+                    toastr.success("add award product successfully");
+                    $location.path('/showAward');
                 } else {
-                    toastr.error('Invalid Credentials', 'Unable to add promo product');
+                    toastr.error('Invalid Credentials', 'Unable to update award product');
                 }
             } else {
                 toastr.error('Server not working');
@@ -513,7 +512,7 @@ function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productServ
     
     var productidentifier = productService.getProductIdentifier();
     if(!productidentifier) {
-        toastr.error('Invalid Credentials', 'Unable to add promo product');
+        toastr.error('Invalid Credentials', 'Unable to get promo product');
         return ;
     }
     productsFactory.getPromoProductByID(productidentifier, function(err, res) {
@@ -531,7 +530,7 @@ function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productServ
                     availablefor: res.promo.availablefor
                 };
             } else {
-                toastr.error('Invalid Credentials', 'Unable to add promo product');
+                toastr.error('Invalid Credentials', 'Unable to get promo product');
                 return ;
             }
         } else {
@@ -540,7 +539,8 @@ function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productServ
         }
     });
     
-    $scope.updatePromoProduct = function() {
+    $scope.updatePromoProduct = updatePromoProduct;
+    function updatePromoProduct() {
         var data = {
             productidentifier: $scope.promo.pi
         };
@@ -578,7 +578,7 @@ function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productServ
                     toastr.success("add promo product successfully");
                     $location.path('/showPromo');
                 } else {
-                    toastr.error('Invalid Credentials', 'Unable to add promo product');
+                    toastr.error('Invalid Credentials', 'Unable to update promo product');
                 }
             } else {
                 toastr.error('Server not working');

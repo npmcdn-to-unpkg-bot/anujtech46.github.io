@@ -4,33 +4,16 @@
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            table {
-                width:100%;
-            }
-            table, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-            th, td {
-                padding: 5px;
-                text-align: left;
-            }
-            table#t01 tr:nth-child(even) {
-                background-color: #eee;
-            }
-            table#t01 tr:nth-child(odd) {
-               background-color:#fff;
-            }
-            table#t01 th	{
-                background-color: black;
-                color: white;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
-        
+        <div>
+            <p style="align-content: center">
+                <button type="submit" ng-click="addAwardProduct()">Add Award</button>
+            </p>
+        </div><br>
+        <div>Total Award product available = {{count }}</div><br>
         <div>
             <table id="t01">
                 <tr>
@@ -39,24 +22,25 @@
                     <th>description</th>
                     <th>Credits</th>
                     <th>CVFD</th>
-                    <th>Credit Validity</th>
                     <th>Available for</th>
                     <th>Created</th>
                     <th>Expired</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
-                <tr ng-repeat=" promo in products ">
-                    <td>{{ promo.productidentifier}}</td>
-                    <td>{{ promo.name}}</td>
-                    <td>{{ promo.description }}</td>
-                    <td>{{ promo.credits }}</td>
-                    <td>{{ promo.creditsvalidfordays }}</td>
-                    <td>{{ promo.creditvalidity }}</td>
-                    <td>{{ promo.availablefor }}</td>
-                    <td>{{ promo.created }}</td>
-                    <td>{{ promo.expired }}</td>
+                <tr ng-repeat=" award in products ">
+                    <td>{{ award.productidentifier}}</td>
+                    <td>{{ award.name}}</td>
+                    <td>{{ award.description }}</td>
+                    <td>{{ award.credits }}</td>
+                    <td>{{ award.creditsvalidfordays }}</td>
+                    <td>{{ award.availablefor }}</td>
+                    <td>{{ award.created }}</td>
+                    <td>{{ award.expired }}</td>
+                    <td><button type="submit" ng-click="updateAwardProduct(award.productidentifier)">up</button></td>
+                    <td><button type="submit" ng-click="deleteAwardProduct(award.productidentifier)">de</button></td>
                 </tr>
             </table>
-        </div><br>
-        <div>Total promo product available = {{count }}</div>
+        </div>
     </body>
 </html>

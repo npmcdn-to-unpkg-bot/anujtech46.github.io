@@ -13,14 +13,14 @@
         <div align="center">
             <form name="product" ng-submit="updateAwardProduct()" role="addPromo" novalidate>
                 <div ng-class="{ 'has-error': product.pi.$touched && product.pi.$invalid }">
-                            <p>
-                                <label>Product Identifier : </label>
-                                <input type="text" name="pi" ng-model="award.pi" readonly required>
-                            </p>
-                            <div ng-messages="product.pi.$error" ng-if="product.pi.$touched">
-                                <div ng-messages-include="error/error.html"></div>
-                            </div> 
-                        </div>
+                    <p>
+                        <label>Product Identifier : </label>
+                        <input type="text" name="pi" ng-model="award.pi" readonly required>
+                    </p>
+                    <div ng-messages="product.pi.$error" ng-if="product.pi.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
 
                 <div ng-class="{ 'has-error': product.pname.$touched && product.pname.$invalid }">
                     <p>
@@ -67,26 +67,15 @@
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': product.pefd.$touched && product.pefd.$invalid }">
+                <div ng-class="{ 'has-error': product.evfd.$touched && product.evfd.$invalid }">
                     <p>
                         <label>Extend Validity for days : </label>
-                        <input type="text" name="pefd" ng-model="award.pefd" required>
+                        <input type="text" name="evfd" ng-model="award.evfd" required>
                     </p>
-                    <div ng-messages="product.pefd.$error" ng-if="product.pefd.$touched">
+                    <div ng-messages="product.evfd.$error" ng-if="product.evfd.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': product.cvfd.$touched && product.cvfd.$invalid }">
-                    <p>
-                        <label>Credits valid for days : </label>
-                        <input type="text" name="cvfd" ng-model="award.cvfd" required>
-                    </p>
-                    <div ng-messages="product.cvfd.$error" ng-if="product.cvfd.$touched">
-                        <div ng-messages-include="error/error.html"></div>
-                    </div>
-                </div>
-               
-                
                 <div ng-class="{ 'has-error': product.availablefor.$touched && product.availablefor.$invalid }">
                     <p>
                         <label>Available For : </label>

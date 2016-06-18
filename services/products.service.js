@@ -19,8 +19,11 @@ function productsFactory(apiService) {
         getVoucher              : getVoucher,
         getPurchaseProduct      : getPurchaseProduct,
         getReferralCode         : getReferralCode,
+        getAwardProductByID     : getAwardProductByID,
         getPromoProductByID     : getPromoProductByID,
+        updateAward             : updateAward,
         updatePromo             : updatePromo,
+        deleteAward             : deleteAward,
         deletePromo             : deletePromo
     };
     
@@ -171,9 +174,9 @@ function productsFactory(apiService) {
         });
     };
     
-    function getPromoProductByID(productidentifier, callback) {
+    function getAwardProductByID(productidentifier, callback) {
         
-        var url = apiService.getApiEndPoint() + "get/promo/product/" + productidentifier;
+        var url = apiService.getApiEndPoint() + "get/product/award/" + productidentifier;
         
         var config = {
             headers : {
@@ -182,6 +185,36 @@ function productsFactory(apiService) {
         };
         
         apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function getPromoProductByID(productidentifier, callback) {
+        
+        var url = apiService.getApiEndPoint() + "get/product/promo/" + productidentifier;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function updateAward(data, callback) {
+        
+        var url = apiService.getApiEndPoint() + "product/award";
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doPut(url, data, config, function(err, res) {
             return callback(err, res);
         });
     };
@@ -200,6 +233,22 @@ function productsFactory(apiService) {
             return callback(err, res);
         });
     };
+    
+    function deleteAward(productidentifier, callback) {
+        
+        var url = apiService.getApiEndPoint() + "delete/product/award/" + productidentifier;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doDelete(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
     function deletePromo(productidentifier, callback) {
         
         var url = apiService.getApiEndPoint() + "delete/product/promo/" + productidentifier;
@@ -214,6 +263,7 @@ function productsFactory(apiService) {
             return callback(err, res);
         });
     };
+    
     return factory ;
 };
 
