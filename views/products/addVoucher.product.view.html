@@ -5,39 +5,7 @@
         <meta charset="utf-8">
         <title>Add Voucher product</title>
   
-        <!-- CSS -->
-        
-        <style type="text/css">
-            body {
-                background-color : #ffeeff;
-                margin: 0;
-                padding: 0;
-            }
-            form p input {
-                /*display:block;*/
-                float:right;
-                width:200px;
-                margin: 0 auto;
-                
-            }
-            form p{
-                width:400px;
-                
-            }
-            button {
-                background-color: #4CAF50; /* Green */
-                border: none;
-                color: white;
-                padding: 10px 20px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                cursor: pointer;
-                border-radius: 50%;
-
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
@@ -74,7 +42,7 @@
                 <div ng-class="{ 'has-error': !product.credits.$pristine && product.credits.$error.required }">
                     <p>
                         <label>Credits : </label>
-                        <input type="text" name="credits" ng-model="voucher.credits"  required>
+                        <input type="number" name="credits" ng-model="voucher.credits"  required>
                     </p>
                     <div ng-messages="product.credits.$error" ng-if="!product.credits.$pristine && product.credits.$error.required && product.credits.$invalid">
                         <div ng-messages-include="error/error.html"></div>
@@ -83,7 +51,7 @@
                 <div ng-class="{ 'has-error': !product.cvfd.$pristine && product.cvfd.$error.required }">
                     <p>
                         <label>Credits valid for days : </label>
-                        <input type="text" name="cvfd" ng-model="voucher.cvfd" required>
+                        <input type="number" name="cvfd" ng-model="voucher.cvfd" required>
                     </p>
                     <div ng-messages="product.cvfd.$error" ng-if="!product.cvfd.$pristine && product.cvfd.$error.required && product.cvfd.$invalid">
                         <div ng-messages-include="error/error.html"></div>

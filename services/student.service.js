@@ -8,12 +8,12 @@ studentFactory.$inject = ['apiService', '$log'];
 function studentFactory(apiService, $log) {
     
     var factory = {
-        addCredits          : addCredits,
-        deleteStudent       : deleteStudent,
-        getUgradeUser       : getUgradeUser,
-        getReferral         : getReferral,
-        getRegisteredUser   : getRegisteredUser,
-        getStudentProfile   : getStudentProfile
+        addCredits                      : addCredits,
+        deleteStudent                   : deleteStudent,
+        getUgradeUser                   : getUgradeUser,
+        getReferral                     : getReferral,
+        getUserWithCredits              : getUserWithCredits,
+        getStudentProfile               : getStudentProfile
     };
     
     function addCredits(data, callback) {
@@ -76,7 +76,7 @@ function studentFactory(apiService, $log) {
             return callback(err, res);
         });
     };
-    function getRegisteredUser(pageIndex, data, callback) {
+    function getUserWithCredits(pageIndex, data, callback) {
         
         var url = apiService.getApiEndPoint() + "get/studentCredits/" + pageIndex;
         

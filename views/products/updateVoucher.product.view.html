@@ -43,7 +43,7 @@
                 <div ng-class="{ 'has-error': product.credits.$touched && product.credits.$invalid }">
                     <p>
                         <label>Credits : </label>
-                        <input type="text" name="credits" ng-model="voucher.credits" required>
+                        <input type="number" name="credits" ng-model="voucher.credits" required>
                     </p>
                     <div ng-messages="product.credits.$error" ng-if="product.credits.$touched">
                         <div ng-messages-include="error/error.html"></div>
@@ -78,8 +78,8 @@
                 </div>
                 <div ng-class="{ 'has-error': product.cvfd.$touched && product.cvfd.$invalid }">
                     <p>
-                        <label>Extend Validity for days : </label>
-                        <input type="text" name="cvfd" ng-model="voucher.cvfd" required>
+                        <label>Credits valid for days : </label>
+                        <input type="number" name="cvfd" ng-model="voucher.cvfd" required>
                     </p>
                     <div ng-messages="product.cvfd.$error" ng-if="product.cvfd.$touched">
                         <div ng-messages-include="error/error.html"></div>
@@ -97,7 +97,7 @@
                 <div ng-class="{ 'has-error': product.evfd.$touched && product.evfd.$invalid }">
                     <p>
                         <label>Extend Validity for days : </label>
-                        <input type="text" name="evfd" ng-model="voucher.evfd" required>
+                        <input type="number" name="evfd" ng-model="voucher.evfd" required>
                     </p>
                     <div ng-messages="product.evfd.$error" ng-if="product.evfd.$touched">
                         <div ng-messages-include="error/error.html"></div>
@@ -107,7 +107,7 @@
                 <div ng-class="{ 'has-error': product.usagecount.$touched && product.usagecount.$invalid }">
                     <p>
                         <label>Usage Count : </label>
-                        <input type="text" name="usagecount" ng-model="voucher.usagecount" readonly required>
+                        <input type="number" name="usagecount" ng-model="voucher.usagecount" readonly required>
                     </p>
                     <div ng-messages="product.usagecount.$error" ng-if="product.usagecount.$touched">
                         <div ng-messages-include="error/error.html"></div>

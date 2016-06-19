@@ -9,8 +9,8 @@ and open the template in the editor.
 */
 
 body {
-    background-color : #ffeeff;
-    margin: 0;
+    background-color : #DCDCDC;
+    margin-top: 10px;
     padding: 0;
 }
 form p input {
@@ -34,7 +34,6 @@ button {
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 50%;
 
 }
 

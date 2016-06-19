@@ -137,6 +137,9 @@ function GetUserWithCredits($scope, PagerService, studentFactory, toastr, $log, 
             "startdate" : $scope.startdate,
             "enddate"   : $scope.enddate
         };
+        if($scope.credits) {
+            data.credits = $scope.credits;
+        }
         initController();
 
         function initController() {
@@ -149,7 +152,7 @@ function GetUserWithCredits($scope, PagerService, studentFactory, toastr, $log, 
                 return;
             }
 
-            studentFactory.getRegisteredUser(page, data, function(err, res) {
+            studentFactory.getUserWithCredits(page, data, function(err, res) {
                 if(res) {
                     if(res.status.code === 303000) {
                         

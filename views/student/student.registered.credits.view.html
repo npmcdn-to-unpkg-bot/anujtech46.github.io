@@ -1,137 +1,25 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<html>            
     <head>
-        <title>TODO supply a title</title>
+        <title>Student Register Credits</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
+        <link rel="stylesheet" type="text/css" href="css/dateTimePicker.css">
         <style>
-            .angularjs-datetime-picker {
-              color: #333;
-              font: normal 14px sans-serif;
-              border: 1px solid #ddd;
-              display: inline-block;
-              background: #fff;
-            }
-            .angularjs-datetime-picker > .adp-month {
-              text-align: center;
-              line-height: 22px;
-              padding: 10px;
-              background: #fcfcfc;
-              text-transform: uppercase;
-              font-weight: bold;
-              border-bottom: 1px solid #ddd;
-              position: relative;
-            }
-            .angularjs-datetime-picker > .adp-month > button {
-              color: #555;
-              font: normal 14px sans-serif;
-              outline: none;
-              position: absolute;
-              background: transparent;
-              border: none;
-              cursor: pointer;
-            }
-            .angularjs-datetime-picker > .adp-month > button:hover {
-              color: #333;
-            }
-            .angularjs-datetime-picker > .adp-month > button.adp-prev {
-              left: 10px;
-            }
-            .angularjs-datetime-picker > .adp-month > button.adp-next {
-              right: 10px;
-            }
-            .angularjs-datetime-picker > .adp-days {
-              width: 210px; /* 30 x 7 */
-              margin: 10px;
-              text-align: center;
-            }
-            .angularjs-datetime-picker > .adp-days > .adp-day-of-week, .angularjs-datetime-picker > .adp-days > .adp-day {
-              box-sizing: border-box;
-              -moz-box-sizing: border-box;
-              border: 1px solid transparent;
-              width: 30px;
-              line-height: 28px;
-              float: left;
-            }
-            .angularjs-datetime-picker > .adp-days > .adp-day-of-week {
-              font-weight: bold;
-            }
-            .angularjs-datetime-picker > .adp-days > .adp-day:not(.selectable) {
-              opacity: 0.15;
-              cursor: default;
-            }
-            .angularjs-datetime-picker > .adp-days > .adp-day.selectable  {
-              cursor: pointer;
-            }
-            .angularjs-datetime-picker > .adp-days > .adp-day.selected {
-              background: #e0e0e0;
-            }
-            .angularjs-datetime-picker > .adp-days > .adp-day.selectable:hover {
-              background: #eee;
-            }
-            .angularjs-datetime-picker > .adp-days:after {
-              content: '';
-              display: block;
-              clear: left;
-              height: 0;
-            }
-
-            .angularjs-datetime-picker input[type=range] {
-              width: 150px;
-            }
-
-            body {
-                background-color : #ffeeff;
-                margin: 0;
-                padding: 0;
-            }
-            table {
-                width:100%;
-            }
-            table, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-            th, td {
-                padding: 5px;
-                text-align: left;
-            }
-            table#t01 tr:nth-child(even) {
-                background-color: #eee;
-            }
-            table#t01 tr:nth-child(odd) {
-               background-color:#fff;
-            }
-            table#t01 th	{
-                background-color: black;
-                color: white;
-            }
-            label {
-              width:200px;
-              display: inline-block;
-            }
-            p {
-                margin-left: 20px;
-            }
             button {
-                margin-left: 100px;
+                margin-left: 70px;
             }
         </style>
     </head>
     
     <body align="center">
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
-        <div    >
-            <form name="register" ng-submit="setUsers()" role="sleep" novalidate>
+        <div>
+            <form name="register" ng-submit="setUsers()" novalidate>
                 <div ng-class="{ 'has-error': !register.startdate.$pristine && register.startdate.$error.required }">
                     <p>
                         <label>Registration Date From : </label>
-                        <input name="startdate" ng-model="startdate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />
+                        <input name="text" ng-model="startdate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />
                     </p>
                     <div ng-messages="register.startdate.$error" ng-if="register.startdate.$invalid && !register.startdate.$pristine && register.startdate.$error.required">
                         <div ng-messages-include="error/error.html"></div>
@@ -146,6 +34,15 @@ and open the template in the editor.
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
+                <div ng-class="{ 'has-error': !register.credits.$pristine && register.credits.$error.required }">
+                    <p>
+                        <label>Credits : </label>
+                        <input type = "number" name="credits" ng-model="credits" />
+                    </p>
+                    <div ng-messages="register.credits.$error" ng-if="register.credits.$invalid && !register.credits.$pristine && register.credits.$error.required">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
                 <div>
                     <p>
                         <button type="submit" ng-disabled="register.$invalid">Submit</button>
@@ -155,7 +52,7 @@ and open the template in the editor.
             </form>
         </div><br>
         <div ng-show="showTable">
-            <div>Total Registration {{ count }} </div>
+            <div>Total user = {{ count }} </div>
             <div>
                 <table id="t01">
                     <tr>

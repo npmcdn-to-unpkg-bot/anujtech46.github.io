@@ -43,7 +43,7 @@
                 <div ng-class="{ 'has-error': product.credits.$touched && product.credits.$invalid }">
                     <p>
                         <label>Credits : </label>
-                        <input type="text" name="credits" ng-model="award.credits" required>
+                        <input type="number" name="credits" ng-model="award.credits" required>
                     </p>
                     <div ng-messages="product.credits.$error" ng-if="product.credits.$touched">
                         <div ng-messages-include="error/error.html"></div>
@@ -52,7 +52,7 @@
                 <div ng-class="{ 'has-error': product.cvfd.$touched && product.cvfd.$invalid }">
                     <p>
                         <label>Credit Validity for days : </label>
-                        <input type="text" name="cvfd" ng-model="award.cvfd" required>
+                        <input type="number" name="cvfd" ng-model="award.cvfd" required>
                     </p>
                     <div ng-messages="product.cvfd.$error" ng-if="product.cvfd.$touched">
                         <div ng-messages-include="error/error.html"></div>
