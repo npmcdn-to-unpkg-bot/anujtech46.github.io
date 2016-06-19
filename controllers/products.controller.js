@@ -19,7 +19,9 @@ angular.module('products')
         .controller('ShowPurchaseCtrl', ShowPurchaseCtrl)
         .controller('ShowReferralCodeCtrl', ShowReferralCodeCtrl)
         .controller('UpdateAwardCtrl', UpdateAwardCtrl)
-        .controller('UpdatePromoCtrl', UpdatePromoCtrl);
+        .controller('UpdatePromoCtrl', UpdatePromoCtrl)
+        .controller('UpdateShopCtrl', UpdateShopCtrl)
+        .controller('UpdateVoucherCtrl', UpdateVoucherCtrl);
 
 /*
  * @desc    : Add new award product
@@ -116,8 +118,6 @@ function AddShopCtrl($scope, productsFactory, toastr, $location) {
             if(res) {
                 if(res.status.code === 303000) {
                     toastr.success("add shop product successfully");
-                    $scope.shop = '';
-                    $scope.product.$setPristine();
                     $location.path('/showShop');
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to add shop product');
@@ -176,7 +176,7 @@ function AddVoucherCtrl($scope, productsFactory, toastr, cpProfileService, $loca
 
 /*
  * @desc    : Add new Voucher product, first get the code of channel partner after that we add new product.
- * @name    : AddVoucherCtrl
+ * @name    : ShowAwardCtrl
  * @author  : Anuj Gupta
  * @params  : $scope, productsFactory, toastr, cpProfileService, $location
  */
@@ -243,8 +243,8 @@ function ShowAwardCtrl($scope, productsFactory, toastr, $location, productServic
 };
 
 /*
- * @desc    : show all product.
- * @name    : AddVoucherCtrl
+ * @desc    : show all promo product.
+ * @name    : ShowPromoCtrl
  * @author  : Anuj Gupta
  * @params  : $scope, productsFactory, toastr, $location, productService
  */
@@ -310,9 +310,15 @@ function ShowPromoCtrl($scope, productsFactory, toastr, $location, productServic
     }
 };
 
-ShowShopCtrl.$inject = ['$scope', 'productsFactory', 'toastr'];
+/*
+ * @desc    : show all shop product.
+ * @name    : ShowShopCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, $location, productService
+ */
+ShowShopCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', 'productService'];
 
-function ShowShopCtrl($scope, productsFactory, toastr) {
+function ShowShopCtrl($scope, productsFactory, toastr, $location, productService) {
 
     productsFactory.getShop(function(err, res) {
         if(res) {
@@ -326,11 +332,60 @@ function ShowShopCtrl($scope, productsFactory, toastr) {
             toastr.error('Server not working');
         }
     });
+    
+    $scope.addShopProduct = addShopProduct;
+    function addShopProduct() {
+        $location.path('/addShop');
+    }
+    $scope.updateShopProduct = updateShopProduct;
+    function updateShopProduct(productidentifier) {
+        productService.saveProductIdentifier(productidentifier);
+        $location.path('/updateShop');
+    }
+    
+    $scope.deleteShopProduct = deleteShopProduct;
+    function deleteShopProduct(productidentifier) {
+        var x = confirm("Are you sure you want to delete?");
+        if(x) { 
+            productsFactory.deleteShop(productidentifier, function(err, res) {
+                if(res) {
+                    if(res.status.code === 303000) {
+                        toastr.success("delete successfully");
+                        productsFactory.getShop(function(err, res) {
+                            if(res) {
+                                if(res.status.code === 303000) {
+                                    $scope.products = res.products;
+                                    $scope.count = res.count;
+                                } else {
+                                    toastr.error('Invalid Credentials', 'Unable to get shop product');
+                                }
+                            } else {
+                                toastr.error('Server not working');
+                            }
+                        });
+                    } else {
+                        toastr.error('Invalid Credentials', 'Unable to delete shop product');
+                    }
+                } else {
+                    toastr.error('Server not working');
+                }
+            });
+        } else { 
+            $location.path('/showShop');
+            return false;
+        }
+    }
 };
 
-ShowVoucherCtrl.$inject = ['$scope', 'productsFactory', 'toastr'];
+/*
+ * @desc    : show all voucher product.
+ * @name    : ShowVoucherCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, $location, productService
+ */
+ShowVoucherCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', 'productService'];
 
-function ShowVoucherCtrl($scope, productsFactory, toastr) {
+function ShowVoucherCtrl($scope, productsFactory, toastr, $location, productService) {
 
     productsFactory.getVoucher(function(err, res) {
         if(res) {
@@ -344,6 +399,50 @@ function ShowVoucherCtrl($scope, productsFactory, toastr) {
             toastr.error('Server not working');
         }
     });
+    
+    
+    $scope.addVoucherProduct = addVoucherProduct;
+    function addVoucherProduct() {
+        $location.path('/addVoucher');
+    }
+    $scope.updateVoucherProduct = updateVoucherProduct;
+    function updateVoucherProduct(productidentifier) {
+        productService.saveProductIdentifier(productidentifier);
+        $location.path('/updateVoucher');
+    }
+    
+    $scope.deleteVoucherProduct = deleteVoucherProduct;
+    function deleteVoucherProduct(productidentifier) {
+        var x = confirm("Are you sure you want to delete?");
+        if(x) { 
+            productsFactory.deleteVoucher(productidentifier, function(err, res) {
+                if(res) {
+                    if(res.status.code === 303000) {
+                        toastr.success("delete successfully");
+                        productsFactory.getVoucher(function(err, res) {
+                            if(res) {
+                                if(res.status.code === 303000) {
+                                    $scope.products = res.products;
+                                    $scope.count = res.count;
+                                } else {
+                                    toastr.error('Invalid Credentials', 'Unable to get voucher product');
+                                }
+                            } else {
+                                toastr.error('Server not working');
+                            }
+                        });
+                    } else {
+                        toastr.error('Invalid Credentials', 'Unable to delete voucher product');
+                    }
+                } else {
+                    toastr.error('Server not working');
+                }
+            });
+        } else { 
+            $location.path('/showVoucher');
+            return false;
+        }
+    }
 };
 
 ShowPurchaseCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location'];
@@ -556,8 +655,8 @@ function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productServ
         if($scope.promo.cvfd) {
             data.creditsvalidfordays = $scope.promo.cvfd;
         }
-        if($scope.promo.pefd) {
-            data.extendValidity = $scope.promo.pefd;
+        if($scope.promo.evfd) {
+            data.extendValidity = $scope.promo.evfd;
         }
         if($scope.promo.expiry) {
             data.expired = $scope.promo.expiry;
@@ -579,6 +678,165 @@ function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productServ
                     $location.path('/showPromo');
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to update promo product');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        });
+    };
+};
+
+/*
+ * Update the shop product first fetch update product identifier, show data to admin,
+ * admin update the required field, after that take updated data and update the product.
+ * @name    : UpdatePromoCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, $location, productService
+ */
+UpdateShopCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', 'productService'];
+function UpdateShopCtrl($scope, productsFactory, toastr, $location, productService) {
+    
+    var productidentifier = productService.getProductIdentifier();
+    if(!productidentifier) {
+        toastr.error('Invalid Credentials', 'Unable to get shop product');
+        return ;
+    }
+    productsFactory.getShopProductByID(productidentifier, function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                $scope.shop = {
+                    pi: productidentifier,
+                    pname: res.shop.name,
+                    description: res.shop.description,
+                    credits: res.shop.credits,
+                    cvfd : res.shop.creditsvalidfordays,
+                    expiry: res.shop.expired,
+                    availablefor: res.shop.availablefor
+                };
+            } else {
+                toastr.error('Invalid Credentials', 'Unable to get shop product');
+                return ;
+            }
+        } else {
+            toastr.error('Server not working');
+            return ;
+        }
+    });
+    
+    $scope.updateShopProduct = updateShopProduct;
+    function updateShopProduct() {
+        var data = {
+            productidentifier: $scope.shop.pi
+        };
+        if($scope.shop.pname) {
+            data.name = $scope.shop.pname;
+        }
+        if($scope.shop.description) {
+            data.description = $scope.shop.description;
+        }
+        if($scope.shop.credits) {
+            data.credits = $scope.shop.credits;
+        }
+        if($scope.shop.cvfd) {
+            data.creditsvalidfordays = $scope.shop.cvfd;
+        }
+        if($scope.shop.evfd) {
+            data.extendValidity = $scope.shop.evfd;
+        }
+        if($scope.shop.expiry) {
+            data.expired = $scope.shop.expiry;
+        }
+        if($scope.shop.availablefor) {
+            data.availablefor = $scope.shop.availablefor;
+        }        
+        productsFactory.updateShop(data, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    toastr.success("add shop product successfully");
+                    $location.path('/showShop');
+                } else {
+                    toastr.error('Invalid Credentials', 'Unable to update shop product');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        });
+    };
+};
+/*
+ * Update the voucher product first fetch update product identifier, show data to admin,
+ * admin update the required field, after that take updated data and update the product.
+ * @name    : UpdateVocherCtrl
+ * @author  : Anuj Gupta
+ * @params  : $scope, productsFactory, toastr, $location, productService
+ */
+UpdateVoucherCtrl.$inject = ['$scope', 'productsFactory', 'toastr', '$location', 'productService'];
+function UpdateVoucherCtrl($scope, productsFactory, toastr, $location, productService) {
+    
+    var productidentifier = productService.getProductIdentifier();
+    if(!productidentifier) {
+        toastr.error('Invalid Credentials', 'Unable to get voucher product');
+        return ;
+    }
+    productsFactory.getVoucherProductByID(productidentifier, function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                $scope.voucher = {
+                    pi: productidentifier,
+                    pname: res.voucher.name,
+                    description: res.voucher.description,
+                    credits: res.voucher.credits,
+                    code: res.voucher.code,
+                    codemajor: res.voucher.codemajor,
+                    codeminor: res.voucher.codeminor,
+                    cvfd : res.voucher.creditsvalidfordays,
+                    expiry: res.voucher.expired,
+                    usagecount: res.voucher.usagecount,
+                    availablefor: res.voucher.availablefor
+                };
+            } else {
+                toastr.error('Invalid Credentials', 'Unable to get voucher product');
+                return ;
+            }
+        } else {
+            toastr.error('Server not working');
+            return ;
+        }
+    });
+    
+    $scope.updateVoucherProduct = updateVoucherProduct;
+    function updateVoucherProduct() {
+        var data = {
+            productidentifier: $scope.voucher.pi
+        };
+        if($scope.voucher.pname) {
+            data.name = $scope.voucher.pname;
+        }
+        if($scope.voucher.description) {
+            data.description = $scope.voucher.description;
+        }
+        if($scope.voucher.credits) {
+            data.credits = $scope.voucher.credits;
+        }
+        if($scope.voucher.cvfd) {
+            data.creditsvalidfordays = $scope.voucher.cvfd;
+        }
+        if($scope.voucher.evfd) {
+            data.extendValidity = $scope.voucher.evfd;
+        }
+        if($scope.voucher.expiry) {
+            data.expired = $scope.voucher.expiry;
+        }
+        if($scope.voucher.availablefor) {
+            data.availablefor = $scope.voucher.availablefor;
+        }        
+        productsFactory.updateVoucher(data, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    toastr.success("update voucher product successfully");
+                    $location.path('/showVoucher');
+                } else {
+                    toastr.error('Invalid Credentials', 'Unable to update voucher product');
                 }
             } else {
                 toastr.error('Server not working');

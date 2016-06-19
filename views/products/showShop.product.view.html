@@ -1,41 +1,19 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Show shop Product</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            table {
-                width:100%;
-            }
-            table, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-            th, td {
-                padding: 5px;
-                text-align: left;
-            }
-            table#t01 tr:nth-child(even) {
-                background-color: #eee;
-            }
-            table#t01 tr:nth-child(odd) {
-               background-color:#fff;
-            }
-            table#t01 th	{
-                background-color: black;
-                color: white;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
         <div>
+            <p style="align-content: center">
+                <button type="submit" ng-click="addShopProduct()">Add Shop</button>
+            </p>
+        </div><br>
+        <div>Total shop product available = {{count }}</div><br>
             <table id="t01">
                 <tr>
                     <th>Product Identifier</th>
@@ -45,7 +23,11 @@ and open the template in the editor.
                     <th>Credits valid for days</th>
                     <th>Available for</th>
                     <th>Created</th>
+                    <th>updated</th>
                     <th>Expired</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                    
                 </tr>
                 <tr ng-repeat=" shop in products ">
                     <td>{{ shop.productidentifier}}</td>
@@ -55,10 +37,12 @@ and open the template in the editor.
                     <td>{{ shop.creditsvalidfordays }}</td>
                     <td>{{ shop.availablefor }}</td>
                     <td>{{ shop.created }}</td>
+                    <td>{{ shop.updated }}</td>
                     <td>{{ shop.expired }}</td>
+                    <td><button type="submit" ng-click="updateShopProduct(shop.productidentifier)">up</button></td>
+                    <td><button type="submit" ng-click="deleteShopProduct(shop.productidentifier)">de</button></td>
                 </tr>
             </table>
         </div><br>
-        <div>Total Shop product available = {{count }}.</div>
     </body>
 </html>

@@ -51,5 +51,13 @@ function config($routeProvider) {
             when('/updatePromo', {
                 templateUrl :'views/products/updatePromo.product.view.html',
                 controller :'UpdatePromoCtrl'
+            }).
+            when('/updateShop', {
+                templateUrl :'views/products/updateShop.product.view.html',
+                controller :'UpdateShopCtrl'
+            }).
+            when('/updateVoucher', {
+                templateUrl :'views/products/updateVoucher.product.view.html',
+                controller :'UpdateVoucherCtrl'
             });
 };

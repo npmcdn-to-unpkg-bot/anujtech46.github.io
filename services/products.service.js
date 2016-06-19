@@ -21,10 +21,16 @@ function productsFactory(apiService) {
         getReferralCode         : getReferralCode,
         getAwardProductByID     : getAwardProductByID,
         getPromoProductByID     : getPromoProductByID,
+        getShopProductByID      : getShopProductByID,
+        getVoucherProductByID   : getVoucherProductByID,
         updateAward             : updateAward,
         updatePromo             : updatePromo,
+        updateShop              : updateShop,
+        updateVoucher           : updateVoucher,
         deleteAward             : deleteAward,
-        deletePromo             : deletePromo
+        deletePromo             : deletePromo,
+        deleteShop              : deleteShop,
+        deleteVoucher           : deleteVoucher
     };
     
     function addAward(data, callback) {
@@ -204,6 +210,36 @@ function productsFactory(apiService) {
         });
     };
     
+    function getShopProductByID(productidentifier, callback) {
+        
+        var url = apiService.getApiEndPoint() + "get/product/shop/" + productidentifier;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function getVoucherProductByID(productidentifier, callback) {
+        
+        var url = apiService.getApiEndPoint() + "get/product/voucher/" + productidentifier;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
     function updateAward(data, callback) {
         
         var url = apiService.getApiEndPoint() + "product/award";
@@ -234,6 +270,36 @@ function productsFactory(apiService) {
         });
     };
     
+    function updateShop(data, callback) {
+        
+        var url = apiService.getApiEndPoint() + "product/shop";
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doPut(url, data, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function updateVoucher(data, callback) {
+        
+        var url = apiService.getApiEndPoint() + "product/voucher";
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doPut(url, data, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
     function deleteAward(productidentifier, callback) {
         
         var url = apiService.getApiEndPoint() + "delete/product/award/" + productidentifier;
@@ -252,6 +318,36 @@ function productsFactory(apiService) {
     function deletePromo(productidentifier, callback) {
         
         var url = apiService.getApiEndPoint() + "delete/product/promo/" + productidentifier;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doDelete(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function deleteShop(productidentifier, callback) {
+        
+        var url = apiService.getApiEndPoint() + "delete/product/shop/" + productidentifier;
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doDelete(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function deleteVoucher(productidentifier, callback) {
+        
+        var url = apiService.getApiEndPoint() + "delete/product/voucher/" + productidentifier;
         
         var config = {
             headers : {
