@@ -66,6 +66,9 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
     if(roles.indexOf("educator") > -1) {
         $scope.updateE.educator = true;
     }
+    if(roles.indexOf("educatorV1") > -1) {
+        $scope.updateE.educatorV1 = true;
+    }
     if(roles.indexOf("channelpartner") > -1) {
         $scope.updateE.channelpartner = true;
     }
@@ -107,6 +110,9 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
         
         if($scope.updateE.educator) {
             roles.push("educator");
+        }
+        if($scope.updateE.educatorV1) {
+            roles.push("educatorV1");
         }
         if($scope.updateE.channelpartner) {
             roles.push("channelpartner");
