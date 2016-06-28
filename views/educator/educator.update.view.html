@@ -36,32 +36,32 @@ body {
                     <div ng-messages="update.email.$error" ng-if="!update.email.$pristine && update.email.$error.required && update.email.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
-                </div>
+                </div><br>
                 <div ng-class="{ 'has-error': !update.appid.$pristine && update.appid.$error.required }">                    
                     <label>AppID        : </label>
                     <input type="text" name="appid" ng-model="updateE.appid" required>
                     <div ng-messages="update.appid.$error" ng-if="!update.appid.$pristine && update.appid.$error.required && update.appid.$invalid">
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
-                </div>
+                </div><br>
                 <div ng-class="{ 'has-error': !update.headline.$pristine}">
                     <label>Headline     : </label>
                     <textarea type="text" name="headline" ng-model="updateE.headline" required></textarea>
-                </div>
+                </div><br>
                 <div>
                     
                         <label>Internal     : </label>
                         <input type="radio" ng-model="updateE.internal" value="true"> true &nbsp;&nbsp;&nbsp;
                         <input type="radio" ng-model="updateE.internal"  value="false"> false                   
                     
-                </div>
+                </div><br>
                 <div>
                     
                         <label>Roles        : </label>
                         <input type="checkbox" ng-model="updateE.educator" value="educator"> Educator  
                         <input type="checkbox" ng-model="updateE.educatorV1" value="educator"> EducatorV1  
                         <input type="checkbox" ng-model="updateE.channelpartner" value="ChannelPartner"> ChannelPartner  
-                </div>
+                </div><br>
                 <div>
                     
                         <label>Skills       : </label>
@@ -77,7 +77,7 @@ body {
                         <input type="checkbox" ng-model="updateE.english" value="english"> English
                             
                     </
-                </div>
+                </div>><br>
                 <div>
                     <p>
                         <button type="submit" ng-disabled="update.$invalid">Submit</button>
