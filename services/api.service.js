@@ -9,8 +9,8 @@ function apiService($log, $http) {
     var token = '';
     var username = '';
 //    var apiEndPoint = 'https://localhost:4000/api/admin/v1/';
-    var apiEndPoint = 'https://trringconnect.com:14000/api/admin/v1/';
-//    var apiEndPoint = 'https://trringconnect.com:4000/api/admin/v1/';
+//    var apiEndPoint = 'https://trringconnect.com:14000/api/admin/v1/';
+    var apiEndPoint = 'https://trringconnect.com:4000/api/admin/v1/';
     
     this.setToken = function(token) {
         this.token = token;

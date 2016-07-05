@@ -19,7 +19,8 @@
                 <div ng-class="{ 'has-error': !register.startdate.$pristine && register.startdate.$error.required }">
                     <p>
                         <label>Registration Date From : </label>
-                        <input name="text" ng-model="startdate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />
+                        <input type="date" name="startdate" ng-model="startdate" required>
+                        <!--<input name="text" ng-model="startdate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />-->
                     </p>
                     <div ng-messages="register.startdate.$error" ng-if="register.startdate.$invalid && !register.startdate.$pristine && register.startdate.$error.required">
                         <div ng-messages-include="error/error.html"></div>
@@ -28,7 +29,8 @@
                 <div ng-class="{ 'has-error': !register.enddate.$pristine && register.enddate.$error.required }">
                     <p>
                         <label>Registration Date To : </label>
-                        <input type = "text" name="enddate" ng-model="enddate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />
+                        <input type="date" name="enddate" ng-model="enddate" required>
+                        <!--<input type = "text" name="enddate" ng-model="enddate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />-->
                     </p>
                     <div ng-messages="register.enddate.$error" ng-if="register.enddate.$invalid && !register.enddate.$pristine && register.enddate.$error.required">
                         <div ng-messages-include="error/error.html"></div>
