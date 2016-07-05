@@ -61,14 +61,16 @@
                         <th>User Id</th>
                         <th>Full Name</th>
                         <th>Email</th>
-                        <th>credits</th>
-                        <th>created</th>
+                        <th>Question</th>
+                        <th>Credits</th>
+                        <th>Created</th>
                         <th>Last Active Time</th>
                     </tr>
                     <tr ng-repeat=" user in users">
                         <td ng-click="getProfiles(user.userid)">{{ user.userid }} </td>
                         <td>{{ user.fullname }}</td>
                         <td>{{ user.email }}</td>
+                        <td>{{ user.question }}</td>
                         <td>{{ user.credits }}</td>
                         <td>{{ user.created }}</td>
                         <td>{{ user.lastactive }}</td>
