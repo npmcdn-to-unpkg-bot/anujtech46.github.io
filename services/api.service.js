@@ -2,15 +2,15 @@
 angular.module('TUTRAPP')
         .service('apiService', apiService);
 
-apiService.$inject = ['$log', '$http'];
+apiService.$inject = ['$log', '$http', '$cookies'];
 
-function apiService($log, $http) {
+function apiService($log, $http, $cookies) {
     
     var token = '';
     var username = '';
 //    var apiEndPoint = 'https://localhost:4000/api/admin/v1/';
-    var apiEndPoint = 'https://trringconnect.com:14000/api/admin/v1/';
-//    var apiEndPoint = 'https://trringconnect.com:4000/api/admin/v1/';
+//    var apiEndPoint = 'https://trringconnect.com:14000/api/admin/v1/';
+    var apiEndPoint = 'https://trringconnect.com:4000/api/admin/v1/';
     
     this.setToken = function(token) {
         this.token = token;
@@ -18,7 +18,8 @@ function apiService($log, $http) {
     };
     
     this.getToken = function() {
-        return this.token;
+        var token = $cookies.get('token');
+        return token;
     };
     
     this.setUsername = function(username) {
@@ -27,7 +28,8 @@ function apiService($log, $http) {
     };
     
     this.getUsername = function() {
-        return this.username;
+        var username = $cookies.get('username');
+        return username;
     };
     
     this.getApiEndPoint = function() {   

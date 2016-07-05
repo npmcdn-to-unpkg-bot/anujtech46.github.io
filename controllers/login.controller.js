@@ -4,9 +4,9 @@ angular
     .controller('LoginCtrl', LoginCtrl);
 
 //inject the all dependencies
-LoginCtrl.$inject = ['$scope', '$log', 'apiService', '$location', 'loginFactory', 'toastr'];
+LoginCtrl.$inject = ['$scope', '$log', 'apiService', '$location', 'loginFactory', 'toastr', '$cookies'];
 
-function LoginCtrl($scope, $log, apiService, $location, loginFactory, toastr) {
+function LoginCtrl($scope, $log, apiService, $location, loginFactory, toastr, $cookies) {
         
     $scope.loginFunction = loginFunction;
     
@@ -22,8 +22,10 @@ function LoginCtrl($scope, $log, apiService, $location, loginFactory, toastr) {
         loginFactory.doLogin(data, function(err, res){
             if(res) {
                 if(res.status.code === 303000) {
-                    apiService.setToken(res.token);
-                    apiService.setUsername($scope.username);
+                    $cookies.put('token', res.token);
+                    $cookies.put('username', $scope.username);
+//                    apiService.setToken(res.token);
+//                    apiService.setUsername($scope.username);
                     $location.path('/profile');
                 } else {
                     toastr.error('Invalid Credentials', 'Please check username and password');
