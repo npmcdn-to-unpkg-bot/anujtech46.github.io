@@ -36,12 +36,12 @@
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>
-                <div ng-class="{ 'has-error': !register.credits.$pristine && register.credits.$error.required }">
+                <div ng-class="{ 'has-error': !register.questions.$pristine && register.questions.$error.required }">
                     <p>
-                        <label>Credits : </label>
-                        <input type = "number" name="credits" ng-model="credits" />
+                        <label>Questions : </label>
+                        <input type = "number" name="questions" ng-model="questions" />
                     </p>
-                    <div ng-messages="register.credits.$error" ng-if="register.credits.$invalid && !register.credits.$pristine && register.credits.$error.required">
+                    <div ng-messages="register.questions.$error" ng-if="register.questions.$invalid && !register.questions.$pristine && register.questions.$error.required">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>

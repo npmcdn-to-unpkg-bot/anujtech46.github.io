@@ -135,12 +135,10 @@ function GetUserWithCredits($scope, PagerService, studentFactory, toastr, $log, 
         
         data = {
             "startdate" : $scope.startdate,
-            "enddate"   : $scope.enddate
+            "enddate"   : $scope.enddate,
+            "questions" : $scope.questions
         };
         console.log(data);
-        if($scope.credits) {
-            data.credits = $scope.credits;
-        }
         initController();
 
         function initController() {
