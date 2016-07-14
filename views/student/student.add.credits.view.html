@@ -1,0 +1,58 @@
+<html>            
+    <head>
+        <title>Student Register Credits</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
+        <link rel="stylesheet" type="text/css" href="css/dateTimePicker.css">
+        <style>
+            button {
+                margin-left: 70px;
+            }
+        </style>
+    </head>
+    
+    <body align="center">
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
+        <div ng-show="showForm">
+            <form name="register" ng-submit="addCredits()" novalidate>
+                <div ng-class="{ 'has-error': !register.startdate.$pristine && register.startdate.$error.required }">
+                    <p>
+                        <label>Registration Date From : </label>
+                        <input type="date" name="startdate" ng-model="startdate" required>
+                        <!--<input name="text" ng-model="startdate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />-->
+                    </p>
+                    <div ng-messages="register.startdate.$error" ng-if="register.startdate.$invalid && !register.startdate.$pristine && register.startdate.$error.required">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+                <div ng-class="{ 'has-error': !register.enddate.$pristine && register.enddate.$error.required }">
+                    <p>
+                        <label>Registration Date To : </label>
+                        <input type="date" name="enddate" ng-model="enddate" required>
+                        <!--<input type = "text" name="enddate" ng-model="enddate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />-->
+                    </p>
+                    <div ng-messages="register.enddate.$error" ng-if="register.enddate.$invalid && !register.enddate.$pristine && register.enddate.$error.required">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': !register.questions.$pristine && register.questions.$error.required }">
+                    <p>
+                        <label>Questions : </label>
+                        <input type = "number" name="questions" ng-model="questions" />
+                    </p>
+                    <div ng-messages="register.questions.$error" ng-if="register.questions.$invalid && !register.questions.$pristine && register.questions.$error.required">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        <button type="submit" ng-disabled="register.$invalid">Submit</button>
+                    </p>
+                </div>
+            </form>
+        </div><br>   
+        <div ng-hide="showMessage">  Credits added to {{ usersCount }} users.
+        </div>
+    </body>
+</html>

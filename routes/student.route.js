@@ -28,5 +28,13 @@ function config($routeProvider) {
             when('/getStudentProfile', {
                 templateUrl :'views/student/student.find.email.fullname.view.html',
                 controller :'GetStudentProfileCtrl'
+            }).
+            when('/sendEmailToAdmin', {
+                templateUrl :'views/student/student.registered.detail.to.admin.view.html',
+                controller :'SendEmailToAdminCtrl'
+            }).
+            when('/AddCredits', {
+                templateUrl :'views/student/student.add.credits.view.html',
+                controller :'AddCreditsCtrl'
         });
 };

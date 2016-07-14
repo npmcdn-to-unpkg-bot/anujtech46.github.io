@@ -113,11 +113,10 @@ function ShowEducatorProfileCtrl($scope, $log, $routeParams, toastr,
                 $scope.modifiedon = profiles.modifiedon ;
                 $scope.createdon = profiles.createdon ; 
                 $scope.location = profiles.location ; 
-                return;
                 if(devices) {
                     $scope.showDevice = true;
                     $log.info("devices", devices);
-                    $scope.devices = devices;
+                    $scope.devices = devices.devices;
                 }
                 return;
             } else {

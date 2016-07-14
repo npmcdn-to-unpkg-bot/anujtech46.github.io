@@ -13,7 +13,9 @@ function studentFactory(apiService, $log) {
         getUgradeUser                   : getUgradeUser,
         getReferral                     : getReferral,
         getUserWithCredits              : getUserWithCredits,
-        getStudentProfile               : getStudentProfile
+        getStudentProfile               : getStudentProfile,
+        sendUsersDetailToAdmin          : sendUsersDetailToAdmin,
+        addCreditsToUsers               : addCreditsToUsers
     };
     
     function addCredits(data, callback) {
@@ -94,6 +96,48 @@ function studentFactory(apiService, $log) {
     function getStudentProfile(data, callback) {
         
         var url = apiService.getApiEndPoint() + "get/student/profile";
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doPost(url, data, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    /**
+     * Send a file of registered users to admin
+     * @param {object} data
+     * @param {function} callback
+     * @returns {callback}
+     */    
+    function sendUsersDetailToAdmin(data, callback) {
+        
+        var url = apiService.getApiEndPoint() + "send/admin/email";
+        
+        var config = {
+            headers : {
+                'token' : apiService.getToken()
+            }
+        };
+        
+        apiService.doPost(url, data, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    /**
+     * Add credits to multiple users
+     * @param {object} data
+     * @param {function} callback
+     * @returns {callback}
+     */    
+    function addCreditsToUsers(data, callback) {
+        
+        var url = apiService.getApiEndPoint() + "add/students/credits";
         
         var config = {
             headers : {

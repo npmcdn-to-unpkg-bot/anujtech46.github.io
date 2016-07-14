@@ -4,7 +4,9 @@ angular.module('student')
     .controller('ReferralUserCtrl', ReferralUserCtrl)
     .controller('UgradeUserCtrl', UgradeUserCtrl)
     .controller('GetUserWithCredits', GetUserWithCredits)
-    .controller('GetStudentProfileCtrl', GetStudentProfileCtrl);
+    .controller('GetStudentProfileCtrl', GetStudentProfileCtrl)
+    .controller('SendEmailToAdminCtrl', SendEmailToAdminCtrl)
+    .controller('AddCreditsCtrl', AddCreditsCtrl);
     
 UpdateStudentCtrl.$inject = ['$scope', 'studentFactory', 'toastr'];
 
@@ -138,7 +140,6 @@ function GetUserWithCredits($scope, PagerService, studentFactory, toastr, $log, 
             "enddate"   : $scope.enddate,
             "questions" : $scope.questions
         };
-        console.log(data);
         initController();
 
         function initController() {
@@ -220,3 +221,106 @@ function GetStudentProfileCtrl($scope, studentFactory, toastr, $location) {
             $location.path('/profile/student/'+userid);
         }
 };
+
+/**
+ * 
+ * @type Array
+ */
+SendEmailToAdminCtrl.$inject = ['$scope', 'studentFactory', 'toastr', '$log'];
+
+/**
+ * Send email to admin all the registered student in between dates 
+ * and with credits and after that if admin want to add credits then add credits
+ * @param {object} $scope
+ * @param {factoryObject} studentFactory
+ * @param {module} toastr
+ * @param {module} $log
+ * @returns {undefined}
+ */
+function SendEmailToAdminCtrl($scope, studentFactory, toastr, $log) {
+    
+    $scope.showForm = true;
+    $scope.showMessage = true;
+    $scope.setUsers = function() {
+        var data = {};
+        var date        = new Date();
+        $scope.year     = date.getFullYear();
+        $scope.month    = date.getMonth();
+        $scope.day      = date.getDate();
+        
+        data = {
+            "startdate" : $scope.startdate,
+            "enddate"   : $scope.enddate,
+            "questions" : $scope.questions
+        };
+        
+        if($scope.register.sendemail) {
+            data.sendemail = true;
+        }
+        
+        studentFactory.sendUsersDetailToAdmin(data, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    $scope.showForm = false;
+                    $scope.showMessage = false;
+                    $scope.usersCount = res.count;
+                    toastr.info("Add Users into file");
+                    return;
+                } else {
+                    toastr.error('Invalid request');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        }); 
+    };
+}
+
+/**
+ * 
+ * @type Array
+ */
+AddCreditsCtrl.$inject = ['$scope', 'studentFactory', 'toastr', '$log'];
+
+/**
+ * add credits according to their question asked
+ * @param {object} $scope
+ * @param {factoryObject} studentFactory
+ * @param {module} toastr
+ * @param {module} $log
+ * @returns {undefined}
+ */
+function AddCreditsCtrl($scope, studentFactory, toastr, $log) {
+
+    $scope.showForm = true;
+    $scope.showMessage = true;
+    $scope.addCredits = function() {
+        var data = {};
+        var date        = new Date();
+        $scope.year     = date.getFullYear();
+        $scope.month    = date.getMonth();
+        $scope.day      = date.getDate();
+        
+        data = {
+            "startdate" : $scope.startdate,
+            "enddate"   : $scope.enddate,
+            "questions" : $scope.questions
+        };
+
+        studentFactory.addCreditsToUsers(data, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    toastr.info("Add Credits to users");
+                    $scope.showForm = false;
+                    $scope.showMessage = false;
+                    $scope.usersCount = res.count;
+                    return;
+                } else {
+                    toastr.error('Invalid request');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        }); 
+    };
+}
