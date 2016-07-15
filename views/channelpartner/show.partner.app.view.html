@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Show all Partner</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
+    </head>
+    <body>
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
+        <div>
+            <p style="align-content: center">
+                <button type="submit" ng-click="addPartner()">Add Partner</button>
+            </p>
+        </div><br>
+        <div>Total Partner = {{ count }}</div><br>
+        <div ng-show="showTable">
+            <table id="t01">
+                <tr>
+                    <th>Appid</th>
+                    <th>SLA Level</th>
+                    <th>description</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                <tr ng-repeat=" partner in partners ">
+                    <td>{{ partner.appid}}</td>
+                    <td>{{ partner.slalevel}}</td>
+                    <td>{{ partner.description }}</td>                    
+                    <td><button type="submit" ng-click="updatePartner(partner.appid)">up</button></td>
+                    <td><button type="submit" ng-click="deletePartner(partner.appid)">de</button></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

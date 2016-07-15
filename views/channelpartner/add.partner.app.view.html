@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add Partner</title>
+  
+        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
+    </head>
+    <body>
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
+        <div align="center">
+            <form name="partner" ng-submit="appPartner()" novalidate>
+                        <div ng-class="{ 'has-error': partner.appid.$touched && partner.appid.$invalid }">
+                            <p>
+                                <label>App ID : </label>
+                                <input type="text" name="appid" ng-model="partnerapp.appid" required>
+                            </p>
+                            <div ng-messages="partner.appid.$error" ng-if="partner.appid.$touched">
+                                <div ng-messages-include="error/error.html"></div>
+                            </div> 
+                        </div>
+
+                <div ng-class="{ 'has-error': partner.slalevel.$touched && partner.slalevel.$invalid }">
+                    <p>
+                        <label>SLA Level : </label>
+                        <input type="number" name="slalevel" ng-model="partnerapp.slalevel" required>
+                    </p>
+                    <div ng-messages="partner.slalevel.$error" ng-if="partner.slalevel.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': partner.description.$touched && partner.description.$invalid }">
+                    <p>
+                        <label>Description : </label>
+                        <input type="text" name="description" ng-model="partnerapp.description" required>
+                    </p>
+                    <div ng-messages="partner.description.$error" ng-if="partner.description.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div>
+                    <p style="align-content: center">
+                        <button type="submit" ng-disabled="partner.$invalid && partner.$dirty">Submit</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

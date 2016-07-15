@@ -530,7 +530,7 @@ function UpdateAwardCtrl($scope, productsFactory, toastr, $location, productServ
     
     var productidentifier = productService.getProductIdentifier();
     if(!productidentifier) {
-        toastr.error('Invalid Credentials', 'Unable to add award product');
+        toastr.error('Invalid Credentials');
         return ;
     }
     productsFactory.getAwardProductByID(productidentifier, function(err, res) {
@@ -611,7 +611,7 @@ function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productServ
     
     var productidentifier = productService.getProductIdentifier();
     if(!productidentifier) {
-        toastr.error('Invalid Credentials', 'Unable to get promo product');
+        toastr.error('Invalid Credentials');
         return ;
     }
     productsFactory.getPromoProductByID(productidentifier, function(err, res) {
@@ -698,7 +698,7 @@ function UpdateShopCtrl($scope, productsFactory, toastr, $location, productServi
     
     var productidentifier = productService.getProductIdentifier();
     if(!productidentifier) {
-        toastr.error('Invalid Credentials', 'Unable to get shop product');
+        toastr.error('Invalid Credentials');
         return ;
     }
     productsFactory.getShopProductByID(productidentifier, function(err, res) {
@@ -775,7 +775,7 @@ function UpdateVoucherCtrl($scope, productsFactory, toastr, $location, productSe
     
     var productidentifier = productService.getProductIdentifier();
     if(!productidentifier) {
-        toastr.error('Invalid Credentials', 'Unable to get voucher product');
+        toastr.error('Invalid Credentials');
         return ;
     }
     productsFactory.getVoucherProductByID(productidentifier, function(err, res) {
