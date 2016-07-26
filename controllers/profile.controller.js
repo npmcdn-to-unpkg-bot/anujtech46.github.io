@@ -12,6 +12,7 @@ function ProfileCtrl($scope, apiService, $log, $location) {
     
     $scope.logout = logout;
     function logout() {
+        apiService.removeToken();
         $location.path('/');
     }
     

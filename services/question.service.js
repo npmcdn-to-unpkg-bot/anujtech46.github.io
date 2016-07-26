@@ -1,6 +1,6 @@
 // question.service.js
-angular
-    .module('question')
+
+    angular.module('question')
     .factory('questionFactory', questionFactory);
     
 questionFactory.$inject = ['apiService', '$log'];

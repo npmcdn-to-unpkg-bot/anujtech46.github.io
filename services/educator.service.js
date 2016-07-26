@@ -1,6 +1,6 @@
 // educator.service.js
-angular
-    .module('educator')
+
+    angular.module('educator')
     .factory('educatorFactory', educatorFactory);
     
 educatorFactory.$inject = ['apiService', '$log'];

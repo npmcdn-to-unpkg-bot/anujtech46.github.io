@@ -25,7 +25,7 @@ body {
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
         
-        
+        <div ng-init="showMessage = false"><p ng-if="showMessage">{{message}}</p></div><br>
         <div>
             <form name="update" ng-submit="updateEducator()" ng-hide="hideform" role="update" novalidate>
                 <div ng-class="{ 'has-error': !update.email.$pristine && update.email.$error.required }">

@@ -20,13 +20,15 @@
                     <th>Appid</th>
                     <th>SLA Level</th>
                     <th>description</th>
+                    <th>created</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
                 <tr ng-repeat=" partner in partners ">
                     <td>{{ partner.appid}}</td>
                     <td>{{ partner.slalevel}}</td>
-                    <td>{{ partner.description }}</td>                    
+                    <td>{{ partner.description }}</td>                   
+                    <td>{{ partner.created }}</td>                   
                     <td><button type="submit" ng-click="updatePartner(partner.appid)">up</button></td>
                     <td><button type="submit" ng-click="deletePartner(partner.appid)">de</button></td>
                 </tr>

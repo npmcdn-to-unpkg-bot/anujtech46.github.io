@@ -1,5 +1,5 @@
-angular
-    .module('registration')
+
+    angular.module('registration')
     .controller('TodayRegistrationCtrl', TodayRegistrationCtrl)
     .controller('TotalRegistrationCtrl', TotalRegistrationCtrl)
     .controller('TempUserCtrl', TempUserCtrl)
@@ -29,7 +29,7 @@ function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr
             return;
         }
         
-        registrationFactory.getTodayRegister(page, function(err, res) {
+        registrationFactory.getTotalRegister(page, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
                     $log.info("getting res", res.user.user);

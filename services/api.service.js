@@ -2,30 +2,30 @@
 angular.module('TUTRAPP')
         .service('apiService', apiService);
 
-apiService.$inject = ['$log', '$http', '$cookies'];
+apiService.$inject = ['$log', '$http', '$cookies', '$location', '$q', 'toastr'];
 
-function apiService($log, $http, $cookies) {
+function apiService($log, $http, $cookies, $location, $q, toastr) {
     
-    var token = '';
-    var username = '';
+//    var token = '';
+//    var username = '';
     var apiEndPoint = 'https://localhost:4000/api/admin/v1/';
 //    var apiEndPoint = 'https://trringconnect.com:14000/api/admin/v1/';
 //    var apiEndPoint = 'https://trringconnect.com:4000/api/admin/v1/';
     
-    this.setToken = function(token) {
-        this.token = token;
-        return ;
-    };
+//    this.setToken = function(token) {
+//        this.token = token;
+//        return ;
+//    };
     
     this.getToken = function() {
         var token = $cookies.get('token');
         return token;
     };
     
-    this.setUsername = function(username) {
-        this.username = username;
-        return ;
-    };
+//    this.setUsername = function(username) {
+//        this.username = username;
+//        return ;
+//    };
     
     this.getUsername = function() {
         var username = $cookies.get('username');
@@ -35,6 +35,12 @@ function apiService($log, $http, $cookies) {
     this.getApiEndPoint = function() {   
         return apiEndPoint;
     };
+    
+    this.removeToken = function() {   
+        $cookies.remove('token');
+        return ;
+    };
+    
     
     this.doPost = function(url, data, config, callback) {
         
@@ -95,4 +101,40 @@ function apiService($log, $http, $cookies) {
             return callback(true, null);
         });     
     };
+    
+    this.isLoggedIn = function() {
+        var token = $cookies.get('token');
+        if(token) {
+            return true;
+        }
+        return false;
+    };
+    
+    this.onlyLoggedIn = function($location, apiService, $q, toastr) {
+    
+        var deferred = $q.defer();
+        if (apiService.isLoggedIn()) {
+            deferred.resolve();
+        } else {
+            deferred.reject();
+            toastr.error("You are not logged in, Please login");
+            $location.path('/');
+        }
+        return deferred.promise;
+    };
 };
+
+//onlyLoggedIn.$inject = ['$location','apiService', '$q', 'toastr'];
+//
+//function onlyLoggedIn($location, apiService, $q, toastr) {
+//    
+//    var deferred = $q.defer();
+//    if (apiService.isLoggedIn()) {
+//        deferred.resolve();
+//    } else {
+//        deferred.reject();
+//        toastr.error("You are not logged in, Please login");
+//        $location.path('/');
+//    }
+//    return deferred.promise;
+//}

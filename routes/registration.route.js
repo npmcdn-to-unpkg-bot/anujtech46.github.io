@@ -1,17 +1,21 @@
 // registration.config.js
-angular
-    .module('registration')
+
+    angular.module('registration')
     .config(config);
 
 function config($routeProvider) {
     $routeProvider
         .when('/todayR', {
             templateUrl :'views/registration/registration.todayR.view.html',
-            controller : 'TodayRegistrationCtrl'
+            controller : 'TodayRegistrationCtrl',
+            resolve:{loggedIn:'onlyLoggedIn'
+            }
         })
         .when('/totalR', {
             templateUrl :'views/registration/registration.totalR.view.html',
-            controller : 'TotalRegistrationCtrl'
+            controller : 'TotalRegistrationCtrl',
+            resolve:{loggedIn:'onlyLoggedIn'
+            }
         })
         .when('/tempUser', {
             templateUrl :'views/registration/tempuser.view.html',

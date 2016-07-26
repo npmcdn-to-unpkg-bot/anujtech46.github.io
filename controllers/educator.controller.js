@@ -1,3 +1,4 @@
+'use strict';
 angular.module('educator')
     .controller('ShowAllEducatorCtrl', ShowAllEducatorCtrl)
     .controller('UpdateEducatorCtrl', UpdateEducatorCtrl)
@@ -6,18 +7,36 @@ angular.module('educator')
     .controller('SetSleepTimeCtrl', SetSleepTimeCtrl)
     .controller('ShowServiceTimeCtrl', ShowServiceTimeCtrl)
     .controller('ShowRatingCtrl', ShowRatingCtrl);
-
-ShowAllEducatorCtrl.$inject = ['$scope', '$log', 'toastr', 'educatorFactory', '$location'];
-function ShowAllEducatorCtrl($scope, $log, toastr, educatorFactory, $location) {
     
-    $scope.getProfiles = getProfiles;
+/**
+ * Show All Educator controller
+ * @type Array
+ */
+ShowAllEducatorCtrl.$inject = ['$scope', '$log', 'toastr', 'educatorFactory', '$location', 'apiService'];
+/**
+ * 
+ * @param   {service}   $scope
+ * @param   {service}   $log
+ * @param   {module}    toastr
+ * @param   {factory}   educatorFactory
+ * @param   {service}   $location
+ * @param   {service}   apiService
+ * @returns {undefined}
+ */
+function ShowAllEducatorCtrl($scope, $log, toastr, educatorFactory, $location, apiService) {
+    
+    if(!apiService.isLoggedIn()) {
+        toastr.error('You are not Logged in', 'Please logged in');
+        $location.path('/');
+        return;
+    }
     
     educatorFactory.getAllEducator(function(err, res) {
         if(res) {
             if(res.status.code === 303000) {
                 if(res.count === 0) {
-                    $scope.count = res.count;
-                    $scope.hideTable = true;
+                    $scope.count        = res.count;
+                    $scope.hideTable    = true;
                 } else {
                     $scope.count = res.count;
                     $scope.users = res.profiles;
@@ -30,6 +49,7 @@ function ShowAllEducatorCtrl($scope, $log, toastr, educatorFactory, $location) {
         }
     });
     
+    $scope.getProfiles = getProfiles;
     function getProfiles(userid, roles) {
         
         if(roles[0] === 'educator' && userid) {
@@ -41,14 +61,28 @@ function ShowAllEducatorCtrl($scope, $log, toastr, educatorFactory, $location) {
     }
 };
 
-//inject UpdateEducatorCtrl
-/*
- * name : UpdateEducatorCtrl
- * desc : update educator role and subjects
+/**
+ * Inject required module
+ * @type Array
  */
-UpdateEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'educatorProfileService', '$location'];
-function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileService, $location) {
+UpdateEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'educatorProfileService', '$location', 'apiService'];
+/**
+ * Update educator profile
+ * @param   {service}   $scope
+ * @param   {factory}   educatorFactory
+ * @param   {module}    toastr
+ * @param   {service}   educatorProfileService
+ * @param   {service}   $location
+ * @param   {service}   apiService
+ * @returns {undefined}
+ */
+function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileService, $location, apiService) {
     
+    if(!apiService.isLoggedIn()) {
+        toastr.error('You are not Logged in', 'Please logged in');
+        $location.path('/');
+        return;
+    }
     var userid      = educatorProfileService.getUserID();
     var email       = educatorProfileService.getEmail();
     var roles       = educatorProfileService.getRoles();
@@ -107,6 +141,18 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
         
         var roles = [];
         var skills = [];
+        
+        //Check condition
+        if(($scope.updateE.educatorV1) && ($scope.updateE.internal.toString() === "false")) {
+            $scope.showMessage = true;
+            $scope.message = "Invalid combination of educatorV1 role and internal type";
+            return;
+        }
+        if(($scope.updateE.educator) && ($scope.updateE.internal.toString() === "true")) {
+            $scope.showMessage = true;
+            $scope.message = "Invalid combination of educator role and internal type";
+            return;
+        }
         
         if($scope.updateE.educator) {
             roles.push("educator");
@@ -168,8 +214,6 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
             if(res) {
                 if(res.status.code === 303000) {
                     toastr.success("educator update successfully");
-                    $scope.updateE = '';
-                    $scope.update.$setPristine();
                     $location.path('/profile/educator/'+userid);
                 } else {
                     toastr.error('Invalid Credentials', 'Unable to update educator role');
@@ -180,37 +224,27 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
         });
     };
 };
-
-//DeleteEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
-//
-//function DeleteEducatorCtrl($scope, educatorFactory, toastr) {
-//    
-//    $scope.deleteEducator = function() {
-//        
-//        var data = {
-//            email : $scope.email,
-//            appid : $scope.appid
-//        };
-//        educatorFactory.doDeleteEducator(data, function(err, res) {
-//            if(res) {
-//                if(res.status.code === 303000) {
-//                    toastr.success("educator update successfully");
-//                    $scope.email = '';
-//                    $scope.appid = '';
-//                    $scope.educator.$setPristine();
-//                } else {
-//                    toastr.error('Invalid Credentials', 'Unable to delete educator');
-//                }
-//            } else {
-//                toastr.error('Server not working');
-//            }
-//        });
-//    };
-//};
-
-ShowLookersCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
-
-function ShowLookersCtrl($scope, educatorFactory, toastr) {
+/**
+ * Show all lookers
+ * @type Array
+ */
+ShowLookersCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'apiService', '$location'];
+/**
+ * 
+ * @param {type} $scope
+ * @param {type} educatorFactory
+ * @param {type} toastr
+ * @param {type} apiService
+ * @param {type} $location
+ * @returns {undefined}
+ */
+function ShowLookersCtrl($scope, educatorFactory, toastr, apiService, $location) {
+    
+    if(!apiService.isLoggedIn()) {
+        toastr.error('You are not Logged in', 'Please logged in');
+        $location.path('/');
+        return;
+    }
          
     educatorFactory.getAllLookers(function(err, res) {
         if(res) {
@@ -225,9 +259,20 @@ function ShowLookersCtrl($scope, educatorFactory, toastr) {
     });  
 };
 
-ShowWeightsCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
+/**
+ * 
+ * @type Array
+ */
+ShowWeightsCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'apiService', '$location'];
 
-function ShowWeightsCtrl($scope, educatorFactory, toastr) {
+function ShowWeightsCtrl($scope, educatorFactory, toastr, apiService, $location) {
+    
+    
+    if(!apiService.isLoggedIn()) {
+        toastr.error('You are not Logged in', 'Please logged in');
+        $location.path('/');
+        return;
+    }
 
     educatorFactory.getAllWeights(function(err, res) {
         if(res) {
@@ -242,16 +287,23 @@ function ShowWeightsCtrl($scope, educatorFactory, toastr) {
     });  
 };
 
-SetSleepTimeCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', '$route'];
+SetSleepTimeCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', '$route', 'apiService', '$location'];
 
-function SetSleepTimeCtrl($scope, educatorFactory, toastr, $route) {
-$scope.showField = true;
-    $scope.sleepEducator = function() {
+function SetSleepTimeCtrl($scope, educatorFactory, toastr, $route, apiService, $location) {
+    
+    if(!apiService.isLoggedIn()) {
+        toastr.error('You are not Logged in', 'Please logged in');
+        $location.path('/');
+        return;
+    }
+    
+    $scope.showField        = true;
+    $scope.sleepEducator    = function() {
         
-        var date = new Date();
-        $scope.year = date.getFullYear();
-        $scope.month = date.getMonth();
-        $scope.day = date.getDate();
+        var date        = new Date();
+        $scope.year     = date.getFullYear();
+        $scope.month    = date.getMonth();
+        $scope.day      = date.getDate();
         var data = {
             "sleeptime" : $scope.sleeptime,
             "wakeuptime":$scope.wakeuptime
@@ -260,12 +312,9 @@ $scope.showField = true;
             if(res) {
                 if(res.status.code === 303000) {
                     toastr.success("time set successfully");
-                    $scope.sleeptime = '';
-                    $scope.wakeuptime = '';
-                    $scope.sleep.$setPristine();
                     $route.reload();
                 } else {
-                    toastr.error('Unable to apply');
+                    toastr.error('Unable to apply', 'Please check input time');
                 }
             } else {
                 toastr.error('Server not working');
@@ -274,9 +323,27 @@ $scope.showField = true;
     };
 };
 
-ShowServiceTimeCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
-
-function ShowServiceTimeCtrl($scope, educatorFactory, toastr) {
+/**
+ * Show sleeping time service
+ * @type Array
+ */
+ShowServiceTimeCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'apiService', '$location'];
+/**
+ * Show Service time controller
+ * @param   {service} $scope
+ * @param   {factory} educatorFactory
+ * @param   {module} toastr
+ * @param   {Service} apiService
+ * @param   {service} $location
+ * @returns {undefined}
+ */
+function ShowServiceTimeCtrl($scope, educatorFactory, toastr, apiService, $location) {
+    
+    if(!apiService.isLoggedIn()) {
+        toastr.error('You are not Logged in', 'Please logged in');
+        $location.path('/');
+        return;
+    }
   
     educatorFactory.getSleepTime(function(err, res) {
         if(res) {
@@ -291,10 +358,27 @@ function ShowServiceTimeCtrl($scope, educatorFactory, toastr) {
     });
 };
 
-ShowRatingCtrl.$inject = ['$scope', 'educatorFactory', 'toastr'];
-
-function ShowRatingCtrl($scope, educatorFactory, toastr) {
-  
+/**
+ * Inject all required module
+ * @type Array
+ */
+ShowRatingCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'apiService', '$location'];
+/**
+ * Show rating of all educator
+ * @param {service} $scope
+ * @param {factory} educatorFactory
+ * @param {module}  toastr
+ * @param {service} apiService
+ * @param {service} $location
+ * @returns {undefined}
+ */
+function ShowRatingCtrl($scope, educatorFactory, toastr, apiService, $location) {
+    
+    if(!apiService.isLoggedIn()) {
+        toastr.error('You are not Logged in', 'Please logged in');
+        $location.path('/');
+        return;
+    }
     educatorFactory.getRating(function(err, res) {
         if(res) {
             if(res.status.code === 303000) {

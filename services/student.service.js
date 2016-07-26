@@ -1,6 +1,6 @@
 // student.service.js
-angular
-    .module('student')
+
+    angular.module('student')
     .factory('studentFactory', studentFactory);
     
 studentFactory.$inject = ['apiService', '$log'];

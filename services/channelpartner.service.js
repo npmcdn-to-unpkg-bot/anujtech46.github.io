@@ -1,5 +1,5 @@
-angular
-    .module('channelpartner')
+
+    angular.module('channelpartner')
     .factory('cpFactory', cpFactory)
     .service('cpService', cpService);
     
@@ -8,13 +8,17 @@ cpFactory.$inject = ['apiService', '$log'];
 function cpFactory(apiService, $log) {
     
     var factory = {
-        doRegister          : doRegister,
-        getAllCP            : getAllCP,
-        getAllPartnerApp    : getAllPartnerApp,
-        addPartnerApp       : addPartnerApp,
-        deletePartnerApp    : deletePartnerApp,
-        getPartnerAppByID   : getPartnerAppByID,
-        updatePartnerApp    : updatePartnerApp
+        doRegister              : doRegister,
+        getAllCP                : getAllCP,
+        getAllPartnerApp        : getAllPartnerApp,
+        addPartnerApp           : addPartnerApp,
+        deletePartnerApp        : deletePartnerApp,
+        getPartnerAppByID       : getPartnerAppByID,
+        updatePartnerApp        : updatePartnerApp,
+        addAppCredentials       : addAppCredentials,
+        getAllAppCredentials    : getAllAppCredentials,
+        deleteAppCredentials    : deleteAppCredentials
+        
     };
     
     function doRegister(data, callback) {
@@ -110,6 +114,44 @@ function cpFactory(apiService, $log) {
         });
     };
     
+    function addAppCredentials(data, callback) {
+        
+        var url = apiService.getApiEndPoint() + "application/credentials" ;
+        var config = {
+            headers : {
+                token : apiService.getToken()
+            }
+        }; 
+        apiService.doPost(url, data, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function getAllAppCredentials(callback) {
+        
+        var url = apiService.getApiEndPoint() + "application/credentials" ;
+        var config = {
+            headers : {
+                token : apiService.getToken()
+            }
+        }; 
+        apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function deleteAppCredentials(data, callback) {
+        
+        var url = apiService.getApiEndPoint() + "delete/application/credentials";
+        var config = {
+            headers : {
+                token : apiService.getToken()
+            }
+        }; 
+        apiService.doPost(url, data, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
     
     return factory ;
 };

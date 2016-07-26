@@ -22,5 +22,13 @@ function config($routeProvider) {
         .when('/updatePartnerApp', {
             templateUrl :'views/channelpartner/update.partner.app.view.html',
             controller :'UpdatePartnerAPPCtrl'
+        })
+        .when('/addAppCredentials', {
+            templateUrl :'views/channelpartner/add.app.credentials.view.html',
+            controller :'AddAppCredentialsCtrl'
+        })
+        .when('/showAppCredentials', {
+            templateUrl :'views/channelpartner/show.app.credentials.view.html',
+            controller :'ShowAppCredentialsCtrl'
         });
     };

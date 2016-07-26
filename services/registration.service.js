@@ -1,6 +1,6 @@
 // registration.service.js
-angular
-    .module('registration')
+
+    angular.module('registration')
     .factory('registrationFactory', registrationFactory)
     .factory('PagerService', PagerService);
     

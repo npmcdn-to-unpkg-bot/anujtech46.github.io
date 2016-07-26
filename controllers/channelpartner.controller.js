@@ -8,7 +8,9 @@ angular.module('channelpartner')
         .controller('ShowAllCPCtrl', ShowAllCPCtrl)
         .controller('ShowAllPartnerAPPCtrl', ShowAllPartnerAPPCtrl)
         .controller('AddPartnerAPPCtrl', AddPartnerAPPCtrl)
-        .controller('UpdatePartnerAPPCtrl', UpdatePartnerAPPCtrl);
+        .controller('UpdatePartnerAPPCtrl', UpdatePartnerAPPCtrl)
+        .controller('AddAppCredentialsCtrl', AddAppCredentialsCtrl)
+        .controller('ShowAppCredentialsCtrl', ShowAppCredentialsCtrl);
 
 /**
  * 
@@ -256,4 +258,109 @@ function UpdatePartnerAPPCtrl($scope, cpFactory, toastr, $location, cpService) {
             }
         });
     };
+};
+
+/**
+ * 
+ * @type Array
+ */
+AddAppCredentialsCtrl.$inject = ['$scope', 'cpFactory', 'toastr', '$location'];
+/**
+ * 
+ * @param {type} $scope
+ * @param {type} cpFactory
+ * @param {type} toastr
+ * @param {type} $location      
+ * @returns {undefined}
+ */
+function AddAppCredentialsCtrl($scope, cpFactory, toastr, $location) {
+    
+    $scope.addAppCredential = function() {
+        
+        var data = {
+            appid       : $scope.apps.appid,
+            description : $scope.apps.description
+        };
+        
+        cpFactory.addAppCredentials(data, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    toastr.success("add App Credentials successfully");
+                    $location.path('/showAppCredentials');
+                } else {
+                    toastr.error('Invalid Credentials', 'Unable to add Credentials');
+                } 
+            } else {
+                toastr.error('Server not working');
+            }
+        });
+    };
+};
+
+/**
+ * Inject all the required module
+ * @type Array
+ */
+ShowAppCredentialsCtrl.$inject = ['$scope', 'toastr', 'cpFactory', '$location', 'cpService', '$route'];
+/**
+ * 
+ * @param {type} $scope
+ * @param {type} toastr
+ * @param {type} cpFactory
+ * @param {type} $location
+ * @param {type} cpService
+ * @param {type} $route
+ * @returns {undefined}
+ */
+function ShowAppCredentialsCtrl($scope, toastr, cpFactory, $location, cpService, $route) {
+    
+    $scope.showTable    = false;
+    cpFactory.getAllAppCredentials(function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                if(res.apps.length === 0) {
+                    $scope.count = res.apps.length;
+                } else {
+                    $scope.showTable = true;
+                    $scope.count    = res.apps.length;
+                    $scope.apps     = res.apps;
+                }
+            } else {
+                toastr.error('Invalid Credentials', 'Unable to find');
+            }
+        } else {
+            toastr.error('Server not working');
+        }
+    });
+    
+    $scope.addAppCredential = addAppCredential;
+    function addAppCredential() {
+        $location.path('/addAppCredentials');
+    }
+    
+    $scope.deleteAppCredential = deleteAppCredential;
+    function deleteAppCredential(appid, secretid) {
+        var x = confirm("Are you sure you want to delete?");
+        if(x) { 
+            var data = {
+                appid       : appid,
+                secretid    : secretid
+            };
+            cpFactory.deleteAppCredentials(data, function(err, res) {
+                if(res) {
+                    if(res.status.code === 303000) {
+                        toastr.success("delete app credential successfully");
+                        $route.reload();
+                    } else {
+                        toastr.error('Invalid Credentials', 'Unable to delete app credential');
+                    }
+                } else {
+                    toastr.error('Server not working');
+                }
+            });
+        } else { 
+            $location.path('/showAppCredentials');
+            return false;
+        }
+    }
 };

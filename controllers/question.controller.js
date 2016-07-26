@@ -135,7 +135,7 @@ function AllStartedSessionCtrl($scope, PagerService, questionFactory, toastr, $l
         }
         
         questionFactory.getStartedSessions(page, function(err, res) {
-            if(res) {
+            if(res && res.status) {
                 if(res.status.code === 303000) {
                     $log.info("getting res", res.sessions.sessions);
                     $scope.pager = PagerService.GetPager(res.sessions.count, page, res.sessions.pageSize);

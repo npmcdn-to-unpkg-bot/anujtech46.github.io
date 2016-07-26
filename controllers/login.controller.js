@@ -1,12 +1,12 @@
 // login.controller.js
-angular
-    .module('login')
+
+    angular.module('login')
     .controller('LoginCtrl', LoginCtrl);
 
 //inject the all dependencies
-LoginCtrl.$inject = ['$scope', '$log', 'apiService', '$location', 'loginFactory', 'toastr', '$cookies'];
+LoginCtrl.$inject = ['$scope', '$log', '$location', 'loginFactory', 'toastr', '$cookies'];
 
-function LoginCtrl($scope, $log, apiService, $location, loginFactory, toastr, $cookies) {
+function LoginCtrl($scope, $log, $location, loginFactory, toastr, $cookies) {
         
     $scope.loginFunction = loginFunction;
     

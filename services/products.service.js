@@ -1,6 +1,6 @@
 // question.service.js
-angular
-    .module('products')
+
+    angular.module('products')
     .factory('productsFactory', productsFactory)
     .service('productService', productService);
     

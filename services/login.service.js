@@ -1,6 +1,6 @@
 // login.service.js
-angular
-    .module('login')
+
+    angular.module('login')
     .factory('loginFactory', loginFactory);
     
 loginFactory.$inject = ['apiService', '$log'];

@@ -1,6 +1,6 @@
 // login.config.js
-angular
-    .module('educator')
+
+    angular.module('educator')
     .config(config);
 
 function config($routeProvider) {

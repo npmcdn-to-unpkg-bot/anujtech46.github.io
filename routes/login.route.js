@@ -1,6 +1,6 @@
 // login.config.js
-angular
-    .module('login')
+
+    angular.module('login')
     .config(config);
 
 function config($routeProvider) {
