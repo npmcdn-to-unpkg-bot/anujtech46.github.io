@@ -29,7 +29,7 @@ function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr
             return;
         }
         
-        registrationFactory.getTotalRegister(page, function(err, res) {
+        registrationFactory.getTodayRegister(page, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
                     $log.info("getting res", res.user.user);

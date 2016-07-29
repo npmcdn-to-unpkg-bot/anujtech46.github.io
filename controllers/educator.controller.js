@@ -12,7 +12,7 @@ angular.module('educator')
  * Show All Educator controller
  * @type Array
  */
-ShowAllEducatorCtrl.$inject = ['$scope', '$log', 'toastr', 'educatorFactory', '$location', 'apiService'];
+ShowAllEducatorCtrl.$inject = ['$scope', '$log', 'toastr', 'educatorFactory', '$location'];
 /**
  * 
  * @param   {service}   $scope
@@ -20,16 +20,9 @@ ShowAllEducatorCtrl.$inject = ['$scope', '$log', 'toastr', 'educatorFactory', '$
  * @param   {module}    toastr
  * @param   {factory}   educatorFactory
  * @param   {service}   $location
- * @param   {service}   apiService
  * @returns {undefined}
  */
-function ShowAllEducatorCtrl($scope, $log, toastr, educatorFactory, $location, apiService) {
-    
-    if(!apiService.isLoggedIn()) {
-        toastr.error('You are not Logged in', 'Please logged in');
-        $location.path('/');
-        return;
-    }
+function ShowAllEducatorCtrl($scope, $log, toastr, educatorFactory, $location) {
     
     educatorFactory.getAllEducator(function(err, res) {
         if(res) {
@@ -65,7 +58,7 @@ function ShowAllEducatorCtrl($scope, $log, toastr, educatorFactory, $location, a
  * Inject required module
  * @type Array
  */
-UpdateEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'educatorProfileService', '$location', 'apiService'];
+UpdateEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'educatorProfileService', '$location'];
 /**
  * Update educator profile
  * @param   {service}   $scope
@@ -73,16 +66,10 @@ UpdateEducatorCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'educatorPr
  * @param   {module}    toastr
  * @param   {service}   educatorProfileService
  * @param   {service}   $location
- * @param   {service}   apiService
  * @returns {undefined}
  */
-function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileService, $location, apiService) {
+function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileService, $location) {
     
-    if(!apiService.isLoggedIn()) {
-        toastr.error('You are not Logged in', 'Please logged in');
-        $location.path('/');
-        return;
-    }
     var userid      = educatorProfileService.getUserID();
     var email       = educatorProfileService.getEmail();
     var roles       = educatorProfileService.getRoles();
@@ -228,24 +215,17 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
  * Show all lookers
  * @type Array
  */
-ShowLookersCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'apiService', '$location'];
+ShowLookersCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', '$location'];
 /**
  * 
  * @param {type} $scope
  * @param {type} educatorFactory
  * @param {type} toastr
- * @param {type} apiService
  * @param {type} $location
  * @returns {undefined}
  */
-function ShowLookersCtrl($scope, educatorFactory, toastr, apiService, $location) {
-    
-    if(!apiService.isLoggedIn()) {
-        toastr.error('You are not Logged in', 'Please logged in');
-        $location.path('/');
-        return;
-    }
-         
+function ShowLookersCtrl($scope, educatorFactory, toastr, $location) {
+       
     educatorFactory.getAllLookers(function(err, res) {
         if(res) {
             if(res.status.code === 303000) {
@@ -263,16 +243,9 @@ function ShowLookersCtrl($scope, educatorFactory, toastr, apiService, $location)
  * 
  * @type Array
  */
-ShowWeightsCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'apiService', '$location'];
+ShowWeightsCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', '$location'];
 
-function ShowWeightsCtrl($scope, educatorFactory, toastr, apiService, $location) {
-    
-    
-    if(!apiService.isLoggedIn()) {
-        toastr.error('You are not Logged in', 'Please logged in');
-        $location.path('/');
-        return;
-    }
+function ShowWeightsCtrl($scope, educatorFactory, toastr, $location) {
 
     educatorFactory.getAllWeights(function(err, res) {
         if(res) {
@@ -287,15 +260,9 @@ function ShowWeightsCtrl($scope, educatorFactory, toastr, apiService, $location)
     });  
 };
 
-SetSleepTimeCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', '$route', 'apiService', '$location'];
+SetSleepTimeCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', '$route', '$location'];
 
-function SetSleepTimeCtrl($scope, educatorFactory, toastr, $route, apiService, $location) {
-    
-    if(!apiService.isLoggedIn()) {
-        toastr.error('You are not Logged in', 'Please logged in');
-        $location.path('/');
-        return;
-    }
+function SetSleepTimeCtrl($scope, educatorFactory, toastr, $route, $location) {
     
     $scope.showField        = true;
     $scope.sleepEducator    = function() {
@@ -327,24 +294,17 @@ function SetSleepTimeCtrl($scope, educatorFactory, toastr, $route, apiService, $
  * Show sleeping time service
  * @type Array
  */
-ShowServiceTimeCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'apiService', '$location'];
+ShowServiceTimeCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', '$location'];
 /**
  * Show Service time controller
  * @param   {service} $scope
  * @param   {factory} educatorFactory
  * @param   {module} toastr
- * @param   {Service} apiService
  * @param   {service} $location
  * @returns {undefined}
  */
-function ShowServiceTimeCtrl($scope, educatorFactory, toastr, apiService, $location) {
+function ShowServiceTimeCtrl($scope, educatorFactory, toastr, $location) {
     
-    if(!apiService.isLoggedIn()) {
-        toastr.error('You are not Logged in', 'Please logged in');
-        $location.path('/');
-        return;
-    }
-  
     educatorFactory.getSleepTime(function(err, res) {
         if(res) {
             if(res.status.code === 303000) {
@@ -362,23 +322,17 @@ function ShowServiceTimeCtrl($scope, educatorFactory, toastr, apiService, $locat
  * Inject all required module
  * @type Array
  */
-ShowRatingCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', 'apiService', '$location'];
+ShowRatingCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', '$location'];
 /**
  * Show rating of all educator
  * @param {service} $scope
  * @param {factory} educatorFactory
  * @param {module}  toastr
- * @param {service} apiService
  * @param {service} $location
  * @returns {undefined}
  */
-function ShowRatingCtrl($scope, educatorFactory, toastr, apiService, $location) {
-    
-    if(!apiService.isLoggedIn()) {
-        toastr.error('You are not Logged in', 'Please logged in');
-        $location.path('/');
-        return;
-    }
+function ShowRatingCtrl($scope, educatorFactory, toastr, $location) {
+
     educatorFactory.getRating(function(err, res) {
         if(res) {
             if(res.status.code === 303000) {

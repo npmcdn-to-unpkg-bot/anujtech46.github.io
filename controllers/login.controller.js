@@ -22,7 +22,7 @@ function LoginCtrl($scope, $log, $location, loginFactory, toastr, $cookies) {
         loginFactory.doLogin(data, function(err, res){
             if(res) {
                 if(res.status.code === 303000) {
-                    $cookies.put('token', res.token);
+                    $cookies.put('loginToken', res.token);
                     $cookies.put('username', $scope.username);
 //                    apiService.setToken(res.token);
 //                    apiService.setUsername($scope.username);

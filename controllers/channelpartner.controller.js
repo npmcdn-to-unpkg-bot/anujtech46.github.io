@@ -6,17 +6,16 @@
 angular.module('channelpartner')
         .controller('RegisterCPCtrl', RegisterCPCtrl)
         .controller('ShowAllCPCtrl', ShowAllCPCtrl)
-        .controller('ShowAllPartnerAPPCtrl', ShowAllPartnerAPPCtrl)
-        .controller('AddPartnerAPPCtrl', AddPartnerAPPCtrl)
-        .controller('UpdatePartnerAPPCtrl', UpdatePartnerAPPCtrl)
         .controller('AddAppCredentialsCtrl', AddAppCredentialsCtrl)
-        .controller('ShowAppCredentialsCtrl', ShowAppCredentialsCtrl);
+        .controller('ShowAppCredentialsCtrl', ShowAppCredentialsCtrl)
+        .controller('ShowAllPartnerAdminCtrl', ShowAllPartnerAdminCtrl)
+        .controller('AddPartnerAdminCtrl', AddPartnerAdminCtrl);
 
 /**
  * 
  * @type Array
  */
-RegisterCPCtrl.$inject = ['$scope', 'cpFactory', 'toastr', '$location'];
+RegisterCPCtrl.$inject = ['$scope', 'cpFactory', 'toastr', '$location', 'apiService'];
 /**
  * register new channel partner
  * @param {type} $scope
@@ -270,7 +269,7 @@ AddAppCredentialsCtrl.$inject = ['$scope', 'cpFactory', 'toastr', '$location'];
  * @param {type} $scope
  * @param {type} cpFactory
  * @param {type} toastr
- * @param {type} $location      
+ * @param {type} $location
  * @returns {undefined}
  */
 function AddAppCredentialsCtrl($scope, cpFactory, toastr, $location) {
@@ -301,18 +300,17 @@ function AddAppCredentialsCtrl($scope, cpFactory, toastr, $location) {
  * Inject all the required module
  * @type Array
  */
-ShowAppCredentialsCtrl.$inject = ['$scope', 'toastr', 'cpFactory', '$location', 'cpService', '$route'];
+ShowAppCredentialsCtrl.$inject = ['$scope', 'toastr', 'cpFactory', '$location', '$route'];
 /**
  * 
  * @param {type} $scope
  * @param {type} toastr
  * @param {type} cpFactory
  * @param {type} $location
- * @param {type} cpService
  * @param {type} $route
  * @returns {undefined}
  */
-function ShowAppCredentialsCtrl($scope, toastr, cpFactory, $location, cpService, $route) {
+function ShowAppCredentialsCtrl($scope, toastr, cpFactory, $location, $route) {
     
     $scope.showTable    = false;
     cpFactory.getAllAppCredentials(function(err, res) {
@@ -360,6 +358,111 @@ function ShowAppCredentialsCtrl($scope, toastr, cpFactory, $location, cpService,
             });
         } else { 
             $location.path('/showAppCredentials');
+            return false;
+        }
+    }
+};
+
+/**
+ * 
+ * @type Array
+ */
+AddPartnerAdminCtrl.$inject = ['$scope', 'cpFactory', 'toastr', '$location'];
+/**
+ * register new channel partner
+ * @param {type} $scope
+ * @param {type} cpFactory
+ * @param {type} toastr
+ * @param {type} $location
+ * @returns {undefined}
+ */
+function AddPartnerAdminCtrl($scope, cpFactory, toastr, $location) {
+    
+    $scope.registerAP =  function() {
+        
+        var data = {
+            email       : $scope.ap.email,
+            fullname    : $scope.ap.fullname,
+            appid       : $scope.ap.appid,
+            password    : $scope.ap.password,
+            onboard     : "CUSTOM"
+        };
+        
+        cpFactory.addPartnerAdmin(data, function(err, res) {
+            if(res && res.status) {
+                if(res.status.code === 303000) {
+                    $scope.ap = '';
+                    $scope.register.$setPristine();
+                    $location.path('/showPartnerAdmin');
+                } else {
+                    toastr.error('Invalid Credentials', 'Unable to register');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        });
+    };
+};
+
+/**
+ * Inject all the required module
+ * @type Array
+ */
+ShowAllPartnerAdminCtrl.$inject = ['$scope', 'toastr', 'cpFactory', '$location', 'cpService', '$route'];
+/**
+ * 
+ * @param {type} $scope
+ * @param {type} toastr
+ * @param {type} cpFactory
+ * @param {type} $location
+ * @param {type} cpService
+ * @param {type} $route
+ * @returns {undefined}
+ */
+function ShowAllPartnerAdminCtrl($scope, toastr, cpFactory, $location, cpService, $route) {
+    
+    $scope.showTable    = false;
+    cpFactory.getAllPartnerAdmin(function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                if(res.users.length === 0) {
+                    $scope.count = res.users.length;
+                } else {
+                    $scope.showTable = true;
+                    $scope.count     = res.users.length;
+                    $scope.users     = res.users;
+                }
+            } else {
+                toastr.error('Invalid Credentials', 'Unable to find');
+            }
+        } else {
+            toastr.error('Server not working');
+        }
+    });
+    
+    $scope.addPartnerAdmin = addPartnerAdmin;
+    function addPartnerAdmin() {
+        $location.path('/addPartnerAdmin');
+    }
+    
+    $scope.deletePartnerAdmin = deletePartnerAdmin;
+    function deletePartnerAdmin(userid) {
+        var x = confirm("Are you sure you want to delete?");
+        if(x) { 
+            cpFactory.deletePartnerAdmin(userid, function(err, res) {
+                if(res) {
+                    if(res.status.code === 303000) {
+                        toastr.success("delete partner admin successfully");
+                        $route.reload();
+                    } else {
+                        toastr.error('Invalid Credentials', 'Unable to delete Partners admin');
+                    }
+                } else {
+                    toastr.error('Server not working');
+                }
+            });
+        } else { 
+            $location.path('/showPartnerAdmin');
             return false;
         }
     }
