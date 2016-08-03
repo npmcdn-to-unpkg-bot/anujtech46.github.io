@@ -2,7 +2,8 @@
 
     angular.module('registration')
     .factory('registrationFactory', registrationFactory)
-    .factory('PagerService', PagerService);
+    .factory('PagerService', PagerService)
+    .service('registrationService', registrationService);
     
 registrationFactory.$inject = ['apiService', '$log'];
 
@@ -229,3 +230,33 @@ function PagerService(_) {
         };
     }
 };
+
+registrationService.$inject = [];
+
+function registrationService() {
+    
+    var userid ;
+    var clickCount = 1;
+    
+    this.setUserid = function(userid) {
+        this.userid = userid;
+        return;
+    };
+    
+    this.getUserid = function() {
+        return this.userid;
+    };
+    
+    this.setClickCount = function(clickCount) {
+        this.clickCount = clickCount;
+        return;
+    };
+    
+    this.getClickCount = function() {
+        return this.clickCount;
+    };
+    
+    this.removeUserid = function() {
+        this.userid = '';
+    };
+}

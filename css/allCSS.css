@@ -40,6 +40,7 @@ button {
 
 table {
     width:100%;
+    /*table-layout: fixed;*/
 }
 table, th, td {
     border: 1px solid black;
@@ -55,8 +56,21 @@ table#t01 tr:nth-child(even) {
 table#t01 tr:nth-child(odd) {
    background-color:#fff;
 }
+
+/*table#t01 td {
+   width: 200px;
+   overflow: visible;
+}*/
 table#t01 th	{
     background-color: black;
     color: white;
+    text-align: center;
 }
-        
+
+.cursor-pointer {
+    cursor:pointer;
+}
+
+.div-align-center {
+    text-align: center;
+}

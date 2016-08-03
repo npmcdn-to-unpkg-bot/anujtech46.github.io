@@ -1,7 +1,7 @@
 {
   "name": "myAngular",
   "version": "1.0.0",
-    "private": false,
+  "private": false,
   "keywords": [
     "util",
     "functional",
@@ -10,8 +10,7 @@
     "browser"
   ],
   "author": "comp",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "engines": {
     "node": "5.1.0",
     "npm": "3.4.1"
@@ -21,8 +20,11 @@
     "postinstall": "bower install"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "bower": "1.7.1",
     "express": "4.13.3"
   },
-  "cacheDirectories": ["node_modules"]
+  "cacheDirectories": [
+    "node_modules"
+  ]
 }

@@ -18,10 +18,12 @@ function ProfileCtrl($scope, apiService, $log, $location) {
     
 };
 
-ShowStudentProfileCtrl.$inject = ['$scope', '$log', '$routeParams', 'toastr', 'userProfileFactory'];
-function ShowStudentProfileCtrl($scope, $log, $routeParams, toastr, userProfileFactory) {
+ShowStudentProfileCtrl.$inject = ['$scope', '$log', '$routeParams', 'toastr', 'userProfileFactory', 'registrationService'];
+function ShowStudentProfileCtrl($scope, $log, $routeParams, toastr, userProfileFactory, registrationService) {
     
-    var userid = $routeParams.userid;
+    $scope.profile = function () {
+    
+    var userid = registrationService.getUserid();
     $scope.deleteStudent = deleteStudent;
     
 
@@ -68,7 +70,7 @@ function ShowStudentProfileCtrl($scope, $log, $routeParams, toastr, userProfileF
       else
         console.log("Show not logic");;
     }
-    
+    };
 };
 
 ShowEducatorProfileCtrl.$inject = ['$scope', '$log', '$routeParams', 'toastr', 

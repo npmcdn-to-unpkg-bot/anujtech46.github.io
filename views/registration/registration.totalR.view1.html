@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Total Registration</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+    </head>
+    <body ng-init="showProfile = false">
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
+        <div>Total Registration {{ count }} </div>
+        <table id="t01">
+          <tr>
+                    <th>user ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>App Id</th>
+                    <th>Role</th>
+                    <th>On Board</th>
+                    <th>created</th>
+                    <th>Last Active</th>
+        </tr>
+        </table>
+        <table id="t01" ng-repeat=" user in users ">
+                <tr>
+                    <td ng-click="getProfiles(user._id)">{{ user._id }} </td>
+                    <td>{{ user.fullname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.appid }}</td>
+                    <td>{{ user.roles }}</td>
+                    <td>{{ user.onboard }}</td>
+                    <td>{{ user.created }}</td>
+                    <td>{{ user.lastactive }}</td>
+                </tr>
+            </table>
+        </div><br>
+        <ul ng-if=" pager.pages.length" class="pagination">
+            <li ng-class="{disabled:pager.currentPage === 1}">
+                <a ng-click=" setPage(1)">First</a>
+            </li>
+            <li ng-class="{disabled:pager.currentPage === 1}">
+                <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li ng-repeat="page in  pager.pages" ng-class="{active: pager.currentPage === page}">
+                <a ng-click=" setPage(page)">{{page}}</a>
+            </li>                
+            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+                <a ng-click=" setPage( pager.currentPage + 1)">Next</a>
+            </li>
+            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+                <a ng-click=" setPage( pager.totalPages)">Last</a>
+            </li>
+        </ul>
+        <div ng-if="showProfile" ng-hide="hideProfile">
+          <div >
+            <div ng-include="'views/profile/profile.showProfile.student.view.html'">
+          </div>
+        </div>
+        </div>
+    </body>
+</html>
