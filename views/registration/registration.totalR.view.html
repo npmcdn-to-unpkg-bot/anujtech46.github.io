@@ -1,68 +1,73 @@
 <html>
-    <head>
-        <title>Total Registration</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
-    </head>
-    <body>
-        <div ng-include = "'views/profile/profile.view.html'"></div><br>
-        <div ng-init="showProfile = false">Total Registration {{ count }} </div>
-        <table id="t01" class="table" st-table="users">
-          <tr>
-            <th>user ID</th>
-            <th ng-click="sortType = 'fullname'; sortReverse = !sortReverse">
-              <span class="cursor-pointer">Full Name</span>
-            </th>
-            <th ng-click="sortType = 'email'; sortReverse = !sortReverse" class="cursor-pointer">
-              <span class="cursor-pointer">Email</span>
-            </th>
-            <th>App Id</th>
-            <th>Role</th>
-            <th>On Board</th>
-            <th ng-click="sortType = 'created'; sortReverse = !sortReverse" class="cursor-pointer">
-              <span class="cursor-pointer">Created</span>
-            </th>
-            <th ng-click="sortType = 'lastactive'; sortReverse = !sortReverse" class="cursor-pointer">
-              <span class="cursor-pointer">Last Active</span>
-            </th>
+  <head>
+      <title>Total Registration</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div ng-include = "'views/profile/profile.view.html'"></div><br>
+
+    <div layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+      <div ng-init="showProfile = false" class="text-margin-10px" >Total Registration {{ count }} </div><br>
+      <table id="t01" class="table">
+        <tr>
+          <th>user ID</th>
+          <th ng-click="sortType = 'fullname'; sortReverse = !sortReverse">
+            <span class="cursor-pointer">Full Name</span>
+          </th>
+          <th ng-click="sortType = 'email'; sortReverse = !sortReverse" class="cursor-pointer">
+            <span class="cursor-pointer">Email</span>
+          </th>
+          <th>App Id</th>
+          <th>Role</th>
+          <th>On Board</th>
+          <th ng-click="sortType = 'created'; sortReverse = !sortReverse" class="cursor-pointer">
+            <span class="cursor-pointer">Created</span>
+          </th>
+          <th ng-click="sortType = 'lastactive'; sortReverse = !sortReverse" class="cursor-pointer">
+            <span class="cursor-pointer">Last Active</span>
+          </th>
         </tr>
-          <tr ng-repeat=" user in users | orderBy:sortType:sortReverse">
-              <td ng-click="getProfiles(user._id, user.roles)" class="cursor-pointer">{{ user._id }} </td>
-              <td>{{ user.fullname }}</td>
-              <td>{{ user.email }}</td>
-              <td>{{ user.appid }}</td>
-              <td>{{ user.roles }}</td>
-              <td>{{ user.onboard }}</td>
-              <td>{{ user.created | utcToLocal:'dd.MM.yy - hh.mm a'}}</td>
-              <td>{{ user.lastactive | utcToLocal:'dd.MM.yy - hh.mm a'}}</td>
-          </tr>
-      </table>
-        </div><br>
-        <div class="div-align-center">
-          <ul ng-if=" pager.pages.length" class="pagination">
-            <li ng-class="{disabled:pager.currentPage === 1}">
-                <a ng-click=" setPage(1)">First</a>
-            </li>
-            <li ng-class="{disabled:pager.currentPage === 1}">
-                <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
-            </li>
-            <li ng-repeat="page in  pager.pages" ng-class="{active: pager.currentPage === page}">
-                <a ng-click=" setPage(page)">{{page}}</a>
-            </li>                
-            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
-                <a ng-click=" setPage( pager.currentPage + 1)">Next</a>
-            </li>
-            <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
-                <a ng-click=" setPage( pager.totalPages)">Last</a>
-            </li>
-          </ul>
-        </div>
-        <div ng-if="showProfile" ng-hide="hideProfile">
-          <div >
-            <div ng-include="'views/profile/profile.showProfile.student.view.html'">
+      
+        <tr ng-repeat=" user in users | orderBy:sortType:sortReverse">
+            <td ng-click="getProfiles(user._id, user.roles)" class="cursor-pointer">{{ user._id }} </td>
+            <td>{{ user.fullname }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.appid }}</td>
+            <td>{{ user.roles }}</td>
+            <td>{{ user.onboard }}</td>
+            <td>{{ user.created | utcToLocal:'dd.MM.yy - hh.mm a'}}</td>
+            <td>{{ user.lastactive | utcToLocal:'dd.MM.yy - hh.mm a'}}</td>
+        </tr>
+    </table>
+      
+      </div><br>
+      <div class="div-align-center">
+        <ul ng-if=" pager.pages.length" class="pagination">
+          <li ng-class="{disabled:pager.currentPage === 1}">
+              <a ng-click=" setPage(1)">First</a>
+          </li>
+          <li ng-class="{disabled:pager.currentPage === 1}">
+              <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+          </li>
+          <li ng-repeat="page in  pager.pages" ng-class="{active: pager.currentPage === page}">
+              <a ng-click=" setPage(page)">{{page}}</a>
+          </li>                
+          <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+              <a ng-click=" setPage( pager.currentPage + 1)">Next</a>
+          </li>
+          <li ng-class="{disabled: pager.currentPage ===  pager.totalPages}">
+              <a ng-click=" setPage( pager.totalPages)">Last</a>
+          </li>
+        </ul>
+      </div>
+      <div ng-if="showProfile" ng-hide="hideProfile">
+        <div >
+          <div ng-include="'views/profile/profile.showProfile.student.view.html'">
           </div>
         </div>
-        </div>
-    </body>
+      </div>
+  </body>
 </html>

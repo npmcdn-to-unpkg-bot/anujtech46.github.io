@@ -1,142 +1,81 @@
-<html>
-    <head>
-        <title>Profile Header</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-                background-color: #333;
-            }
 
-            li {
-                float: left;
-            }
-
-            li a, .dropbtn1 {
-                display: inline-block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
-
-            li a:hover, .dropdown1:hover .dropbtn1 {
-                background-color: red;
-            }
-
-            li.dropdown1 {
-                display: inline-block;
-            }
-
-            .dropdown-content1 {
-                display: none;
-                position: absolute;
-                background-color: #f9f9f9;
-                min-width: 160px;
-                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            }
-
-            .dropdown-content1 a {
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-                text-align: left;
-            }
-
-            .dropdown-content1 a:hover {background-color: #27AE60}
-
-            .dropdown1:hover .dropdown-content1 {
-                display: block;
-            }
-        </style>
-        <!--<link rel="stylesheet" type="text/css" href="css/profileHeader.css">-->
-    </head>
-    <body>
-        <div style="width:100%;">
-            <ul>
-                <li class="dropdown1">
-                <a class="dropbtn1">Registration</a>
-                    <div class="dropdown-content1">
-                      <a href="#todayR">Today</a>
-                      <a href="#totalR">Total</a>
-                      <a href="#tempUser">Temp User</a>
-                      <a href="#devices">device</a>
-                      <a href="#lastActive">Last Active</a>
-                      <a href="#lastDayActiveUser">Lastday Active User</a>
-                      <a href="#AllUserProfileLocation">User Locations</a>
-                      <a href="#AllUserIPAddress">User IP</a>
-                    </div>
-                </li>
-                <li class="dropdown1">
-                <a class="dropbtn1">Question</a>
-                    <div class="dropdown-content1">
-                      <a href="#maths">Maths</a>
-                      <a href="#science">Science</a>
-                      <a href="#english">English</a>
-                      <a href="#totalQ">Total</a>
-                      <a href="#repeatUserSessions">Repeat User</a>
-                      <a href="#getStartedSessions">Started Sessions</a>
-                      <a href="#getRequestedSessions">Requested Sessions</a>
-                      <a href="#getRatingLT2">Rating LT2</a>
-                      <a href="#getRatingGT4">Rating GT4</a>
-                    </div>
-                </li>
-                <li class="dropdown1">
-                <a class="dropbtn1">Product</a>
-                    <div class="dropdown-content1">
-                        <a href="#showAward">Show Award</a>
-                        <a href="#showPromo">Show Promo</a>
-                        <a href="#showShop">Show Shop</a>
-                        <a href="#showVoucher">Show Voucher</a>
-                        <a href="#showPurchase">Purchases Users</a>
-                        <a href="#showReferralCode">Referral Code Users</a>
-                        
-                    </div>
-                </li>
-                <li class="dropdown1">
-                <a class="dropbtn1">Educator</a>
-                    <div class="dropdown-content1">
-                      <a href="#showEducator">Show</a>
-                      <a href="#showLookers">Show Lookers</a>
-                      <a href="#showWeights">Show Weights</a>
-                      <a href="#setSleepTime">Sleep Time</a>
-                      <a href="#showRating">Rating</a>
-                    </div>
-                </li>
-                <li class="dropdown1">
-                <a class="dropbtn1">Student</a>
-                    <div class="dropdown-content1">
-                      <a href="#addCreditStudent">Add Credit</a>
-                      <a href="#deleteStudent">Delete</a>
-                      <a href="#getStudentProfile">Search Student</a>
-                      <a href="#referralUser">Referral User</a>
-                      <a href="#upgradeUser">Upgrade User</a>
-                      <a href="#getRegisteredUser">User Credits</a>
-                      <a href="#sendEmailToAdmin">Get Email</a>
-                      <a href="#AddCredits">Add Credits</a>
-                    </div>
-                </li>
-                <li class="dropdown1">
-                <a class="dropbtn1">Partners</a>
-                    <div class="dropdown-content1">
-                      <a href="#registerCP">CP Register</a>
-                      <a href="#showCP">Show CP</a> 
-                      <a href="#showPartnerAdmin">Show Partner</a>
-                      <a href="#showAppCredentials">Show apps</a>
-                    </div>
-                </li>
-                <li class="dropdown1">
-                <a class="dropbtn1">Graph</a>
-                    <div class="dropdown-content1">
-                      <a href="#registrationGraph">Registration</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </body>
-</html>
+<div style="width:100%;" class="header">
+  <ul id="header01">
+    <li class="dropdown">
+      <a class="dropbtn">Registration</a>
+      <div class="dropdown-content">
+        <a href="#todayR">Today</a>
+        <a href="#totalR">Total</a>
+        <a href="#tempUser">Temp User</a>
+        <a href="#devices">device</a>
+        <a href="#lastActive">Last Active</a>
+        <a href="#lastDayActiveUser">Lastday Active User</a>
+        <a href="#AllUserProfileLocation">User Locations</a>
+        <a href="#AllUserIPAddress">User IP</a>
+      </div>
+    </li>
+    <li class="dropdown">
+      <a class="dropbtn">Question</a>
+      <div class="dropdown-content">
+        <a href="#maths">Maths</a>
+        <a href="#science">Science</a>
+        <a href="#english">English</a>
+        <a href="#totalQ">Total</a>
+        <a href="#repeatUserSessions">Repeat User</a>
+        <a href="#getStartedSessions">Started Sessions</a>
+        <a href="#getRequestedSessions">Requested Sessions</a>
+        <a href="#getRatingLT2">Rating LT2</a>
+        <a href="#getRatingGT4">Rating GT4</a>
+      </div>
+    </li>
+    <li class="dropdown">
+      <a class="dropbtn">Product</a>
+      <div class="dropdown-content">
+        <a href="#showAward">Show Award</a>
+        <a href="#showPromo">Show Promo</a>
+        <a href="#showShop">Show Shop</a>
+        <a href="#showVoucher">Show Voucher</a>
+        <a href="#showPurchase">Purchases Users</a>
+        <a href="#showReferralCode">Referral Code Users</a>
+      </div>
+    </li>
+    <li class="dropdown">
+    <a class="dropbtn">Educator</a>
+    <div class="dropdown-content">
+      <a href="#showEducator">Show</a>
+      <a href="#showLookers">Show Lookers</a>
+      <a href="#showWeights">Show Weights</a>
+      <a href="#setSleepTime">Sleep Time</a>
+      <a href="#showRating">Rating</a>
+    </div>
+    </li>
+    <li class="dropdown">
+    <a class="dropbtn">Student</a>
+    <div class="dropdown-content">
+      <a href="#addCreditStudent">Add Credit</a>
+      <a href="#deleteStudent">Delete</a>
+      <a href="#getStudentProfile">Search Student</a>
+      <a href="#referralUser">Referral User</a>
+      <a href="#upgradeUser">Upgrade User</a>
+      <a href="#getRegisteredUser">User Credits</a>
+      <a href="#sendEmailToAdmin">Get Email</a>
+      <a href="#AddCredits">Add Credits</a>
+    </div>
+    </li>
+    <li class="dropdown">
+      <a class="dropbtn">Partners</a>
+      <div class="dropdown-content">
+        <a href="#registerCP">CP Register</a>
+        <a href="#showCP">Show CP</a> 
+        <a href="#showPartnerAdmin">Show Partner</a>
+        <a href="#showAppCredentials">Show apps</a>
+      </div>
+    </li>
+    <li class="dropdown">
+      <a class="dropbtn">Graph</a>
+      <div class="dropdown-content">
+        <a href="#registrationGraph">Registration</a>
+      </div>
+    </li>
+  </ul>
+</div>
