@@ -17,9 +17,9 @@ function questionFactory(apiService, $log) {
         getRequestedSessions:getRequestedSessions
     };
     
-    function getAllSession(callback) {
+    function getAllSession(data, callback) {
         
-        var url = apiService.getApiEndPoint() + "question";
+        var url = apiService.getApiEndPoint() + "partner/session";
         
         var config = {
             headers : {
@@ -27,7 +27,7 @@ function questionFactory(apiService, $log) {
             }
         };
         
-        apiService.doGet(url, config, function(err, res) {
+        apiService.doPost(url, data, config, function(err, res) {
             return callback(err, res);
         });
     };

@@ -30,9 +30,9 @@ function config($routeProvider) {
                     }
                 }
             }).
-            when('/totalQ', {
-                templateUrl :'views/question/question.totalQ.view.html',
-                controller :'AQCtrl',
+            when('/sessionDetails', {
+                templateUrl :'views/question/question.sessiondetails.view.html',
+                controller :'SessionDetailCtrl',
                 resolve : {
                     loggedin : function(apiService) {
                         return apiService.onlyLoggedIn();

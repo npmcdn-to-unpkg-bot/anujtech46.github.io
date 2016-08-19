@@ -6,7 +6,7 @@
         <title>Update Shop product</title>
   
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
+         
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
@@ -55,6 +55,15 @@
                         <input type="number" name="cvfd" ng-model="shop.cvfd" required>
                     </p>
                     <div ng-messages="product.cvfd.$error" ng-if="product.cvfd.$touched">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+              <div ng-class="{ 'has-error': product.pvfd.$touched && product.pvfd.$invalid }">
+                    <p>
+                        <label>Product valid for days </label>
+                        <input type="number" name="pvfd" ng-model="shop.pvfd" required>
+                    </p>
+                    <div ng-messages="product.pvfd.$error" ng-if="product.pvfd.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>

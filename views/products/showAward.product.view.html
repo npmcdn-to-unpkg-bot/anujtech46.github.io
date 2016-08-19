@@ -4,7 +4,7 @@
         <title>Show award Product</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
+         
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
@@ -18,10 +18,11 @@
             <table id="t01">
                 <tr>
                     <th>Product Identifier</th>
+                    <th>Partner Id</th>
                     <th>Name</th>
-                    <th>description</th>
                     <th>Credits</th>
                     <th>CVFD</th>
+                    <th>PVFD</th>
                     <th>Available for</th>
                     <th>Created</th>
                     <th>Updated</th>
@@ -31,10 +32,11 @@
                 </tr>
                 <tr ng-repeat=" award in products ">
                     <td>{{ award.productidentifier}}</td>
+                    <td>{{ award.studentpartnerid}}</td>
                     <td>{{ award.name}}</td>
-                    <td>{{ award.description }}</td>
                     <td>{{ award.credits }}</td>
                     <td>{{ award.creditsvalidfordays }}</td>
+                    <td>{{ award.creditvalidity }}</td>
                     <td>{{ award.availablefor }}</td>
                     <td>{{ award.created }}</td>
                     <td>{{ award.updated }}</td>

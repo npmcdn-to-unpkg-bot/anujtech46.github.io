@@ -36,10 +36,12 @@ function AddAwardCtrl($scope, productsFactory, toastr, $location) {
         
         var data = {
             productidentifier: $scope.award.pi,
+            studentpartnerid : $scope.award.spid,
             name: $scope.award.pname,
             description: $scope.award.description,
             credits: $scope.award.credits,
             creditsvalidfordays: $scope.award.cvfd,
+            creditvalidity: $scope.award.pvfd,
             availablefor: $scope.award.availablefor
         };
 
@@ -70,10 +72,12 @@ function AddPromoCtrl($scope, productsFactory, toastr, $location) {
     $scope.addPromoProduct = function() {
         var data = {
             productidentifier: $scope.promo.pi,
+            studentpartnerid : $scope.promo.spid,
             name: $scope.promo.pname,
             description: $scope.promo.description,
             credits: $scope.promo.credits,
             creditsvalidfordays: $scope.promo.cvfd,
+            creditvalidity: $scope.promo.pvfd,
             code: $scope.promo.code,
             usagecount: $scope.promo.usagecount,
             availablefor: $scope.promo.availablefor
@@ -107,10 +111,12 @@ function AddShopCtrl($scope, productsFactory, toastr, $location) {
       
         var data = {
             productidentifier: $scope.shop.pi,
+            studentpartnerid : $scope.shop.spid,
             name: $scope.shop.pname,
             description: $scope.shop.description,
             credits: $scope.shop.credits,
             creditsvalidfordays: $scope.shop.cvfd,
+            creditvalidity: $scope.shop.pvfd,
             availablefor: $scope.shop.availablefor        
         };
 
@@ -148,10 +154,12 @@ function AddVoucherCtrl($scope, productsFactory, toastr, cpProfileService, $loca
     $scope.addVoucherProduct = function() {
         var data = {
             productidentifier: $scope.voucher.pi,
+            studentpartnerid : $scope.voucher.spid,
             name: $scope.voucher.pname,
             description: $scope.voucher.description,
             credits: $scope.voucher.credits,
             creditsvalidfordays: $scope.voucher.cvfd,
+            creditvalidity: $scope.voucher.pvfd,
             code: $scope.voucher.code,
             codemajor: $scope.voucher.codemajor,
             codeminor: $scope.voucher.codeminor,
@@ -533,15 +541,18 @@ function UpdateAwardCtrl($scope, productsFactory, toastr, $location, productServ
         toastr.error('Invalid Credentials');
         return ;
     }
+    
     productsFactory.getAwardProductByID(productidentifier, function(err, res) {
         if(res) {
             if(res.status.code === 303000) {
                 $scope.award = {
                     pi: productidentifier,
+                    spid: res.award.studentpartnerid,
                     pname: res.award.name,
                     description: res.award.description,
                     credits: res.award.credits,
                     cvfd : res.award.creditsvalidfordays,
+                    creditvalidity : res.award.creditvalidity,
                     expiry: res.award.expired,
                     code: res.award.code,
                     usagecount: res.award.usagecount,
@@ -579,6 +590,7 @@ function UpdateAwardCtrl($scope, productsFactory, toastr, $location, productServ
         }
         if($scope.award.evfd) {
             data.extendValidity = $scope.award.evfd;
+            data.creditvalidity = $scope.award.creditvalidity + $scope.award.evfd;
         }
         if($scope.award.availablefor) {
             data.availablefor = $scope.award.availablefor;
@@ -619,10 +631,12 @@ function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productServ
             if(res.status.code === 303000) {
                 $scope.promo = {
                     pi: productidentifier,
+                    spid: res.promo.studentpartnerid,
                     pname: res.promo.name,
                     description: res.promo.description,
                     credits: res.promo.credits,
                     cvfd : res.promo.creditsvalidfordays,
+                    creditvalidity : res.promo.creditvalidity,
                     expiry: res.promo.expired,
                     code: res.promo.code,
                     usagecount: res.promo.usagecount,
@@ -657,6 +671,7 @@ function UpdatePromoCtrl($scope, productsFactory, toastr, $location, productServ
         }
         if($scope.promo.evfd) {
             data.extendValidity = $scope.promo.evfd;
+            data.creditvalidity = $scope.promo.creditvalidity + $scope.promo.evfd;
         }
         if($scope.promo.expiry) {
             data.expired = $scope.promo.expiry;
@@ -706,10 +721,12 @@ function UpdateShopCtrl($scope, productsFactory, toastr, $location, productServi
             if(res.status.code === 303000) {
                 $scope.shop = {
                     pi: productidentifier,
+                    spid: res.shop.studentpartnerid,
                     pname: res.shop.name,
                     description: res.shop.description,
                     credits: res.shop.credits,
                     cvfd : res.shop.creditsvalidfordays,
+                    creditvalidity : res.shop.creditvalidity,
                     expiry: res.shop.expired,
                     availablefor: res.shop.availablefor
                 };
@@ -742,6 +759,7 @@ function UpdateShopCtrl($scope, productsFactory, toastr, $location, productServi
         }
         if($scope.shop.evfd) {
             data.extendValidity = $scope.shop.evfd;
+            data.creditvalidity = $scope.shop.creditvalidity + $scope.shop.evfd;
         }
         if($scope.shop.expiry) {
             data.expired = $scope.shop.expiry;
@@ -783,6 +801,7 @@ function UpdateVoucherCtrl($scope, productsFactory, toastr, $location, productSe
             if(res.status.code === 303000) {
                 $scope.voucher = {
                     pi: productidentifier,
+                    spid: res.voucher.studentpartnerid,
                     pname: res.voucher.name,
                     description: res.voucher.description,
                     credits: res.voucher.credits,
@@ -790,6 +809,7 @@ function UpdateVoucherCtrl($scope, productsFactory, toastr, $location, productSe
                     codemajor: res.voucher.codemajor,
                     codeminor: res.voucher.codeminor,
                     cvfd : res.voucher.creditsvalidfordays,
+                    creditvalidity : res.voucher.creditvalidity,
                     expiry: res.voucher.expired,
                     usagecount: res.voucher.usagecount,
                     availablefor: res.voucher.availablefor
@@ -826,6 +846,7 @@ function UpdateVoucherCtrl($scope, productsFactory, toastr, $location, productSe
         }
         if($scope.voucher.expiry) {
             data.expired = $scope.voucher.expiry;
+            data.creditvalidity = $scope.voucher.creditvalidity + $scope.voucher.evfd;
         }
         if($scope.voucher.availablefor) {
             data.availablefor = $scope.voucher.availablefor;

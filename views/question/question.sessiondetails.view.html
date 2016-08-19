@@ -1,0 +1,91 @@
+<html>            
+  <head>
+    <title>Student Register Credits</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" type="text/css" href="css/dateTimePicker.css">-->
+    <style>
+/*      button {
+        margin-left: 70px;
+      }*/
+      label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 200px;
+    text-align: left;
+    margin-left: 10px;
+}
+input, p {
+  display: inline-block;
+  float: left;
+  /*margin-left: 40px;*/
+  margin-bottom: 10px;
+}
+
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+
+    </style>
+  </head>
+    
+  <body>
+    <div ng-include = "'views/profile/profile.view.html'"></div><br>
+    <div>
+      <div ng-show="hideMessage">
+          <label style="width: 75px"></label>
+          <p style="font-size: 16px;">Total number of session = {{totalQuestion}}</p>
+    </div>
+      <form name="session" ng-submit="getSessionCount()" novalidate >
+<!--        <div ng-class="{ 'has-error': !session.startdate.$pristine && session.startdate.$error.required }">
+            <label>Session date from : </label>
+            <input type="date" name="startdate" ng-model="startdate" required>
+          <div ng-messages="session.startdate.$error" ng-if="session.startdate.$invalid && !session.startdate.$pristine && session.startdate.$error.required">
+              <div ng-messages-include="error/error.html"></div>
+          </div> 
+        </div><br>
+        <div ng-class="{ 'has-error': !session.enddate.$pristine && session.enddate.$error.required }">
+            <label>Session date to : </label>
+            <input type="date" name="enddate" ng-model="enddate" required>
+          <div ng-messages="session.enddate.$error" ng-if="session.enddate.$invalid && !session.enddate.$pristine && session.enddate.$error.required">
+            <div ng-messages-include="error/error.html"></div>
+          </div>
+        </div>-->
+<!--        <ng-datepicker ng-model="startdate"></ng-datepicker>  
+        <div>
+            <label>Select class : </label>
+            <p ng-dropdown-multiselect="" options="classesdata" selected-model="classesmodel" extra-settings="classessettings"></p>
+        </div><br>-->
+<h4>Popup</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="dd.MM.yyyy" ng-model="dt" is-open="opened"  ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div>
+        
+        <div>
+            <label>Select subject : </label>
+            <p ng-dropdown-multiselect="" options="subjectdata" selected-model="subjectmodel" extra-settings="subjectsettings"></p>
+        </div><br>
+        <div>
+            <label style="width: 100px"></label>
+            <p><button ng-disabled="session.$invalid">Submit</button></p>
+        </div><br><br>
+      </form>
+    </div><br>
+    
+  </body>
+</html>

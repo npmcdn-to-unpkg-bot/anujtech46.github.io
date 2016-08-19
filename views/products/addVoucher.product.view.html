@@ -5,12 +5,12 @@
         <meta charset="utf-8">
         <title>Add Voucher product</title>
   
-        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
+         
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
         <div align="center">
-            <p style="font-size: 30px; width: 400px"><b><u>Create Voucher For {{institute}}</u></b</p>
+            <p style="font-size: 30px; width: 400px"><u>Create Voucher For {{institute}}</u></p>
             <form name="product" ng-submit="addVoucherProduct()" ng-hide="hideform" role="addVoucher" novalidate>
                 <div ng-class="{ 'has-error': !product.pi.$pristine && product.pi.$error.required }">
                     <p>
@@ -21,6 +21,15 @@
                         <div ng-messages-include="error/error.html"></div>
                     </div> 
                 </div>
+              <div ng-class="{ 'has-error': product.spid.$touched && product.spid.$invalid }">
+                            <p>
+                                <label>Partner Id : </label>
+                                <input type="text" name="spid" ng-model="voucher.spid" required>
+                            </p>
+                            <div ng-messages="product.spid.$error" ng-if="product.spid.$touched">
+                                <div ng-messages-include="error/error.html"></div>
+                            </div> 
+                        </div>
                 <div ng-class="{ 'has-error': !product.pname.$pristine && product.pname.$error.required }">
                     <p>
                         <label>Product Name : </label>
@@ -54,6 +63,15 @@
                         <input type="number" name="cvfd" ng-model="voucher.cvfd" required>
                     </p>
                     <div ng-messages="product.cvfd.$error" ng-if="!product.cvfd.$pristine && product.cvfd.$error.required && product.cvfd.$invalid">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+              <div ng-class="{ 'has-error': product.pvfd.$touched && product.pvfd.$invalid }">
+                    <p>
+                        <label>Product valid for days </label>
+                        <input type="number" name="pvfd" ng-model="voucher.pvfd" required>
+                    </p>
+                    <div ng-messages="product.pvfd.$error" ng-if="product.pvfd.$touched">
                         <div ng-messages-include="error/error.html"></div>
                     </div>
                 </div>

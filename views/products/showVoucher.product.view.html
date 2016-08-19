@@ -4,7 +4,7 @@
         <title>Show voucher Product</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/allCSS.css">
+         
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
@@ -12,10 +12,11 @@
             <table id="t01">
                 <tr>
                     <th>Product Identifier</th>
+                    <th>Partner Id</th>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Credits</th>
                     <th>CVFD</th>
+                    <th>PVFD</th>
                     <th>Available For</th>
                     <th>Code</th>
                     <th>Code Major</th>
@@ -29,14 +30,15 @@
                 </tr>
                 <tr ng-repeat=" voucher in products ">
                     <td>{{ voucher.productidentifier}}</td>
+                    <td>{{ voucher.studentpartnerid}}</td>
                     <td>{{ voucher.name}}</td>
-                    <td>{{ voucher.description}}</td>
                     <td>{{ voucher.credits }}</td>
                     <td>{{ voucher.creditsvalidfordays}}</td>
+                    <td>{{ voucher.creditvalidity}}</td>
                     <td>{{ voucher.availablefor}}</td>
                     <td>{{ voucher.code }}</td>
-                    <td>{{ voucher.codeminor }}</td>
                     <td>{{ voucher.codemajor }}</td>
+                    <td>{{ voucher.codeminor }}</td>
                     <td>{{ voucher.usagecount }}</td>
                     <td>{{ voucher.created }}</td>
                     <td>{{ voucher.updated }}</td>

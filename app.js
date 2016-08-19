@@ -1,6 +1,7 @@
 var app = angular.module('TUTRAPP', ['ngRoute','ngMessages','ngFileUpload', 'toastr',
                     'angularjs-datetime-picker','login','profile','question','registration','products',
-                    'educator','student','channelpartner', 'angular-loading-bar', 'ngAnimate', 'ngCookies']);
+                    'educator','student','channelpartner', 'angular-loading-bar', 'ngAnimate', 'ngCookies',
+                'angularjs-dropdown-multiselect']);
                 
 
 app.config(function(toastrConfig) {
@@ -24,3 +25,5 @@ app.constant('_',
 app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
   }]);
+
+    
