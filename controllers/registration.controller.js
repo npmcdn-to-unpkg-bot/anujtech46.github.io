@@ -15,7 +15,7 @@ function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr
     
     $scope.pager = {};
     $scope.setPage = setPage;
-    $scope.getProfiles = getProfiles;
+    $scope.getProfiles = getProfiles; 
     
     initController();
 
@@ -23,13 +23,13 @@ function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr
         // initialize to page 1
          $scope.setPage(1);
     }
-
-    function setPage(page) {
-        if (page < 1 || page >  $scope.pager.totalPages) {
-            return;
-        }
         
-        registrationFactory.getTotalRegister(page, function(err, res) {
+    function setPage(page) {
+            if (page < 1 || page >  $scope.pager.totalPages) {
+                return;
+            }
+        
+        registrationFactory.getTodayRegister(page, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
                     $log.info("getting res", res.user.user);
@@ -63,13 +63,12 @@ function TodayRegistrationCtrl($scope, PagerService, registrationFactory, toastr
     }
 }
 
-TotalRegistrationCtrl.$inject = ['$scope','PagerService', 'registrationFactory', 'toastr', '$log', '$location'];
+TotalRegistrationCtrl.$inject = ['$scope','PagerService', 'registrationFactory','registrationService','userProfileFactory', 'toastr', '$log', '$location'];
 
-function TotalRegistrationCtrl($scope, PagerService, registrationFactory, toastr, $log, $location) {
+function TotalRegistrationCtrl($scope, PagerService, registrationFactory, registrationService, userProfileFactory, toastr, $log, $location) {
     
     $scope.pager = {};
     $scope.setPage = setPage;
-    $scope.getProfiles = getProfiles;
     initController();
     
     function initController() {
@@ -85,7 +84,6 @@ function TotalRegistrationCtrl($scope, PagerService, registrationFactory, toastr
         registrationFactory.getTotalRegister(page, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
-                    $log.info("getting res", res.user.user);
                     $scope.pager = PagerService.GetPager(res.user.count, page, res.user.pageSize);
                     $scope.users =  res.user.user;
                     $scope.count = res.user.count;
@@ -99,21 +97,54 @@ function TotalRegistrationCtrl($scope, PagerService, registrationFactory, toastr
         }); 
     }
     
-    function getProfiles(userid, roles) {
-        $log.info(roles);
-        if(roles) {
-            $location.path('/profile/student/'+userid);
+    $scope.getProfiles = getProfiles;
+    
+    function getProfiles(userid) {
+        $scope.showProfile  = true;
+        
+        if(userid === registrationService.getUserid() && registrationService.getClickCount() === 0) {
+            $scope.hideProfile = true;
+            registrationService.setClickCount(1);
+            return;
         }
-        if(roles[0] === 'student') {
-            $location.path('/profile/student/'+userid);
+        $scope.hideProfile = false;
+        registrationService.setClickCount(0);
+        registrationService.setUserid(userid);
+        userProfileFactory.getStudentProfileWithToken(userid, function(err, res, sessions, devices) {
+        if(res) {
+            if(res.status.code === 303000) {
+                var profiles = res.profile;
+                $scope.userid = profiles.userid ;
+                $scope.email = res.email ;
+                $scope.fullname = profiles.fullname ; 
+                $scope.gender = profiles.gender ; 
+                $scope.school = profiles.school ; 
+                $scope.grade = profiles.grade ; 
+                $scope.dob = profiles.dob ; 
+                $scope.v1username = profiles.v1username ; 
+                $scope.modifiedon = profiles.modifiedon ; 
+                $scope.createdon = profiles.createdon ; 
+                $scope.location = profiles.location ;
+                $scope.subscriptions = profiles.subscription.products || 0;
+                if(devices) {
+                    $log.info("devices", devices.devices);
+                    $scope.devices = devices.devices;
+                }
+                if(sessions) {
+                    $log.info("sessions", sessions);
+                    $scope.sessions = sessions.sessions;
+                }
+                return;
+            } else {
+                toastr.error('Invalid request');
+            }
+        } else {
+            toastr.error('Server not working');
         }
-        if(roles[0] === 'educator') {
-            $location.path('/profile/educator/'+userid);
-        }
-        if(roles[0] === 'channelpartner') {
-            $location.path('/profile/channelpartner/'+userid);
-        }
+    });
     }
+    
+    
 }
 
 

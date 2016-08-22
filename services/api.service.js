@@ -4,7 +4,7 @@ angular.module('TUTRAPP')
 
 apiService.$inject = ['$log', '$http', '$cookies', '$location', '$q', 'toastr'];
 
-function apiService($log, $http, $cookies, $location, $q, toastr) {
+function apiService($log, $http, $cookies, $state, $q, toastr) {
     
 //    var token = '';
 //    var username = '';
@@ -18,8 +18,7 @@ function apiService($log, $http, $cookies, $location, $q, toastr) {
 //    };
     
     this.getToken = function() {
-        var token = $cookies.get('token');
-        return token;
+        return $cookies.get('loginToken');
     };
     
 //    this.setUsername = function(username) {
@@ -37,7 +36,7 @@ function apiService($log, $http, $cookies, $location, $q, toastr) {
     };
     
     this.removeToken = function() {   
-        $cookies.remove('token');
+        $cookies.remove('loginToken');
         return ;
     };
     
@@ -103,38 +102,24 @@ function apiService($log, $http, $cookies, $location, $q, toastr) {
     };
     
     this.isLoggedIn = function() {
-        var token = $cookies.get('token');
+        var token = $cookies.get('loginToken');
         if(token) {
             return true;
         }
         return false;
     };
     
-    this.onlyLoggedIn = function($location, apiService, $q, toastr) {
+    this.onlyLoggedIn = function() {
     
         var deferred = $q.defer();
-        if (apiService.isLoggedIn()) {
+        var token   = $cookies.get('loginToken');
+        if (token) {
             deferred.resolve();
         } else {
             deferred.reject();
             toastr.error("You are not logged in, Please login");
-            $location.path('/');
+            $state.go('/');
         }
         return deferred.promise;
     };
 };
-
-//onlyLoggedIn.$inject = ['$location','apiService', '$q', 'toastr'];
-//
-//function onlyLoggedIn($location, apiService, $q, toastr) {
-//    
-//    var deferred = $q.defer();
-//    if (apiService.isLoggedIn()) {
-//        deferred.resolve();
-//    } else {
-//        deferred.reject();
-//        toastr.error("You are not logged in, Please login");
-//        $location.path('/');
-//    }
-//    return deferred.promise;
-//}

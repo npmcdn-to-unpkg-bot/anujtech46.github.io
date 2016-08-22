@@ -177,11 +177,10 @@ function GetUserWithCredits($scope, PagerService, studentFactory, toastr, $log, 
     };
 }
 
-GetStudentProfileCtrl.$inject = ['$scope', 'studentFactory', 'toastr', '$location'];
+GetStudentProfileCtrl.$inject = ['$scope', 'studentFactory', 'registrationService', 'toastr', 'userProfileFactory'];
 
-function GetStudentProfileCtrl($scope, studentFactory, toastr, $location) {
+function GetStudentProfileCtrl($scope, studentFactory, registrationService, toastr, userProfileFactory) {
     
-    $scope.getProfiles  = getProfiles;
     $scope.hideform     = true;
     
     $scope.getUserProfile = function() {
@@ -200,7 +199,6 @@ function GetStudentProfileCtrl($scope, studentFactory, toastr, $location) {
         studentFactory.getStudentProfile(data, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
-                    console.log(res.count);
                     if(res.count === 0) {
                         toastr.success('User not exit', 'Email or fullname not exist');
                         return;
@@ -217,9 +215,51 @@ function GetStudentProfileCtrl($scope, studentFactory, toastr, $location) {
             }
         });
     };
+    
+    $scope.getProfiles = getProfiles;
+    
     function getProfiles(userid) {
-            $location.path('/profile/student/'+userid);
+        $scope.showProfile  = true;
+        
+        if(userid === registrationService.getUserid() && registrationService.getClickCount() === 0) {
+            $scope.hideProfile = true;
+            registrationService.setClickCount(1);
+            return;
         }
+        $scope.hideProfile = false;
+        registrationService.setClickCount(0);
+        registrationService.setUserid(userid);
+        userProfileFactory.getStudentProfileWithToken(userid, function(err, res, sessions, devices) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    var profiles = res.profile;
+                    $scope.userid = profiles.userid ;
+                    $scope.email = res.email ;
+                    $scope.fullname = profiles.fullname ; 
+                    $scope.gender = profiles.gender ; 
+                    $scope.school = profiles.school ; 
+                    $scope.grade = profiles.grade ; 
+                    $scope.dob = profiles.dob ; 
+                    $scope.v1username = profiles.v1username ; 
+                    $scope.modifiedon = profiles.modifiedon ; 
+                    $scope.createdon = profiles.createdon ; 
+                    $scope.location = profiles.location ;
+                    $scope.subscriptions = profiles.subscription.products || 0;
+                    if(devices) {
+                        $scope.devices = devices.devices;
+                    }
+                    if(sessions) {
+                        $scope.sessions = sessions.sessions;
+                    }
+                    return;
+                } else {
+                    toastr.error('Invalid request');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        });
+    }
 };
 
 /**
