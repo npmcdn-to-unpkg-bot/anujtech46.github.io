@@ -17,7 +17,8 @@ function registrationFactory(apiService, $log) {
         getLastActiveUser   : getLastActiveUser,
         getRepeatUser       : getRepeatUser,
         getProfiles         : getProfiles,
-        getIPWithLocation   : getIPWithLocation
+        getIPWithLocation   : getIPWithLocation,
+        getIP               : getIP
     };
     
     function getTodayRegister(page, callback) {
@@ -155,7 +156,7 @@ function registrationFactory(apiService, $log) {
     
     function getLocWithIP(ip, callback) {
         
-        var url = 'http://localhost:3000/api/admin/v1/' + "get/iplocation";
+        var url = apiService.getApiEndPoint() + "get/iplocation";
         
         var data = {
             ip : ip
