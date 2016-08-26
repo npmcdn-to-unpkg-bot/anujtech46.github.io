@@ -126,23 +126,38 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
     if(skills.indexOf("english") > -1) {
         $scope.updateE.english = true;
     }
+    if(skills.indexOf("physics") > -1) {
+        $scope.updateE.physics = true;
+    }
+    if(skills.indexOf("chemistry") > -1) {
+        $scope.updateE.chemistry = true;
+    }
+    if(skills.indexOf("biology") > -1) {
+        $scope.updateE.biology = true;
+    }
+    if(skills.indexOf("maths") > -1) {
+        $scope.updateE.maths = true;
+    }
+    if(skills.indexOf("sst") > -1) {
+        $scope.updateE.sst = true;
+    }
+    if(skills.indexOf("economics") > -1) {
+        $scope.updateE.economics = true;
+    }
+    if(skills.indexOf("computers") > -1) {
+        $scope.updateE.computers = true;
+    }
+    if(skills.indexOf("accountancy") > -1) {
+        $scope.updateE.accountancy = true;
+    }
+    if(skills.indexOf("businessstudies") > -1) {
+        $scope.updateE.businessstudies = true;
+    }
     
     $scope.updateEducator = function() {
         
         var roles = [];
         var skills = [];
-        
-        //Check condition
-//        if(($scope.updateE.educatorV1) && ($scope.updateE.internal.toString() === "false")) {
-//            $scope.showMessage = true;
-//            $scope.message = "Invalid combination of educatorV1 role and internal type";
-//            return;
-//        }
-//        if(($scope.updateE.educator) && ($scope.updateE.internal.toString() === "true")) {
-//            $scope.showMessage = true;
-//            $scope.message = "Invalid combination of educator role and internal type";
-//            return;
-//        }
         
         if($scope.updateE.partnerEducator) {
             roles.push("partnerEducator");
@@ -185,6 +200,30 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
         }
         if($scope.updateE.english) {
             skills.push("english");
+        }
+        if($scope.updateE.physics) {
+            skills.push("physics");
+        }
+        if($scope.updateE.chemistry) {
+            skills.push("chemistry");
+        }
+        if($scope.updateE.biology) {
+            skills.push("biology");
+        }
+        if($scope.updateE.sst) {
+            skills.push("sst");
+        }
+        if($scope.updateE.economics) {
+            skills.push("economics");
+        }
+        if($scope.updateE.computers) {
+            skills.push("computers");
+        }
+        if($scope.updateE.accountancy) {
+            skills.push("accountancy");
+        }
+        if($scope.updateE.businessstudies) {
+            skills.push("businessstudies");
         }
         var data = {
             'email': $scope.updateE.email,
