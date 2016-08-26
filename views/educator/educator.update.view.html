@@ -58,9 +58,10 @@ body {
                 <div>
                     
                         <label>Roles        : </label>
-                        <input type="checkbox" ng-model="updateE.educator" value="educator"> Educator  
+                        <input type="checkbox" ng-model="updateE.partnerEducator" value="partnerEducator"> PartnerEducator  
+                        <input type="checkbox" ng-model="updateE.educatorCrowd" value="educatorCrowd"> EducatorCrowd  
                         <input type="checkbox" ng-model="updateE.educatorV1" value="educatorV1"> EducatorV1  
-                        <input type="checkbox" ng-model="updateE.channelpartner" value="ChannelPartner"> ChannelPartner  
+                        <input type="checkbox" ng-model="updateE.educatorInHouse" value="educatorInHouse"> EducatorInHOuse  
                 </div><br>
                 <div>
                     
@@ -76,8 +77,8 @@ body {
                         <input type="checkbox" ng-model="updateE.science" value="science"> Science
                         <input type="checkbox" ng-model="updateE.english" value="english"> English
                             
-                    </
-                </div>><br>
+                </div>
+                <br>
                 <div>
                     <p>
                         <button type="submit" ng-disabled="update.$invalid">Submit</button>

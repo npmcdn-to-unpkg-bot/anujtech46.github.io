@@ -74,24 +74,27 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
     var email       = educatorProfileService.getEmail();
     var roles       = educatorProfileService.getRoles();
     var skills      = educatorProfileService.getSkills();
-    var internal    = educatorProfileService.getInternal();
+//    var internal    = educatorProfileService.getInternal();
     var headline    = educatorProfileService.getHeadline();
     
     $scope.updateE = {
         email : email,
         headline : headline
     };
-    if(internal === true || internal === false) {
-        $scope.updateE.internal = internal.toString();
+//    if(internal === true || internal === false) {
+//        $scope.updateE.internal = internal.toString();
+//    }
+    if(roles.indexOf("partnerEducator") > -1) {
+        $scope.updateE.partnerEducator = true;
     }
-    if(roles.indexOf("educator") > -1) {
-        $scope.updateE.educator = true;
+    if(roles.indexOf("educatorCrowd") > -1) {
+        $scope.updateE.educatorCrowd = true;
     }
     if(roles.indexOf("educatorV1") > -1) {
         $scope.updateE.educatorV1 = true;
     }
-    if(roles.indexOf("channelpartner") > -1) {
-        $scope.updateE.channelpartner = true;
+    if(roles.indexOf("educatorInHouse") > -1) {
+        $scope.updateE.educatorInHouse = true;
     }
     if(skills.indexOf("c6") > -1) {
         $scope.updateE.c6 = true;
@@ -130,25 +133,28 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
         var skills = [];
         
         //Check condition
-        if(($scope.updateE.educatorV1) && ($scope.updateE.internal.toString() === "false")) {
-            $scope.showMessage = true;
-            $scope.message = "Invalid combination of educatorV1 role and internal type";
-            return;
-        }
-        if(($scope.updateE.educator) && ($scope.updateE.internal.toString() === "true")) {
-            $scope.showMessage = true;
-            $scope.message = "Invalid combination of educator role and internal type";
-            return;
-        }
+//        if(($scope.updateE.educatorV1) && ($scope.updateE.internal.toString() === "false")) {
+//            $scope.showMessage = true;
+//            $scope.message = "Invalid combination of educatorV1 role and internal type";
+//            return;
+//        }
+//        if(($scope.updateE.educator) && ($scope.updateE.internal.toString() === "true")) {
+//            $scope.showMessage = true;
+//            $scope.message = "Invalid combination of educator role and internal type";
+//            return;
+//        }
         
-        if($scope.updateE.educator) {
-            roles.push("educator");
+        if($scope.updateE.partnerEducator) {
+            roles.push("partnerEducator");
+        }
+        if($scope.updateE.educatorCrowd) {
+            roles.push("educatorCrowd");
         }
         if($scope.updateE.educatorV1) {
             roles.push("educatorV1");
         }
-        if($scope.updateE.channelpartner) {
-            roles.push("channelpartner");
+        if($scope.updateE.educatorInHouse) {
+            roles.push("educatorInHouse");
         }
         if($scope.updateE.c6) {
             skills.push("c6");
@@ -184,9 +190,9 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
             'email': $scope.updateE.email,
             'appid' : $scope.updateE.appid
         };
-        if($scope.updateE.internal) {
-            data.internal = $scope.updateE.internal;
-        }
+//        if($scope.updateE.internal) {
+//            data.internal = $scope.updateE.internal;
+//        }
         if(roles) {
             data.roles = roles;
         }

@@ -274,13 +274,41 @@ AddAppCredentialsCtrl.$inject = ['$scope', 'cpFactory', 'toastr', '$location'];
  */
 function AddAppCredentialsCtrl($scope, cpFactory, toastr, $location) {
     
-    $scope.addAppCredential = function() {
+    $scope.addAppCredential = function() { 
+        
+        var roles = [];
+        
+        if($scope.apps.step1 && $scope.apps.crowd1) {
+            var data = {};
+            data.step = $scope.apps.step1;
+            data.crowd = $scope.apps.crowd1;
+            roles.push(data);
+        }
+        if($scope.apps.step2 && $scope.apps.crowd2) {
+            var data = {};
+            data.step = $scope.apps.step2;
+            data.crowd = $scope.apps.crowd2;
+            roles.push(data);
+        }
+        if($scope.apps.step3 && $scope.apps.crowd3) {
+            var data = {};
+            data.step = $scope.apps.step3;
+            data.crowd = $scope.apps.crowd3;
+            roles.push(data);
+        }
+        if($scope.apps.step4 && $scope.apps.crowd4) {
+            var data = {};
+            data.step = $scope.apps.step4;
+            data.crowd = $scope.apps.crowd4;
+            roles.push(data);
+        }
         
         var data = {
             appid       : $scope.apps.appid,
-            description : $scope.apps.description
+            description : $scope.apps.description,
+            roles       : roles
         };
-        
+        console.log(data);
         cpFactory.addAppCredentials(data, function(err, res) {
             if(res) {
                 if(res.status.code === 303000) {
