@@ -96,6 +96,22 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
     if(roles.indexOf("educatorInHouse") > -1) {
         $scope.updateE.educatorInHouse = true;
     }
+    
+    
+    
+    
+    if(skills.indexOf("CBSE") > -1) {
+        $scope.updateE.cbse = true;
+    }
+    if(skills.indexOf("ICSE") > -1) {
+        $scope.updateE.icse = true;
+    }
+    if(skills.indexOf("IB") > -1) {
+        $scope.updateE.ib = true;
+    }
+    if(skills.indexOf("IGCSE") > -1) {
+        $scope.updateE.igcse = true;
+    }
     if(skills.indexOf("c6") > -1) {
         $scope.updateE.c6 = true;
     }
@@ -170,6 +186,18 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
         }
         if($scope.updateE.educatorInHouse) {
             roles.push("educatorInHouse");
+        }
+        if($scope.updateE.cbse) {
+            skills.push("CBSE");
+        }
+        if($scope.updateE.icse) {
+            skills.push("ICSE");
+        }
+        if($scope.updateE.ib) {
+            skills.push("IB");
+        }
+        if($scope.updateE.igcse) {
+            skills.push("IGCSE");
         }
         if($scope.updateE.c6) {
             skills.push("c6");
