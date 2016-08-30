@@ -298,6 +298,10 @@ ShowLookersCtrl.$inject = ['$scope', 'educatorFactory', 'toastr', '$location'];
  * @returns {undefined}
  */
 function ShowLookersCtrl($scope, educatorFactory, toastr, $location) {
+    
+    $scope.ShowAllRecord = true;
+    $scope.showCDR       = false;
+    $scope.showCDR       = false;
        
     educatorFactory.getAllLookers(function(err, res) {
         if(res) {
@@ -309,7 +313,39 @@ function ShowLookersCtrl($scope, educatorFactory, toastr, $location) {
         } else {
             toastr.error('Server not working');
         }
-    });  
+    });
+    
+    $scope.getCDR = getCDR;
+    function getCDR(userid) {
+        educatorFactory.getEducatorCDR(userid, function(err, res) {
+            if(res) {
+                if(res.status.code === 303000) {
+                    if(res.cdr && res.cdr.length === 0) {
+                        $scope.ShowAllRecord = true;
+                        $scope.showMessages  = true;
+                    } else {
+                        $scope.ShowAllRecord = false;
+                        $scope.showCDR  = true;
+                        $scope.cdrs     = res.cdr;
+                    }
+                } else {
+                    toastr.error('Unable to find educator');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        });
+    }
+    
+    $scope.ShowLookers = ShowLookers;
+    function ShowLookers() {
+        $scope.ShowAllRecord = true;
+        $scope.showCDR  = false;
+    }
+    
+    
+    
+    
 };
 
 /**

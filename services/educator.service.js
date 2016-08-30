@@ -3,9 +3,9 @@
     angular.module('educator')
     .factory('educatorFactory', educatorFactory);
     
-educatorFactory.$inject = ['apiService', '$log'];
+educatorFactory.$inject = ['apiService'];
 
-function educatorFactory(apiService, $log) {
+function educatorFactory(apiService) {
     
     var factory = {
         getAllEducator  : getAllEducator,
@@ -15,7 +15,8 @@ function educatorFactory(apiService, $log) {
         getAllWeights   : getAllWeights,
         setSleepTime    : setSleepTime,
         getSleepTime    : getSleepTime,
-        getRating       : getRating
+        getRating       : getRating,
+        getEducatorCDR  : getEducatorCDR
     };
     
     function getAllEducator(callback) {
@@ -27,7 +28,7 @@ function educatorFactory(apiService, $log) {
             }
         }; 
         apiService.doGet(url, config, function(err, res) {
-            $log.info("res", res);
+            
             return callback(err, res);
         });
     };
@@ -42,7 +43,6 @@ function educatorFactory(apiService, $log) {
                 token : apiService.getToken()
             }
         };
-        $log.info("calling api with data", data);
         apiService.doPut(url, data, config, function(err, res) {
             return callback(err, res);
         });
@@ -57,7 +57,7 @@ function educatorFactory(apiService, $log) {
             }
         }; 
         apiService.doDelete(url, config, function(err, res) {
-            $log.info("res", res);
+            
             return callback(err, res);
         });
     };
@@ -72,7 +72,7 @@ function educatorFactory(apiService, $log) {
         }; 
         
         apiService.doGet(url, config, function(err, res) {
-            $log.info("res", res);
+            
             return callback(err, res);
         });
     };
@@ -88,7 +88,7 @@ function educatorFactory(apiService, $log) {
         }; 
         
         apiService.doGet(url, config, function(err, res) {
-            $log.info("res", res);
+            
             return callback(err, res);
         });
     };
@@ -104,7 +104,7 @@ function educatorFactory(apiService, $log) {
         }; 
         
         apiService.doPost(url, data, config, function(err, res) {
-            $log.info("res", res);
+            
             return callback(err, res);
         });
     };
@@ -120,7 +120,7 @@ function educatorFactory(apiService, $log) {
         }; 
         
         apiService.doGet(url, config, function(err, res) {
-            $log.info("res", res);
+            
             return callback(err, res);
         });
     };
@@ -136,7 +136,22 @@ function educatorFactory(apiService, $log) {
         }; 
         
         apiService.doGet(url, config, function(err, res) {
-            $log.info("res", res);
+            
+            return callback(err, res);
+        });
+    };
+    
+    function getEducatorCDR(userid, callback) {
+        
+        var url = apiService.getApiEndPoint() + 'get/educator/cdr/' + userid;
+        
+        var config = {
+            headers : {
+                token : apiService.getToken()
+            }
+        }; 
+        
+        apiService.doGet(url, config, function(err, res) {
             return callback(err, res);
         });
     };

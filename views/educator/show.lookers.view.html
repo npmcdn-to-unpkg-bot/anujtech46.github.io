@@ -13,10 +13,12 @@ and open the template in the editor.
     </head>
     <body>
         <div ng-include = "'views/profile/profile.view.html'"></div><br>
-        <div>
+        <div ng-show="showMessages"><p>This educator not comes on duty till now.</p></div>
+        <div ng-show="ShowAllRecord">
             <table id="t01">
                 <tr>
-                    <th>user ID</th>
+                    <th>User ID</th>
+                    <th>Fullname</th>
                     <th>Internal</th>
                     <th>Status</th>
                     <th>Start Time</th>
@@ -24,11 +26,12 @@ and open the template in the editor.
                     <th>Topics</th>
                 </tr>
                 <tr ng-repeat=" looker in lookers ">
-                    <td >{{ looker.userid }}</td>
+                    <td class="cursor-pointer"ng-click="getCDR(looker.userid)">{{ looker.userid }} </td>
+                    <td >{{ looker.fullname }}</td>
                     <td >{{ looker.internal }}</td>
                     <td >{{ looker.status }}</td>
-                    <td >{{ looker.starttime }}</td>
-                    <td >{{ looker.endtime }}</td>
+                    <td >{{ looker.starttime | utcToLocal:'dd.MM.yy - hh.mm a'}}</td>
+                    <td >{{ looker.endtime | utcToLocal:'dd.MM.yy - hh.mm a'}}</td>
                     <td >{{ looker.topics }}</td>
 
 <!--                    <td>
@@ -37,6 +40,25 @@ and open the template in the editor.
                     </td>-->
                 </tr>
             </table> 
+        </div>
+        <div ng-show="showCDR">
+          <table id="t01">
+                <tr>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                <tr ng-repeat=" cdr in cdrs ">                    
+                    <td >{{ cdr.starttime | utcToLocal:'dd.MM.yy - hh.mm a'}}</td>
+                    <td >{{ cdr.endtime | utcToLocal:'dd.MM.yy - hh.mm a'}}</td>
+<!--                    <td>
+                        <button type="button" ng-click="showProfile()">showProfile</button>
+                        <button type="button" ng-click="hideProfile()">hideProfile</button>
+                    </td>-->
+                </tr>
+            </table> 
+          <div style="margin-left: 20px; margin-top: 20px;">
+          <button type="button" ng-click="ShowLookers()">Show Lookers</button>
+          </div>
         </div>
     </body>
 </html>
