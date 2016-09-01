@@ -112,6 +112,9 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
     if(skills.indexOf("IGCSE") > -1) {
         $scope.updateE.igcse = true;
     }
+    if(skills.indexOf("ISC") > -1) {
+        $scope.updateE.isc = true;
+    }
     if(skills.indexOf("c6") > -1) {
         $scope.updateE.c6 = true;
     }
@@ -198,6 +201,9 @@ function UpdateEducatorCtrl($scope, educatorFactory, toastr, educatorProfileServ
         }
         if($scope.updateE.igcse) {
             skills.push("IGCSE");
+        }
+        if($scope.updateE.isc > -1) {
+            skills.push("ISC");
         }
         if($scope.updateE.c6) {
             skills.push("c6");

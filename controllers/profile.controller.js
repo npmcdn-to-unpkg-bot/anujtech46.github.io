@@ -130,6 +130,25 @@ function ShowEducatorProfileCtrl($scope, $log, $routeParams, toastr,
         }
     });
     
+    educatorFactory.getEducatorCDR(userid, function(err, res) {
+        if(res) {
+            if(res.status.code === 303000) {
+                if(res.cdr && res.cdr.length === 0) {
+                    $scope.ShowAllRecord = true;
+                    $scope.showMessages  = true;
+                } else {
+                    $scope.ShowAllRecord = false;
+                    $scope.showCDR  = true;
+                    $scope.cdrs     = res.cdr;
+                }
+            } else {
+                toastr.error('Unable to find educator');
+            }
+        } else {
+            toastr.error('Server not working');
+        }
+    });
+    
     $scope.updateEducatorProfile = updateEducatorProfile;
     function updateEducatorProfile() {
         

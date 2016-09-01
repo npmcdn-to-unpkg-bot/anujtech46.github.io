@@ -107,6 +107,25 @@
             <a href="#showCP">Back</a>
             <button ng-click="updateEducatorProfile()">Update Profile</button>
             <button ng-click="deleteEducator()">Delete</button>
+        </div><br>
+            <div ng-show="showCDR" >
+          <table id="t01">
+                <tr>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+                <tr ng-repeat=" cdr in cdrs ">                    
+                    <td >{{ cdr.starttime | utcToLocal:'dd.MM.yy - hh.mm a'}}</td>
+                    <td >{{ cdr.endtime | utcToLocal:'dd.MM.yy - hh.mm a'}}</td>
+<!--                    <td>
+                        <button type="button" ng-click="showProfile()">showProfile</button>
+                        <button type="button" ng-click="hideProfile()">hideProfile</button>
+                    </td>-->
+                </tr>
+            </table> 
+          <div style="margin-left: 20px; margin-top: 20px;">
+          <button type="button" ng-click="ShowLookers()">Show Lookers</button>
+          </div>
         </div>
     </body>
 </html> 
