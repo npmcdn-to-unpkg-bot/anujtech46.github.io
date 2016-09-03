@@ -57,5 +57,13 @@ function config($routeProvider) {
                         return apiService.onlyLoggedIn();
                     }
                 }
+        }).
+        when('/showDispatch', {
+            templateUrl :'views/educator/educator.dispatch.view.html',
+                resolve : {
+                    loggedin : function(apiService) {
+                        return apiService.onlyLoggedIn();
+                    }
+                }
     });
 }

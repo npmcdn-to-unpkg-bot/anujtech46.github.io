@@ -6,7 +6,8 @@ angular.module('educator')
     .controller('ShowWeightsCtrl', ShowWeightsCtrl)
     .controller('SetSleepTimeCtrl', SetSleepTimeCtrl)
     .controller('ShowServiceTimeCtrl', ShowServiceTimeCtrl)
-    .controller('ShowRatingCtrl', ShowRatingCtrl);
+    .controller('ShowRatingCtrl', ShowRatingCtrl)
+    .controller('EducatorDispatchCtrl', EducatorDispatchCtrl);
     
 /**
  * Show All Educator controller
@@ -460,3 +461,42 @@ function ShowRatingCtrl($scope, educatorFactory, toastr, $location) {
         }
     });
 };
+
+EducatorDispatchCtrl.$inject = ['$scope','PagerService', 'educatorFactory', 'toastr', '$log', '$location'];
+
+function EducatorDispatchCtrl($scope, PagerService, educatorFactory, toastr, $log, $location) {
+
+    $scope.showTable = false;
+    $scope.getEducators = function() {
+        
+        var data = {};
+        var date        = new Date();
+        $scope.year     = date.getFullYear();
+        $scope.month    = date.getMonth();
+        $scope.day      = date.getDate();
+        
+        data = {
+            "startdate" : $scope.startdate.toUTCString(),
+            "enddate"   : $scope.enddate.toUTCString(),
+            "appid"     : $scope.appid
+        };
+        
+        console.log("data", data);
+        educatorFactory.getEducatorDispatch(data, function(err, res) {
+            if(res && res.status) {
+                if(res.status.code === 303000) {
+
+                    $log.info("getting res", res);
+                    $scope.users =  res.session;
+                    $scope.showTable = true;
+                    return;
+                } else {
+                    toastr.error('Invalid request');
+                }
+            } else {
+                toastr.error('Server not working');
+            }
+        }); 
+    };
+        
+}

@@ -1,0 +1,84 @@
+<html>            
+    <head>
+        <title>Educator dispatch</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         
+        <link rel="stylesheet" type="text/css" href="css/dateTimePicker.css">
+        <style>
+            button {
+                margin-left: 70px;
+            }
+        </style>
+    </head>
+    
+    <body align="center">
+        <div ng-include = "'views/profile/profile.view.html'"></div><br>
+        <div ng-controller="EducatorDispatchCtrl">
+        <div>
+            <form name="register" ng-submit="getEducators()" novalidate>
+                <div ng-class="{ 'has-error': !register.startdate.$pristine && register.startdate.$error.required }">
+                    <p>
+                        <label>Registration Date From : </label>
+                        <input type="date" name="startdate" ng-model="startdate" required>
+                        <!--<input name="text" ng-model="startdate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />-->
+                    </p>
+                    <div ng-messages="register.startdate.$error" ng-if="register.startdate.$invalid && !register.startdate.$pristine && register.startdate.$error.required">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div> 
+                </div>
+                <div ng-class="{ 'has-error': !register.enddate.$pristine && register.enddate.$error.required }">
+                    <p>
+                        <label>Registration Date To : </label>
+                        <input type="date" name="enddate" ng-model="enddate" required>
+                        <!--<input type = "text" name="enddate" ng-model="enddate" datetime-picker date-format="yyyy-MM-ddTHH:mm:ss.000Z" ng-model="year" ng-model="month"  ng-model="day" required />-->
+                    </p>
+                    <div ng-messages="register.enddate.$error" ng-if="register.enddate.$invalid && !register.enddate.$pristine && register.enddate.$error.required">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': !register.appid.$pristine && register.appid.$error.required }">
+                    <p>
+                        <label>Appid : </label>
+                        <input type = "text" name="appid" ng-model="appid" />
+                    </p>
+                    <div ng-messages="register.appid.$error" ng-if="register.appid.$invalid && !register.appid.$pristine && register.appid.$error.required">
+                        <div ng-messages-include="error/error.html"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        <button type="submit" ng-disabled="register.$invalid">Submit</button>
+                    </p>
+                
+                </div>
+            </form>
+        </div><br>
+        <div ng-show="showTable">
+            <div>Total user = {{ count }} </div>
+            <div>
+                <table id="t01">
+                    <tr>
+                        <th>User Id</th>
+                        <th>Full Name</th>
+                        <th>External</th>
+                        <th>InternalV1</th>
+                        <th>Internal</th>
+                        <th>Internal Sleeping</th>
+                        <th>ExternalPartner</th>
+                    </tr>
+                    <tr ng-repeat=" user in users">
+                        <td >{{ user._id }} </td>
+                        <td>{{ user.fullname }}</td>
+                        <td>{{ user.external }}</td>
+                        <td>{{ user.internalV1 }}</td>
+                        <td>{{ user.internal }}</td>
+                        <td>{{ user.internalsleeping }}</td>
+                        <td>{{ user.externalpartner }}</td>
+                    </tr>
+                </table>
+            </div><br>
+        </div> 
+        </div>
+    </body>
+</html>

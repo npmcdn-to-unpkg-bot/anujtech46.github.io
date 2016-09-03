@@ -16,7 +16,8 @@ function educatorFactory(apiService) {
         setSleepTime    : setSleepTime,
         getSleepTime    : getSleepTime,
         getRating       : getRating,
-        getEducatorCDR  : getEducatorCDR
+        getEducatorCDR  : getEducatorCDR,
+        getEducatorDispatch : getEducatorDispatch
     };
     
     function getAllEducator(callback) {
@@ -152,6 +153,22 @@ function educatorFactory(apiService) {
         }; 
         
         apiService.doGet(url, config, function(err, res) {
+            return callback(err, res);
+        });
+    };
+    
+    function getEducatorDispatch(data, callback) {
+        
+        var url = apiService.getApiEndPoint() + 'educator/dispatch/detail';
+        
+        var config = {
+            headers : {
+                token : apiService.getToken(),
+                'content-type'      : 'application/json'
+            }
+        }; 
+        
+        apiService.doPost(url, data, config, function(err, res) {
             return callback(err, res);
         });
     };
